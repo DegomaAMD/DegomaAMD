@@ -1,0 +1,91 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body{
+  font-size: 18px;
+  font-family: 'Libre Franklin', sans-serif;
+  height: 100%;
+  
+}
+
+body{
+  background: rgba(234, 164, 164, 0.762);
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+}
+
+button{
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: white;
+}
+
+.calculator{
+  background: black;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  width: 420px;
+  border: 1px solid rgb(59, 57, 57);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: .75rem;
+}
+
+.displayValue{
+  background: black;
+  grid-column: 1 / 5;
+  height: 7rem;
+  color: white;
+  text-align: end;
+  font-size: 3rem;
+  
+}
+
+.displayValue::placeholder{
+  color: white;
+  text-align: end;
+  margin-left: 5px ;
+  font-size: 3rem;
+}
+
+.calcSymbols{
+  background: #f69906;
+}
+.calcSymbols:hover{
+  background: #be790b;
+}
+
+.calcSymbols1{
+  background: #a0a0a0;
+}
+.calcSymbols1:hover{
+  background: #918e8e;
+}
+
+.calcButtons{
+  background: #313131;
+}
+.calcButtons:hover{
+  background: #171717;
+}
+
+.calcButtons, .calcSymbols, .calcSymbols1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1rem;
+  aspect-ratio: 1;
+}
