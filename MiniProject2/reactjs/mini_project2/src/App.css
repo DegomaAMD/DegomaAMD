@@ -1,0 +1,41 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.navBtn{
+  color: white !important; 
+}
+/* .pageBanner{
+  
+} */
+
+.imgLogo {
+  margin-top: 5px;
+  border-radius: 50%;
+  width: 5%;
+  height: 5%;
+}
+
+.loginBtn{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.bgColor{
+  background-color: pink;
+}
+
+.marginTop{
+  margin-top: 64px;
+}
+
+.navBarItem{
+  padding: 10px;
+}
+
+.homeBanner{
+  height: 90vh;
+  width: 100vw;
+}
