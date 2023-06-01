@@ -21,8 +21,9 @@ import '../App.css';
 
 
 
+
 const drawerWidth = 240;
-const navItems = ['Home', 'Menu', 'About', 'Shop', 'Login'];
+const navItems = ['Home', 'Menu', 'About', 'Shop'];
 
 function Navbar(props) {
   const { window } = props;
@@ -54,12 +55,12 @@ function Navbar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box className='navbar' sx={{ display: 'flex' }}>
+    <Box  sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar component="nav">
-        <Toolbar>
+        <Toolbar className='navbar'>
           <IconButton
-            color="inherit"
+            color="#000"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
@@ -67,10 +68,12 @@ function Navbar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Box component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }}}>
-            <img src={logo} alt="Vizmaker Logo" className='imgLogo'/>
+          <Box  component="div" sx={{ display: { xs: 'none', sm: 'block' }}}>
+              <Link to={'/Home'}  >
+                <img src={logo} alt="Vizmaker Logo" className='imgLogo'/>
+              </Link>
           </Box>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
             {navItems.map((item) => (
               <Button key={item} >
                 <Link to={`/${item}`} className='navBtn navBarItem'>
@@ -78,12 +81,15 @@ function Navbar(props) {
                 </Link>
               </Button>
             ))}
+            <Link to={'/Login'} className='loginBtn navBarItem' sx={{ display: { xs: 'none', sm: 'flex' } }}>
+                <Button className='btn' sx={{ color: '#000' }}>
+                  Login
+                </Button>
+              </Link>
           </Box>
-          {/* <Box className='loginBtn'>
-              <Button  sx={{ color: '#fff' }}>
-                Login
-              </Button>
-          </Box> */}
+
+              
+   
           
         </Toolbar>
       </AppBar>
