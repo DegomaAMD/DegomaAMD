@@ -18,12 +18,13 @@ import Button from '@mui/material/Button';
 import logo from '../assets/img/vizmaker-logo.png';
 import { Link } from 'react-router-dom';
 import '../App.css';
+import CartBadge from '../components/Cart';
 
 
 
 
 const drawerWidth = 240;
-const navItems = ['Home', 'Menu', 'About', 'Shop'];
+const navItems = ['Home', 'Menu', 'About'];
 
 function Navbar(props) {
   const { window } = props;
@@ -44,7 +45,9 @@ function Navbar(props) {
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={<Link to={`/${item}`}>{item}</Link>} />
+              <ListItemText primary={<Link to={`/${item}`}>{item}</Link>
+            
+            } />
             </ListItemButton>
           </ListItem>
         ))}
@@ -73,7 +76,7 @@ function Navbar(props) {
                 <img src={logo} alt="Vizmaker Logo" className='imgLogo'/>
               </Link>
           </Box>
-          <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
+          <Box sx={{ display: { xs: 'none', sm: 'flex' }, marginTop: '7px'}}>
             {navItems.map((item) => (
               <Button key={item} >
                 <Link to={`/${item}`} className='navBtn navBarItem'>
@@ -81,13 +84,22 @@ function Navbar(props) {
                 </Link>
               </Button>
             ))}
-            <Link to={'/Login'} className='loginBtn navBarItem' sx={{ display: { xs: 'none', sm: 'flex' } }}>
+
+            
+          </Box>
+
+              <Link to={'/Shop'}  sx={{ display: 'flex' }}>
+                <Button sx={{ color: '#000',marginRight:'10px'}}>
+                <CartBadge />
+                </Button>
+              </Link>
+              <Box  component="div" sx={{ display: { xs: 'none', sm: 'block' }}}>
+              <Link to={'/Login'} sx={{ display: { xs: 'none', sm: 'flex'}}}>
                 <Button className='btn' sx={{ color: '#000' }}>
                   Login
                 </Button>
               </Link>
-          </Box>
-
+              </Box>
               
    
           

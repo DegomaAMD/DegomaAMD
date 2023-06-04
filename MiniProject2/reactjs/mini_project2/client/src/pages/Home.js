@@ -1,9 +1,9 @@
 import * as React from 'react';
 import '../App.css';
-import MenuCards from './Card';
+import MenuCards from '../components/Card';
 // import Feedbacks from './ContactUs';
-import Banner from './Banner';
-import ContactUs from './ContactUs';
+import Banner from '../components/Banner';
+import ContactUs from '../components/ContactUs';
 
 function Home() {
   return (
