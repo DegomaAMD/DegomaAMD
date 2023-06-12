@@ -18,7 +18,7 @@ import Button from '@mui/material/Button';
 import logo from '../assets/img/vizmaker-logo.png';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import CartBadge from '../components/Cart';
+import CartBadge from './CartBadge';
 
 
 
@@ -37,20 +37,32 @@ function Navbar(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
+      <Typography variant="h6" sx={{ py: 2, backgroundColor: '#FFBD59' }} >
         Vizmaker Shop
       </Typography>
       <Divider />
-      <List>
+      <List >
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={<Link to={`/${item}`}>{item}</Link>
+              <ListItemText primary={<Link className='navBtn navBarItem' to={`/${item}`}>{item}</Link>
             
             } />
             </ListItemButton>
           </ListItem>
         ))}
+        <Link to={'/Shop'}  sx={{ display: 'flex' }}>
+                <Button sx={{ color: '#000',marginRight:'10px'}}>
+                <CartBadge />
+                </Button>
+              </Link>
+              <Box  component="div">
+              <Link to={'/Login'} sx={{ display: { xs: 'none', sm: 'flex'}}}>
+                <Button className='btn' sx={{ color: '#000' }}>
+                  Login
+                </Button>
+              </Link>
+              </Box>
       </List>
     </Box>
   );
@@ -84,11 +96,7 @@ function Navbar(props) {
                 </Link>
               </Button>
             ))}
-
-            
-          </Box>
-
-              <Link to={'/Shop'}  sx={{ display: 'flex' }}>
+            <Link to={'/Shop'}  sx={{ display: 'flex' }}>
                 <Button sx={{ color: '#000',marginRight:'10px'}}>
                 <CartBadge />
                 </Button>
@@ -100,9 +108,7 @@ function Navbar(props) {
                 </Button>
               </Link>
               </Box>
-              
-   
-          
+          </Box>
         </Toolbar>
       </AppBar>
       <Box component="nav">

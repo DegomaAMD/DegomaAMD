@@ -1,0 +1,64 @@
+.loginForm{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    aspect-ratio: 1;
+    width: 50vw;
+    height: 500px;
+    border: 1px solid black;
+    border-radius: 20px;
+
+}
+
+h2{
+    font-size: 12px;
+    color: red ;
+    text-align: start;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.registerForm h2{
+    font-size: 12px;
+    color: green ;
+    text-align: start;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.registerForm{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    aspect-ratio: 1;
+    width: 50vw;
+    height: 500px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.textInput{
+margin: 10px !important;
+width: 300px;
+}
+
+.button{
+    color: black !important;
+    background: #FFBD59 !important;
+    border: 1px solid #ff914d !important;
+    width: 100px;
+    text-align: center;
+    margin: 10px !important;
+}
+
+.Register{
+    display: flex !important;
+    justify-content: center;
+}
+.Login{
+    display: flex !important;
+    justify-content: center;
+}
+
+.button1{
+    color:  black !important;
+    font-weight: 900;
+}

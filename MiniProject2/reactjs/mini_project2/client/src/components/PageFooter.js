@@ -11,12 +11,13 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 
 
 const footerItems = ['About Vizmaker', 'Careers', 'Business Patners', 'Order and Pick-up'];
+// const aboutPage = footerItems[0];
 
 function Footer() {
   return (
     
-    <Box sx={{width: '100%', bgcolor: 'inherit', color: '#1c110a'}}>
-      <Container sx={{ display:  { xs: 'block', sm: 'flex' }}}>
+    <Box sx={{width: '100%', color: '#1c110a'}}>
+      <Container sx={{ display:  { xs: 'block', sm: 'flex' }, justifyContent: 'space-around'}}>
         <div className="footerContent">
         <Box  component="div">
               <Link to={'/Home'}  >
@@ -25,8 +26,8 @@ function Footer() {
           </Box>
       <Box sx={{ display: 'flex'}}>
             {footerItems.map((item) => (
-              <Button key={item} >
-                <Link to={`/${item}`} className='bodyText' sx={{color: '#fff'}}>
+              <Button key={item} onClick={{scrollTo: 'top'}}>
+                <Link to={'/PageNotFound'} className='bodyText' sx={{color: '#fff'}}>
                   {item}
                 </Link>
               </Button>
@@ -34,28 +35,31 @@ function Footer() {
           </Box>
         </div>
       <div className="footerContent1">
-        <blockquote>
+        <Box>
+        <p>
           105 Salem St, Boston
           Massachusetts
           02113
-        </blockquote>
-        <blockquote>
-          <h3>02 8396 5340</h3>
+        </p>
+        <h3>02 8396 5340</h3>
+        <p>
           info@vizmaker.com
-        </blockquote>
-        <Box sx={{display:'flex', marginTop: '10px', textAlign: 'center'}} >
-          <FacebookIcon sx={{marginRight:'5px'}} />
-          <InstagramIcon sx={{marginRight:'5px'}}/>
-          <TelegramIcon/>
+        </p>
+        </Box>
+        <Box sx={{display:'flex', textAlign: 'center'}} >
+          <Link to={'https://www.facebook.com/'} target='blank'><FacebookIcon sx={{marginRight:'50px', color:'#000'}} /></Link>
+          <Link to={'https://www.instagram.com/'} target='blank'><InstagramIcon sx={{marginRight:'50px', color:'#000'}}/></Link>
+          <Link to={'https://web.telegram.org/'} target='blank'><TelegramIcon sx={{color:'#000'}}/></Link>
         </Box>
       </div>
 
       <div className="footerContent1">
-        <h3>Business Hours</h3>
-        <p>Monday to Sunday</p>
-        <p>9:00 am - 9:00pm</p>
+        <h3 style={{marginTop: '20px'}}>Business Hours</h3>
+        <p>Monday to Saturday</p>
+        <p>9:00am - 9:00pm</p>
       </div>
       </Container>
+      <p style={{textAlign: 'center', margin: '0px', paddingBottom: '10px', color:'#808080'}}>© 2023 Vizmaker Cafe. All rights reserved.</p>
     </Box>
 
   )

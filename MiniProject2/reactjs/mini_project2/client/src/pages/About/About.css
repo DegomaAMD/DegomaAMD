@@ -1,0 +1,27 @@
+.aboutUsBanner{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
+.aboutUsImg{
+    width: 80%;
+    height: 350px;
+}
+
+p,h3{
+    margin: 20px 0px;
+    text-align: start;
+}
+
+h1{
+    font-weight: bolder;
+    font-size: 50px;
+}
+
+.footer{
+    background-image: url(../../assets/img/contactUs-background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

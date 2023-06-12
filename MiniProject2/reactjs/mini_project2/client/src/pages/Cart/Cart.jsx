@@ -26,12 +26,12 @@ export const Cart = () => {
 
       {totalAmount > 0 ? (
         <div className="checkout">
-          <p> Subtotal: ${totalAmount} </p>
+          <p> Subtotal: ₱{totalAmount} </p>
           <button onClick={() => navigate("/Menu")}> Continue Shopping </button>
           <button
             onClick={() => {
               checkout();
-              navigate("/checkout");
+              navigate('/PageNotFound');
             }}
           >
             Checkout

@@ -2,6 +2,8 @@ import React from "react";
 import { PRODUCTS } from "../../products";
 import { Product } from "./Menu";
 import "./Cafe.css";
+import PageFooter from '../../components/PageFooter';
+import { Link } from "react-router-dom";
 
 export const Shop = () => {
   return (
@@ -10,10 +12,16 @@ export const Shop = () => {
         <h1>Vizmaker Cafe</h1>
       </div>
 
-      <div className="products">
+      <div>
+        <Link className="products">
         {PRODUCTS.map((product) => (
           <Product data={product} />
         ))}
+        </Link>
+        
+      </div>
+      <div className='footer'>
+        <PageFooter />
       </div>
     </div>
   );

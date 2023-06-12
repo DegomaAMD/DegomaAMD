@@ -33,9 +33,9 @@ export default function MenuCards() {
     <Container>
       <Box sx={{ width: '100%' }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid xs={12}>     
+        <Grid xs={12} md={6}>     
         <Link to={'/Menu'} className="bodyText">
-        <Card>
+        <Card className='cards'>
               <CardActionArea sx={{backgroundColor:'#d4e9e2' }}>
         <CardMedia
           component="img"
@@ -57,9 +57,9 @@ export default function MenuCards() {
         </Link>              
          
         </Grid>
-        <Grid xs={12}>
+        <Grid xs={12} md={6}>
           <Link to={'/Menu'} className="bodyText">
-          <Card >
+          <Card className='cards'>
               <CardActionArea>
         <CardMedia
           component="img"
@@ -83,7 +83,7 @@ export default function MenuCards() {
         </Grid>
         <Grid xs={12} md={6} >   
         <Link to={'/Menu'} className="bodyText">  
-          <Card >
+          <Card className='cards'>
             <CardActionArea>
           <CardMedia
           component="img"
@@ -105,7 +105,7 @@ export default function MenuCards() {
         </Grid>
         <Grid xs={12} md={6} >     
         <Link to={'/Menu'} className="bodyText">
-          <Card >
+          <Card className='cards'>
             <CardActionArea>
           <CardMedia
           component="img"
@@ -128,7 +128,7 @@ export default function MenuCards() {
         </Grid>
         <Grid xs={12} md={6} >
           <Link to={'/Menu'} className="bodyText">       
-          <Card >
+          <Card className='cards'>
             <CardActionArea>
           <CardMedia
           component="img"
@@ -151,7 +151,7 @@ export default function MenuCards() {
         </Grid>
         <Grid xs={12} md={6}>       
         <Link to={'/Menu'} className="bodyText"> 
-          <Card >
+          <Card className='cards'>
               <CardActionArea sx={{backgroundColor:'#cbe678'}}>
         <CardMedia
           component="img"
@@ -174,7 +174,7 @@ export default function MenuCards() {
         </Grid>
         <Grid xs={12}> 
         <Link to={'/Menu'} className="bodyText">
-          <Card >
+          <Card className='cards'>
               <CardActionArea sx={{backgroundColor:'#eb81a5'}}>
         <CardMedia
           component="img"
