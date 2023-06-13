@@ -6,6 +6,10 @@
   scroll-behavior: smooth;
 }
 
+body{
+  background-color: #FFEED5 !important;
+}
+
 
 .navBtn{
   color: #1c110a !important; 
@@ -142,6 +146,22 @@ margin-bottom: 20px;
   width: 30rem;
   margin-top: 10px !important;
   text-align: center !important;
+}
+
+.Form{
+  display: flex;
+  justify-content: center;
+  margin-top: 0 !important;
+  margin-bottom: 20px;
+}
+
+.formButton{
+  color: black !important;
+  background: #FFBD59 !important;
+  border: 1px solid #ff914d !important;
+  width: 100px;
+  text-align: center;
+  /* margin: 10px !important; */
 }
 
 

@@ -41,8 +41,8 @@ function ContactUs() {
                     placeholder='Enter your message here' className='contactForm' />
             </Box>
       </CardContent>
-      <CardActions className='contactForm'>
-        <Button  size="small">Submit</Button>
+      <CardActions className='Form'>
+        <Button className='formButton' size="small" >Submit</Button>
       </CardActions>
     </Card>
         </Container>

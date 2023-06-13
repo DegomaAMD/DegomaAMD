@@ -15,6 +15,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     place-items: center;
     text-decoration: none;
+    
     color: black;
   }
   
@@ -22,11 +23,12 @@
     border-radius: 15px;
     width: 100%;
     height: 350px;
-    margin: 20px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
   }
   
   .product img {
@@ -67,3 +69,4 @@
     background-size: cover;
     background-position: center;
 }
+

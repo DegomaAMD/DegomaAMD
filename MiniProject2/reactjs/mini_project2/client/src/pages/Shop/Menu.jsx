@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../../context/menu-context";
+import './Cafe.css';
 
 export const Product = (props) => {
   const { id, productCategory, productName, price, productImage } = props.data;

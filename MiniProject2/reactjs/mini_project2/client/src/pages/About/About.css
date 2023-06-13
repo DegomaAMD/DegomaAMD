@@ -9,12 +9,12 @@
     height: 350px;
 }
 
-p,h3{
+.AboutUs p,h3{
     margin: 20px 0px;
     text-align: start;
 }
 
-h1{
+.AboutUs h1{
     font-weight: bolder;
     font-size: 50px;
 }

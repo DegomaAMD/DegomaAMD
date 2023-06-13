@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 import './Login.css'
-
 
 
 function Register() {
@@ -30,6 +30,8 @@ function Register() {
     
   }
 
+  
+
   return (
     <Container sx={{display: 'flex', justifyContent:'center', textAlign:'center'}}>
         <div className='registerForm'>
@@ -51,7 +53,12 @@ function Register() {
             <TextField className='textInput' label='Password' type='password' placeholder='Enter your password' name='password' onChange={(e) => {setpassword(e.target.value)}} required/>
           </Box>
           <Box>
-            <Button className='button' type='submit' onClick={register}> Submit</Button>
+            <Link to={'/Login'}>
+              <Button className='button' type='submit' onClick={register} > 
+                Submit
+              </Button>
+            </Link>
+            
           </Box>
           
 

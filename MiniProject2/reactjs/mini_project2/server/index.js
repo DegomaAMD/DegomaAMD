@@ -21,7 +21,8 @@ app.post('/register', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    con.query("INSERT INTO users (email, username, password) VALUES (?,?,?)", [email, username, password],
+    con.query("INSERT INTO users (email, username, password) VALUES (?,?,?)", 
+        [email, username, password],
         (err,result) => {
             if(result){
                 res.send(result);
@@ -35,24 +36,22 @@ app.post('/register', (req, res) => {
 app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-
     con.query("SELECT * FROM users WHERE username = ? AND password = ?", 
-        [username, password],
-        (err,result) => {
+    [username, password],
+        (err, result) => {
             if(err){
                 req.setEncoding({err: err});
             }else{
-                if (result.lenght > 0){
+                if(result.length > 0){
                     res.send(result);
                 }else{
                     res.send({message: "Wrong username or password"});
-            }
                 }
+            }
                 
         }
     )
 })
-
 
 app.listen(3002,() => {
     console.log("Server is running");

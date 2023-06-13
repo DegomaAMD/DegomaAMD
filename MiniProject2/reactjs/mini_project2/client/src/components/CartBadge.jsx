@@ -20,7 +20,7 @@ export const CartBadge = () => {
   return (
     <IconButton aria-label="cart">
       <StyledBadge color="secondary">
-        <ShoppingCartIcon />
+        <ShoppingCartIcon sx={{color: '#ff914d'}} />
       </StyledBadge>
     </IconButton>
   );

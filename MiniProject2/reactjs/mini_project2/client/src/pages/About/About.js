@@ -6,7 +6,7 @@ import PageFooter from '../../components/PageFooter';
 function About() {
   return (
     <div>
-   <Container>
+   <Container className='AboutUs'>
       <h1 style={{marginTop: '50px', marginLeft: '120px'}}>About Vizmaker</h1>
       <div className='aboutUsBanner'>
        <img className='aboutUsImg' src={AboutUsBanner} alt='About Us Banner'/>

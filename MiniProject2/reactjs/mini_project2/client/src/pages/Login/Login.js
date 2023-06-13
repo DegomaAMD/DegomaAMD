@@ -46,8 +46,6 @@ function Login() {
           </Box>
           <Box>
           <Button className='button' type='submit' onClick={login}>Login</Button>
-          
-          
             </Box>
         <div className='Register'>
           <p>Need an account?</p>
