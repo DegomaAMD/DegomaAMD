@@ -53,6 +53,24 @@ app.post('/login', (req, res) => {
     )
 })
 
+app.post('/messages', (req, res) => {
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+    const email = req.body.email;
+    const message = req.body.message;
+    con.query("INSERT INTO messages (firstname, lastname, email, message) VALUES (?,?,?,?)", 
+    [firstname, lastname, email, message],
+    (err,result) => {
+            if(result){
+                res.send(result);
+            }else{
+                res.send({message: "Please complete the fields provided."})
+            }
+        }
+    )
+})
+
+
 app.listen(3002,() => {
     console.log("Server is running");
 })

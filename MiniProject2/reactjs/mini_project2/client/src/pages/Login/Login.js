@@ -36,7 +36,7 @@ function Login() {
           <h1 style={{marginTop: '30px'}}>Login</h1>
           </div>
           <div>
-            <h2>{loginStatus}</h2>
+            <h2 style={{color:'green'}}>{loginStatus}</h2>
           </div>
           <Box>
             <TextField className='textInput' label='Username' type='text' placeholder='Enter your username' name='username' onChange={(e) => {setusername(e.target.value)}} required/>

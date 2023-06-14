@@ -36,7 +36,7 @@ export default function MenuCards() {
         <Grid xs={12} md={6}>     
         <Link to={'/Menu'} className="bodyText">
         <Card className='cards'>
-              <CardActionArea sx={{backgroundColor:'#d4e9e2' }}>
+              <CardActionArea sx={{backgroundColor:'#d4e9e2', display: {xs: 'flex', md: 'block'} }}>
         <CardMedia
           component="img"
           className='cardMenu'
@@ -60,7 +60,7 @@ export default function MenuCards() {
         <Grid xs={12} md={6}>
           <Link to={'/Menu'} className="bodyText">
           <Card className='cards'>
-              <CardActionArea>
+              <CardActionArea sx={{backgroundColor:'#cbe678' , display: {xs: 'flex', md: 'block'}}}>
         <CardMedia
           component="img"
           className='cardMenu'
@@ -68,7 +68,7 @@ export default function MenuCards() {
           image={image2}
           alt="image1"
         />
-        <CardContent sx={{backgroundColor:'#cbe678'}}>
+        <CardContent >
           <Typography gutterBottom variant="h5" component="div" >
           Macadamia just dropped
           </Typography>
@@ -84,14 +84,14 @@ export default function MenuCards() {
         <Grid xs={12} md={6} >   
         <Link to={'/Menu'} className="bodyText">  
           <Card className='cards'>
-            <CardActionArea>
+            <CardActionArea sx={{backgroundColor:'#eb81a5', display: {xs: 'flex', md: 'block'}}}>
           <CardMedia
           component="img"
           className='cardMenu'
           image={image6}
           alt="image1"
         />
-        <CardContent sx={{backgroundColor:'#eb81a5'}}>
+        <CardContent >
           <Typography gutterBottom variant="h5" component="div" >
           Pineapple Passionfruit Lemonade Vizmaker Refreshers® beverage
           </Typography>
@@ -106,7 +106,7 @@ export default function MenuCards() {
         <Grid xs={12} md={6} >     
         <Link to={'/Menu'} className="bodyText">
           <Card className='cards'>
-            <CardActionArea>
+            <CardActionArea sx={{backgroundColor:'#eb81a5', display: {xs: 'flex', md: 'block'}}}>
           <CardMedia
           component="img"
           
@@ -114,7 +114,7 @@ export default function MenuCards() {
           image={image7}
           alt="image1"
         />
-        <CardContent sx={{backgroundColor:'#eb81a5'}}>
+        <CardContent >
           <Typography gutterBottom variant="h5" component="div" >
           Mango Dragonfruit Lemonade Vizmaker Refreshers® beverage
           </Typography>
@@ -129,7 +129,7 @@ export default function MenuCards() {
         <Grid xs={12} md={6} >
           <Link to={'/Menu'} className="bodyText">       
           <Card className='cards'>
-            <CardActionArea>
+            <CardActionArea sx={{backgroundColor:'#cbe678', display: {xs: 'flex', md: 'block'}}}>
           <CardMedia
           component="img"
           className='cardMenu'
@@ -137,7 +137,7 @@ export default function MenuCards() {
           image={image3}
           alt="image1"
         />
-        <CardContent sx={{backgroundColor:'#cbe678'}}>
+        <CardContent >
           <Typography gutterBottom variant="h5" component="div" >
           New Bumblebee Cake Pop
           </Typography>
@@ -152,7 +152,7 @@ export default function MenuCards() {
         <Grid xs={12} md={6}>       
         <Link to={'/Menu'} className="bodyText"> 
           <Card className='cards'>
-              <CardActionArea sx={{backgroundColor:'#cbe678'}}>
+              <CardActionArea sx={{backgroundColor:'#cbe678', display: {xs: 'flex', md: 'block'}}}>
         <CardMedia
           component="img"
           className='cardMenu'
@@ -175,7 +175,7 @@ export default function MenuCards() {
         <Grid xs={12}> 
         <Link to={'/Menu'} className="bodyText">
           <Card className='cards'>
-              <CardActionArea sx={{backgroundColor:'#eb81a5'}}>
+              <CardActionArea sx={{backgroundColor:'#eb81a5', display: {xs: 'flex', md: 'block'}}}>
         <CardMedia
           component="img"
           className='cardMenu'

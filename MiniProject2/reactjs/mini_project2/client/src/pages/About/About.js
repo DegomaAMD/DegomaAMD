@@ -7,7 +7,7 @@ function About() {
   return (
     <div>
    <Container className='AboutUs'>
-      <h1 style={{marginTop: '50px', marginLeft: '120px'}}>About Vizmaker</h1>
+      <h1 style={{marginTop: '50px', textAlign:'center'}}>About Vizmaker</h1>
       <div className='aboutUsBanner'>
        <img className='aboutUsImg' src={AboutUsBanner} alt='About Us Banner'/>
       </div>

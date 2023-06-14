@@ -70,6 +70,7 @@ function Navbar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
+    
     <Box  sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar component="nav">
@@ -129,15 +130,9 @@ function Navbar(props) {
         </Drawer>
       </Box>
     </Box>
+    
   );
 }
 
-Navbar.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-};
 
 export default Navbar;
