@@ -44,15 +44,18 @@ function Navbar(props) {
       <List >
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemButton sx={{ textAlign: 'start' }}>
               <ListItemText primary={<Link className='navBtn navBarItem' to={`/${item}`}>{item}</Link>
             
             } />
+            
             </ListItemButton>
+            
           </ListItem>
         ))}
-        <Link to={'/Shop'}  sx={{ display: 'flex' }}>
-                <Button sx={{ color: '#000',marginRight:'10px'}}>
+        <div style={{textAlign:'start', marginLeft:'13px'}}>
+        <Link to={'/Shop'} >
+                <Button sx={{ color: '#000',marginRight:'10px', textAlign: 'start'}}>
                 <CartBadge />
                 </Button>
               </Link>
@@ -63,6 +66,7 @@ function Navbar(props) {
                 </Button>
               </Link>
               </Box>
+              </div>
       </List>
     </Box>
   );
@@ -76,7 +80,7 @@ function Navbar(props) {
       <AppBar component="nav">
         <Toolbar className='navbar'>
           <IconButton
-            color="#000"
+            color="#fff"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
