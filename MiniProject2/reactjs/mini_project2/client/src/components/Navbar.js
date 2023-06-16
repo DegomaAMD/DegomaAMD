@@ -37,15 +37,17 @@ function Navbar(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ py: 2, backgroundColor: '#FFBD59' }} >
-        Vizmaker Shop
-      </Typography>
+      <Box  component="div" sx={{ backgroundColor: '#FFBD59', padding:'5px'}}>
+              <Link to={'/Home'}  >
+                <img src={logo} alt="Vizmaker Logo" className='imgLogo'/>
+              </Link>
+          </Box>
       <Divider />
       <List >
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'start' }}>
-              <ListItemText primary={<Link className='navBtn navBarItem' to={`/${item}`}>{item}</Link>
+              <ListItemText primary={<Link className='navBtn1 navBarItem' to={`/${item}`}>{item}</Link>
             
             } />
             
@@ -75,16 +77,16 @@ function Navbar(props) {
 
   return (
     
-    <Box  sx={{ display: 'flex' }}>
+    <Box  sx={{ display: 'flex'}}>
       <CssBaseline />
       <AppBar component="nav">
         <Toolbar className='navbar'>
           <IconButton
-            color="#fff"
+            
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { sm: 'none' }, color: "#fff" }}
           >
             <MenuIcon />
           </IconButton>

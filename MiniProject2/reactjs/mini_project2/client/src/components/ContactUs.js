@@ -33,6 +33,10 @@ function ContactUs() {
         setcontactStatus(response.data.message);
       }else{
         setcontactStatus("Thank you for contacting us. Your message has been submitted!")
+        setfirstname("");
+        setlastname("");
+        setemail("");
+        setmessage("");
       }
     })
   }
@@ -41,17 +45,17 @@ function ContactUs() {
     <div  className='contactUs'>
       <h1 style={{textAlign:'center'}} id='contactUsTitle'>Contact Us</h1>
         <Container sx={{textAlign:'center', marginTop: '15px', display:'flex', justifyContent:'center'}}>   
-        <Card sx={{width:578, display:'block'}}>
+        <Card className='contactUsCard' sx={{width:578, display:'block'}}>
       <CardContent>
             <Box>
             <h2>{contactStatus}</h2>
             </Box>
             <Box>
-                <TextField required label="First Name" type='text' placeholder="Enter your firstname" className='contactForm' onChange={(e) => {setfirstname(e.target.value)}}/>
-                <TextField required label="Last Name" type='text' placeholder="Enter your lastname" className='contactForm' onChange={(e) => {setlastname(e.target.value)}}/>
+                <TextField required label="First Name" value={firstname} type='text' placeholder="Enter your firstname" className='contactForm' onChange={(e) => {setfirstname(e.target.value)}}/>
+                <TextField required label="Last Name" value={lastname} type='text' placeholder="Enter your lastname" className='contactForm' onChange={(e) => {setlastname(e.target.value)}}/>
             </Box>
             <Box>
-                <TextField required label="Email" type='email' placeholder='Enter your email here' className='contactForm' onChange={(e) => {setemail(e.target.value)}}/>
+                <TextField required label="Email" value={email} type='email' placeholder='Enter your email here' className='contactForm' onChange={(e) => {setemail(e.target.value)}}/>
             </Box>
             <Box>
                 <TextField 
@@ -60,6 +64,7 @@ function ContactUs() {
                     label="Message" 
                     id="userMessage"  
                     rows={5} 
+                    value={message}
                     placeholder='Enter your message here' className='contactForm' onChange={(e) => {setmessage(e.target.value)}}/>
             </Box>
       </CardContent>

@@ -45,10 +45,10 @@ export default function MenuCards() {
           alt="image1"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" >
+          <Typography gutterBottom variant="h5" component="div" className='cardH5' >
             For your enjoy-mint
           </Typography>
-          <Typography variant="body2" >
+          <Typography variant="body2" className='cardP'>
           Coffee, chocolate and mint flavors unite in the new Chocolate Java Mint Frappuccino® blended beverage.
           </Typography>
         </CardContent>
@@ -69,10 +69,10 @@ export default function MenuCards() {
           alt="image1"
         />
         <CardContent >
-          <Typography gutterBottom variant="h5" component="div" >
+          <Typography gutterBottom variant="h5" component="div" className='cardH5' >
           Macadamia just dropped
           </Typography>
-          <Typography variant="body2" >
+          <Typography variant="body2" className='cardP'>
           Smooth and lush, the new White Chocolate Macadamia Cream Cold Brew is topped with toasted cookie crumbles.
           </Typography>
         </CardContent>
@@ -92,10 +92,10 @@ export default function MenuCards() {
           alt="image1"
         />
         <CardContent >
-          <Typography gutterBottom variant="h5" component="div" >
+          <Typography gutterBottom variant="h5" component="div" className='cardH5' >
           Pineapple Passionfruit Lemonade Vizmaker Refreshers® beverage
           </Typography>
-          <Typography variant="body2" >
+          <Typography variant="body2" className='cardP'>
           Tropical flavors of pineapple and passionfruit shaken with diced pineapple and refreshing lemonade.
           </Typography>
         </CardContent>
@@ -115,10 +115,10 @@ export default function MenuCards() {
           alt="image1"
         />
         <CardContent >
-          <Typography gutterBottom variant="h5" component="div" >
+          <Typography gutterBottom variant="h5" component="div" className='cardH5' >
           Mango Dragonfruit Lemonade Vizmaker Refreshers® beverage
           </Typography>
-          <Typography variant="body2" >
+          <Typography variant="body2" className='cardP'>
           Hand-shaken mango and dragonfruit flavors with tangy lemonade and real diced fruit.
           </Typography>
         </CardContent>
@@ -138,10 +138,10 @@ export default function MenuCards() {
           alt="image1"
         />
         <CardContent >
-          <Typography gutterBottom variant="h5" component="div" >
+          <Typography gutterBottom variant="h5" component="div" className='cardH5' >
           New Bumblebee Cake Pop
           </Typography>
-          <Typography variant="body2" >
+          <Typography variant="body2" className='cardP'>
           Vanilla cake with buttercream dipped in chocolaty icing and finished with a bumblebee design.
           </Typography>
         </CardContent>
@@ -161,10 +161,10 @@ export default function MenuCards() {
           alt="image1"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" >
+          <Typography gutterBottom variant="h5" component="div" className='cardH5' >
           Bacon, Sausage & Egg Wrap
           </Typography>
-          <Typography variant="body2" >
+          <Typography variant="body2" className='cardP'>
           Protein-packed ingredients with Cheddar cheese and potatoes wrapped in a flour tortilla.
           </Typography>
         </CardContent>
@@ -184,10 +184,10 @@ export default function MenuCards() {
           alt="image1"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" >
+          <Typography gutterBottom variant="h5" component="div" className='cardH5' >
           Shaken with sunshine
           </Typography>
-          <Typography variant="body2" >
+          <Typography variant="body2" className='cardP'>
           Try these bright Vizmaker Refreshers® beverages: Mango Dragonfruit Lemonade, Pineapple Passionfruit Lemonade and Strawberry Açaí Lemonade.
           </Typography>
         </CardContent>

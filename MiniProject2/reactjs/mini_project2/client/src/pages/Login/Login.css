@@ -1,12 +1,17 @@
 .loginForm{
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
     display: flex;
     justify-content: center;
-    margin-top: 70px;
-    aspect-ratio: 1;
+    margin-top: 20vh;
     width: 440px;
     height: 500px;
     border-radius: 20px;
-    box-shadow: 0px 0px 10px 5px #ff914d;
+    box-shadow: 0px 0px 5px 2px #ff914d;
+    background-color: white;
 }
 
 h2{
@@ -26,14 +31,19 @@ h2{
 }
 
 .registerForm{
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
     display: flex;
     justify-content: center;
-    margin-top: 70px;
-    aspect-ratio: 1;
+    margin-top: 20vh;
     width: 440px;
     height: 500px;
-    box-shadow: 0px 0px 10px 5px #ff914d;
     border-radius: 20px;
+    box-shadow: 0px 0px 5px 2px #ff914d;
+    background-color: white;
 }
 
 .textInput{
@@ -67,3 +77,4 @@ width: 300px;
     color:  black !important;
     font-weight: 900;
 }
+

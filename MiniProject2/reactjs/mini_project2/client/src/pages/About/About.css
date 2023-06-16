@@ -19,9 +19,12 @@
     font-size: 50px;
 }
 
-.footer{
-    background-image: url(../../assets/img/contactUs-background.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+@media (max-width:480px){
+    .aboutUsImg{
+        width: 100vw;
+        height: 350px;
+    }
+    .AboutUs h1{
+        font-size: 30px;
+    }
 }
