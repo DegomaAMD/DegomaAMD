@@ -11,8 +11,6 @@ import { ShopContextProvider } from "./context/menu-context";
 import ScrolltoTop from './components/Backtotop';
 import Register from './pages/Login/Register';
 
-// import { Box } from '@mui/material';
-
 
 function App() {
   return (

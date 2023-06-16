@@ -3,7 +3,7 @@ import { ShopContext } from "../../context/menu-context";
 import './Cafe.css';
 
 export const Product = (props) => {
-  const { id, productCategory, productName, price, productImage } = props.data;
+  const { id, productName, price, productImage } = props.data;
   const { addToCart, cartItems } = useContext(ShopContext);
 
   const cartItemCount = cartItems[id];
