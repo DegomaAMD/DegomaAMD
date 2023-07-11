@@ -10,6 +10,7 @@ import  Cart  from "./pages/Cart/Cart";
 import { ShopContextProvider } from "./context/menu-context";
 import ScrolltoTop from './components/Backtotop';
 import Register from './pages/Login/Register';
+import Admin from './pages/Admin/Admin';
 
 
 function App() {
@@ -19,7 +20,6 @@ function App() {
       <ScrolltoTop/>
       <Navbar/>
       <Routes>
-        <Route exact path="" element={<Navigate to="/Home" />} />
         <Route exact path="/" element={<Navigate to="/Home" />} />
         <Route exact path="/Home" element={<Home/>} />
         <Route exact path="/Menu" element={<Shop/>} />
@@ -28,6 +28,7 @@ function App() {
         <Route exact path="/Login" element={<Login/>} />
         <Route exact path="/PageNotFound" element={<PageNotFound/>} />
         <Route exact path="/Register" element={<Register/>} />
+        <Route exact path="/Admin" element={<Admin/>} />
       </Routes>
     </BrowserRouter>
     </ShopContextProvider>
