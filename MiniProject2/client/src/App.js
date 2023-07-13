@@ -14,6 +14,7 @@ import Admin from './pages/Admin/Admin';
 
 
 function App() {
+  const isAuthenticated = localStorage.getItem('login_token');
   return (
     <ShopContextProvider>
     <BrowserRouter>
@@ -27,8 +28,12 @@ function App() {
         <Route exact path="/Shop" element={<Cart/>} />
         <Route exact path="/Login" element={<Login/>} />
         <Route exact path="/PageNotFound" element={<PageNotFound/>} />
-        <Route exact path="/Register" element={<Register/>} />
-        <Route exact path="/Admin" element={<Admin/>} />
+        <Route exact path="/Register" element={<Register/>} /> 
+      </Routes>
+    </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/Admin" element={isAuthenticated ? <Admin/> : <Navigate to="/Login"/>} />
       </Routes>
     </BrowserRouter>
     </ShopContextProvider>

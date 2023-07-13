@@ -3,9 +3,11 @@ import AboutUsBanner from '../../assets/img/aboutUs-banner.jpg';
 import './About.css';
 import { Container } from '@mui/material';
 import PageFooter from '../../components/PageFooter';
+
 function About() {
   return (
     <div>
+    
    <Container className='AboutUs'>
       <h1 style={{marginTop: '50px', textAlign:'center'}}>About Vizmaker</h1>
       <div className='aboutUsBanner'>

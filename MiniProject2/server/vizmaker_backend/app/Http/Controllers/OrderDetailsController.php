@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\orderDetails;
 use App\Http\Requests\StoreorderDetailsRequest;
 use App\Http\Requests\UpdateorderDetailsRequest;
+use App\Http\Resources\OrderDetailsResources;
+use Illuminate\Http\Request;
 
 class OrderDetailsController extends Controller
 {
@@ -16,6 +18,10 @@ class OrderDetailsController extends Controller
     public function index()
     {
         //
+        $order = orderDetails::all();
+        $response = ['code' => 200, 'message' => 'success', 'order'=>OrderDetailsResources::collection($order)];
+
+        return $response;
     }
 
     /**
@@ -26,6 +32,7 @@ class OrderDetailsController extends Controller
     public function create()
     {
         //
+       
     }
 
     /**
@@ -34,9 +41,17 @@ class OrderDetailsController extends Controller
      * @param  \App\Http\Requests\StoreorderDetailsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreorderDetailsRequest $request)
+    public function store(Request $request)
     {
         //
+        $input = $request->all();
+        $order = orderDetails::create($input);
+        $response = [
+            'code' => 200,
+            'message' => 'Order successfully created!',
+            'order' => new OrderDetailsResources($order)
+        ];
+        return $response;
     }
 
     /**
@@ -45,9 +60,16 @@ class OrderDetailsController extends Controller
      * @param  \App\Models\orderDetails  $orderDetails
      * @return \Illuminate\Http\Response
      */
-    public function show(orderDetails $orderDetails)
+    public function show($id)
     {
         //
+        $order = orderDetails::findOrFail($id);
+        $response = [
+            'code' => 200, 
+            'message' => 'Service successfully created!', 
+            'order' => new OrderDetailsResources($order)
+        ];
+        return $response;
     }
 
     /**
@@ -68,9 +90,18 @@ class OrderDetailsController extends Controller
      * @param  \App\Models\orderDetails  $orderDetails
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateorderDetailsRequest $request, orderDetails $orderDetails)
+    public function update(Request $request, $id)
     {
         //
+        $input = $request->all();
+        $order = orderDetails::findOrFail($id);
+        $order->update($input);
+        $response = [
+            'code' => 200, 
+            'message' => 'Order successfully updated!', 
+            'order' => new OrderDetailsResources($order)
+        ];
+        return $response;
     }
 
     /**
@@ -79,8 +110,16 @@ class OrderDetailsController extends Controller
      * @param  \App\Models\orderDetails  $orderDetails
      * @return \Illuminate\Http\Response
      */
-    public function destroy(orderDetails $orderDetails)
+    public function destroy($id)
     {
         //
+        $order = orderDetails::findOrFail($id);
+        $order->delete();
+        $response = [
+            'code' => 200, 
+            'message' => 'Service successfully deleted!', 
+            'order' => new OrderDetailsResources($order)
+        ];
+        return $response;
     }
 }
