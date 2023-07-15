@@ -11,6 +11,7 @@ import { ShopContextProvider } from "./context/menu-context";
 import ScrolltoTop from './components/Backtotop';
 import Register from './pages/Login/Register';
 import Admin from './pages/Admin/Admin';
+import BEUser from './components/BEUser';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route exact path="/Login" element={<Login/>} />
         <Route exact path="/PageNotFound" element={<PageNotFound/>} />
         <Route exact path="/Register" element={<Register/>} /> 
+        <Route exact path="/BEUser" element={<BEUser/>} />
       </Routes>
     </BrowserRouter>
     <BrowserRouter>
