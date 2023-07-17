@@ -1,29 +1,14 @@
 import React from 'react';
-import Badge from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-
-
-const StyledBadge = styled(Badge)(({ theme }) => ({
-  '& .MuiBadge-badge': {
-    right: -3,
-    top: 13,
-    border: `2px solid ${theme.palette.background.paper}`,
-    padding: '0 4px',
-  },
-}));
-
-export const CartBadge = () => {
+const CartIcon = ({ cartItems }) => {
+  const itemCount = cartItems && Array.isArray(cartItems) ? cartItems.length : 0;
 
   return (
-    <IconButton aria-label="cart">
-      <StyledBadge color="secondary">
-        <ShoppingCartIcon sx={{color: '#ff914d'}} />
-      </StyledBadge>
-    </IconButton>
+    <div>
+      <i className="fa fa-shopping-cart"></i>
+      <span>{itemCount}</span>
+    </div>
   );
-}
+};
 
-export default CartBadge;
+export default CartIcon;

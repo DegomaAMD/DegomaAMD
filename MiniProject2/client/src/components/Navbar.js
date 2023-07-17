@@ -22,10 +22,15 @@ import CartBadge from './CartBadge';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'Menu', 'About'];
+const navItemsAdmin = ['Home','Admin', 'Reports'];
 
 function Navbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const isAuthenticated = localStorage.getItem('login_token') ? true : false;
+  const handleLogout = () => {
+    localStorage.removeItem('login_token');
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -41,7 +46,17 @@ function Navbar(props) {
           </Box>
       <Divider />
       <List >
-        {navItems.map((item) => (
+        {isAuthenticated ? navItemsAdmin.map((item) => (
+          <ListItem key={item} disablePadding>
+            <ListItemButton sx={{ textAlign: 'start' }}>
+              <ListItemText primary={<Link className='navBtn1 navBarItem' to={`/${item}`}>{item}</Link>
+            
+            } />
+            
+            </ListItemButton>
+            
+          </ListItem>
+        )) : navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'start' }}>
               <ListItemText primary={<Link className='navBtn1 navBarItem' to={`/${item}`}>{item}</Link>
@@ -59,11 +74,18 @@ function Navbar(props) {
                 </Button>
               </Link>
               <Box  component="div">
-              <Link to={'/Login'} sx={{ display: { xs: 'none', sm: 'flex'}}}>
-                <Button className='btn' sx={{ color: '#000' }}>
-                  Login
-                </Button>
-              </Link>
+                {isAuthenticated ? 
+                  <Link to={'/Login'} sx={{ display: { xs: 'none', sm: 'flex'}}}>
+                    <Button className='btn' sx={{ color: '#000' }}>
+                      Login
+                    </Button>
+                  </Link> 
+                  :
+                  <Link to={'/Login'} sx={{ display: { xs: 'none', sm: 'flex'}}}>
+                    <Button className='btn' sx={{ color: '#000' }} onClick={handleLogout}>
+                      Logout
+                    </Button>
+                  </Link>}
               </Box>
               </div>
       </List>
@@ -139,3 +161,4 @@ function Navbar(props) {
 
 
 export default Navbar;
+

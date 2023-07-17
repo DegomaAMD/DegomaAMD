@@ -86,7 +86,7 @@ function Login() {
           </Box>
           <Box>
             <Button className='button' type='submit'onClick={handleLogin} disabled={submitLoading}>
-            {submitLoading ? <CircularProgress size={'10px'} /> : ''}Login
+          Login
             </Button>
           </Box>
         <div className='Register'>
