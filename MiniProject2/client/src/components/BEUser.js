@@ -72,7 +72,7 @@ function BEUser() {
 const [data, setData] = useState([]);
 const [loading, setloading] = useState(true);
 const [open, setOpen] = useState(false);
-const [error, seterror] = useState('');
+const [error, setError] = useState('');
 const [submitLoading, setSubmitLoading] = useState(false);
 const [success, setSuccess] = useState(false);
 const navigate = useNavigate();
@@ -271,7 +271,7 @@ useEffect(() => {
                   Authorization : 'Bearer' + localStorage.getItem('login_token'),
                 },
             });
-            let User = response.data.User;
+            let User = response.data.userbe;
 
             console.log(User);
             setData(User);
@@ -445,7 +445,7 @@ useEffect(() => {
 
   return ( 
    <div style={{marginTop: '50px'}}>
-    <div style={{display:'flex', justifyContent:'end'}}> 
+    <div style={{display:'flex', justifyContent:'end', marginBottom: '10px'}}> 
      <Button variant='outlined' color='secondary' startIcon={<AddCircleIcon/>} 
        onclick={handleAdd}
        > 
@@ -462,7 +462,7 @@ useEffect(() => {
          title={"Customer Information"} 
          data={data.map((d) => {
               return [d.firstname, d.lastname, d.username, d.email, d.password,
-                      d.house_lot_number, d.street_name, barangay_name, d.city_name,
+                      d.house_lot_number, d.street_name, d.barangay_name, d.city_name,
                       d.province_name, d.region_name, d.country_name, d.postal_code, 
                       d.phone_number];
          })} 
