@@ -12,6 +12,7 @@ function Register() {
     const [email, setEmail] = useState("");
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
+    const [role, setRole] = useState('Customer')
     const [registerStatus, setRegisterStatus] = useState("");
 
  

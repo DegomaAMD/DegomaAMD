@@ -1,3 +1,5 @@
+import * as React from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -19,12 +21,8 @@ import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { styled, useTheme } from '@mui/material/styles';
-import * as React from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
-// import Dashboard from './Dashboard';
-// import Services from './Services';
-// import Vehicles from './Vehicles';
- import PageNotFound from '../../components/PageNotFound';
+import PageNotFound from '../../components/PageNotFound';
+import Order from '../../components/Order';
 
 const drawerWidth = 240;
 
@@ -114,7 +112,7 @@ export default function Admin() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Booking App Capstone
+            Vizmaker Cafe Dashboard
           </Typography>
           <Button
             variant="contained"
@@ -202,6 +200,23 @@ export default function Admin() {
               />
             </ListItemButton>
           </ListItem>
+          <ListItem disablePadding sx={{ background: '#e9e1e1' }}>
+            <ListItemButton>
+              <ListItemIcon>{<DirectionsCarIcon sx={{ color: 'green' }} />}</ListItemIcon>
+              <ListItemText
+                primary={
+                  <Button
+                    variant="contained"
+                    color="success"
+                    fullWidth
+                    onClick={() => handleMenuClick('/dashboard/Orders')}
+                  >
+                    Orders
+                  </Button>
+                }
+              />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
       <Main open={open}>
@@ -209,7 +224,7 @@ export default function Admin() {
           <Route path="/" element={<PageNotFound />} />
           <Route path="/Users" element={<PageNotFound />} />
           <Route path="/Products" element={<PageNotFound />} />
-          <Route path="/Orders" element={<PageNotFound />} />
+          <Route path="/Orders" element={<Order />} />
         </Routes>
       </Main>
     </Box>
