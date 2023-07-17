@@ -10,9 +10,9 @@ import  Cart  from "./pages/Cart/Cart";
 import ScrolltoTop from './components/Backtotop';
 import Register from './pages/Login/Register';
 import Admin from './pages/Admin/Admin';
+import BEUser from './components/BEUser';
 import toast, { Toaster } from 'react-hot-toast';
 import Checkout from './components/Checkout';
-
 
 
 function App() {
@@ -29,6 +29,7 @@ function App() {
         <Route exact path="/Login" element={<Login/>} />
         <Route exact path="/PageNotFound" element={<PageNotFound/>} />
         <Route exact path="/Register" element={<Register/>} /> 
+        <Route exact path="/BEUser" element={<BEUser/>} />
       </Routes>
     </Router>
     <Router>
