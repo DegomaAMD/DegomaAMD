@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Resources\UserDetailsResources;
 
 class UserAuthenticationController extends Controller
 {
@@ -94,4 +95,69 @@ class UserAuthenticationController extends Controller
         return $response;
 
     }
+
+    public function index()
+    {
+        //
+        $userbe = User::all();
+        $response = [
+            'code' => 200, 
+            'message' => 'success', 
+            'userbe'=> UserDetailsResources::collection($userbe)];
+
+        return $response;
+    }
+
+    public function store(Request $request)
+    {
+        //
+        $input = $request->all();
+        $userbe = User::create($input);
+        $response = [
+            'code' => 200,
+            'message' => 'User Details successfully created!',
+            'userbe' => new UserDetailsResources($userbe)
+        ];
+        return $response;
+    }
+
+    public function show(string $id)
+    {
+        //
+        $userbe = User::findOrFail($id);
+        $response = [
+            'code' => 200, 
+            'message' => 'User Details successfully created!', 
+            'userbe' => new UserDetailsResources($userbe)
+        ];
+        return $response;
+    }
+
+    public function update(Request $request, string $id)
+    {
+        //
+        $input = $request->all();
+        $userbe = User::findOrFail($id);
+        $userbe->update($input);
+        $response = [
+            'code' => 200, 
+            'message' => 'User Details successfully updated!', 
+            'userbe' => new UserDetailsResources($userbe)
+        ];
+        return $response;
+    }
+
+    public function destroy(string $id)
+    {
+        //
+        $userbe = User::findOrFail($id);
+        $userbe->delete();
+        $response = [
+            'code' => 200, 
+            'message' => 'User Details successfully deleted!', 
+            'order' => new UserDetailsResources($userbe)
+        ];
+        return $response;
+    }
+
 }

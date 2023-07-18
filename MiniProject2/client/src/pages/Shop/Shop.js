@@ -22,7 +22,8 @@ const Shop = () => {
 
   useEffect(() => {
     fetchProducts();
-    loadCartItems();
+    // loadCartItems();
+    fetchCartItems();
   }, []);
 
   const fetchProducts = () => {
@@ -41,18 +42,30 @@ const Shop = () => {
       });
   };
 
-  const loadCartItems = () => {
-    const storedCartItems = JSON.parse(localStorage.getItem('cartItems'));
-    if (storedCartItems) {
-      setCartItems(storedCartItems);
-    }
-  };
+  // const loadCartItems = () => {
+  //   const storedCartItems = JSON.parse(localStorage.getItem('cartItems'));
+  //   if (storedCartItems) {
+  //     setCartItems(storedCartItems);
+  //   }
+  // };
 
   const saveCartItems = () => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   };
 
   const addToCart = (product) => {
+    axios
+      .post('http://127.0.0.1:8000/api/api/cart/add', product, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getToken()}`,
+        },
+      }).then((response) => {
+        setCartItems(response.data);
+      })
+      .catch((error) => {
+        console.error('Error adding to cart:', error);
+      });
     const existingItem = cartItems.find((item) => item.id === product.id);
     if (existingItem) {
       updateQuantity(existingItem, existingItem.quantity + 1);
@@ -63,6 +76,21 @@ const Shop = () => {
       };
       setCartItems((prevCartItems) => [...prevCartItems, newItem]);
     }
+  };
+
+  const fetchCartItems = () => {
+    axios
+      .get('http://127.0.0.1:8000/api/cart/items', {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
+      .then((response) => {
+        setCartItems(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching cart items:', error);
+      });
   };
 
   const removeFromCart = (product) => {

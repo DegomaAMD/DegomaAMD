@@ -23,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
 const Checkout = () => {
   const classes = useStyles();
   const [userData, setUserData] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
   useEffect(() => {
     fetchUserData();
+    fetchSelectedProducts();
   }, []);
 
   const fetchUserData = () => {
@@ -38,95 +38,88 @@ const Checkout = () => {
       })
       .catch((error) => {
         console.error('Error fetching user data:', error);
-        setError('Failed to fetch user data');
       });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-    setError('');
-
-    // Extract the form data from the event
-    const formData = new FormData(event.target);
-
-    // Convert the form data to JSON format
-    const userData = Object.fromEntries(formData.entries());
-
-    // Perform any additional validation or data manipulation here
-    // ...
-
-    // Submit the user data to the backend
+  const fetchSelectedProducts = () => {
     axios
-      .post('http://127.0.0.1:8000/api/checkout', userData) // Replace with the appropriate endpoint for submitting user data
+      .get('http://127.0.0.1:8000/api/cart/items') // Replace with the appropriate endpoint to fetch selected products from the cart
       .then((response) => {
-        // Handle the successful submission response
-        console.log('Order placed successfully');
-        // Redirect the user to a success or confirmation page
-        // ...
+        setSelectedProducts(response.data);
       })
       .catch((error) => {
-        console.error('Error submitting user data:', error);
-        setError('Failed to place the order');
-      })
-      .finally(() => {
-        setIsLoading(false);
+        console.error('Error fetching selected products:', error);
       });
   };
 
-  if (isLoading) {
-    return <Typography>Loading...</Typography>;
-  }
+  const handlePlaceOrder = () => {
+    const order = {
+      user: userData,
+      products: selectedProducts,
+    };
 
-  if (error) {
-    return <Typography color="error">{error}</Typography>;
-  }
+    axios
+      .post('http://127.0.0.1:8000/api/order', order) // Replace with the appropriate endpoint to send the order data
+      .then((response) => {
+        console.log('Order placed successfully:', response.data);
+        // Add any additional logic or navigation after placing the order
+      })
+      .catch((error) => {
+        console.error('Error placing the order:', error);
+      });
+  };
 
   return (
     <div className={classes.container}>
       <Typography variant="h6" className={classes.title}>
         Checkout
       </Typography>
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label="Name"
-              fullWidth
-              className={classes.formField}
-              value={userData.name || ''}
-              disabled
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label="Email"
-              fullWidth
-              className={classes.formField}
-              value={userData.email || ''}
-              disabled
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="Address"
-              fullWidth
-              className={classes.formField}
-              required
-              name="address"
-            />
-          </Grid>
-          {/* Add more form fields as needed */}
+
+      <Typography variant="h6">User Information:</Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            label="Name"
+            fullWidth
+            className={classes.formField}
+            value={userData.name || ''}
+            disabled
+          />
         </Grid>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className={classes.submitButton}
-        >
-          Place Order
-        </Button>
-      </form>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            label="Email"
+            fullWidth
+            className={classes.formField}
+            value={userData.email || ''}
+            disabled
+          />
+        </Grid>
+        {/* Add more user information fields as needed */}
+      </Grid>
+
+      <Typography variant="h6" className={classes.title}>
+        Selected Products:
+      </Typography>
+      {selectedProducts.length > 0 ? (
+        <ul>
+          {selectedProducts.map((product) => (
+            <li key={product.id}>{product.product_name}</li>
+          ))}
+        </ul>
+      ) : (
+        <Typography variant="body1">No products selected for checkout</Typography>
+      )}
+
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        className={classes.submitButton}
+        onClick={handlePlaceOrder}
+      >
+        Place Order
+      </Button>
     </div>
   );
 };

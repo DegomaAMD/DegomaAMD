@@ -21,8 +21,11 @@ import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { styled, useTheme } from '@mui/material/styles';
-import PageNotFound from '../../components/PageNotFound';
+// import PageNotFound from '../../components/PageNotFound';
 import Order from '../../components/Order';
+import Product from '../../components/Product';
+import { Toaster } from 'react-hot-toast';
+import UserBE from '../../components/BEUser';
 
 const drawerWidth = 240;
 
@@ -221,11 +224,12 @@ export default function Admin() {
       </Drawer>
       <Main open={open}>
         <Routes>
-          <Route path="/" element={<PageNotFound />} />
-          <Route path="/Users" element={<PageNotFound />} />
-          <Route path="/Products" element={<PageNotFound />} />
+          <Route path="/Admin" element={<Admin />} />
+          <Route path="/Users" element={<UserBE />} />
+          <Route path="/Products" element={<Product />} />
           <Route path="/Orders" element={<Order />} />
         </Routes>
+        <Toaster />
       </Main>
     </Box>
   );
