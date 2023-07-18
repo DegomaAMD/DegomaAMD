@@ -23,6 +23,7 @@ import Typography from '@mui/material/Typography';
 import { styled, useTheme } from '@mui/material/styles';
 import PageNotFound from '../../components/PageNotFound';
 import Order from '../../components/Order';
+import BEUser from '../../components/BEUser';
 
 const drawerWidth = 240;
 
@@ -222,7 +223,7 @@ export default function Admin() {
       <Main open={open}>
         <Routes>
           <Route path="/" element={<PageNotFound />} />
-          <Route path="/Users" element={<PageNotFound />} />
+          <Route path="/Users" element={<BEUser />} />
           <Route path="/Products" element={<PageNotFound />} />
           <Route path="/Orders" element={<Order />} />
         </Routes>

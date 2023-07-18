@@ -19,9 +19,9 @@ import axios from 'axios';
 import MUIDataTable from 'mui-datatables';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast, {Toaster} from 'react-hot-toast';
 
-import toast from 'react-hot-toast';
-
+const notify = () => toast('Success.');
 const style = {
   position: 'absolute',
   top: '50%',
@@ -67,7 +67,6 @@ function BootstrapDialogTitle(props) {
   );
 }
 
-
 function BEUser() {
 const [data, setData] = useState([]);
 const [loading, setloading] = useState(true);
@@ -78,7 +77,6 @@ const [success, setSuccess] = useState(false);
 const navigate = useNavigate();
 const [transactionType, setTransactionType] = useState('');
 const [id, setId] = useState('');
-
 
 const [formData, setFormData] = useState({
   firstname: '',
@@ -97,12 +95,11 @@ const [formData, setFormData] = useState({
   phone_number: '',
 });
 
-const handleEdit = (rowIndex) =>{
+const handleEdit = (rowIndex) => {
      const rowData = data[rowIndex];
      setOpen(true);
      setSuccess(false);
      setId(rowData.id);
-     setTransactionType('edit');
      setFormData({ firstname: rowData.firstname, lastname: rowData.lastname,
                    username: rowData.username, email: rowData.email,
                    password: rowData.password, house_lot_number: rowData.house_lot_number,
@@ -110,54 +107,25 @@ const handleEdit = (rowIndex) =>{
                    city_name: rowData.city_name, province_name: rowData.province_name,
                    region_name: rowData.region_name, country_name: rowData.country_name,
                    postal_code: rowData.postal_code, phone_number: rowData.phone_number});
+     setTransactionType('edit');             
 };
-
-const handleDelete = (rowIndex) =>{
-    setTransactionType('delete');
+ 
+const handleDelete = (rowIndex) => {
     const rowData = data[rowIndex];
-     setOpen(true);
-     setSuccess(false);
-     setId(rowData.id);
-     setFormData({ firstname: rowData.firstname, lastname: rowData.lastname,
+    setOpen(true);
+    setSuccess(false);
+    setId(rowData.id);
+    setFormData({  firstname: rowData.firstname, lastname: rowData.lastname,
                    username: rowData.username, email: rowData.email,
                    password: rowData.password, house_lot_number: rowData.house_lot_number,
                    street_name: rowData.street_name, barangay_name: rowData.barangay_name,
                    city_name: rowData.city_name, province_name: rowData.province_name,
                    region_name: rowData.region_name, country_name: rowData.country_name,
                    postal_code: rowData.postal_code, phone_number: rowData.phone_number});
+    setTransactionType('delete');
 };
 
 const columns = [
-  {
-    name: 'Actions',
-    options: {
-      filter: false,
-      sort: false,
-      customBodyRender: (value, tableMeta, updateValue) => {
-        const rowIndex = tableMeta.rowIndex;
-        return (
-          <>
-            <Button
-              variant="text"
-              startIcon={<EditIcon />}
-              color="primary"
-              onClick={() => handleEdit(rowIndex)}
-            >
-              Edit
-            </Button>
-            <Button
-              variant="text"
-              startIcon={<DeleteIcon />}
-              color="error"
-              onClick={() => handleDelete(rowIndex)}
-            >
-              Delete
-            </Button>
-          </>
-        );
-      },
-    },
-  },
   {
     name: 'First Name',
     options: {
@@ -256,23 +224,53 @@ const columns = [
     sort: true,
   },    
 },
+{
+  name: 'Actions',
+  options: {
+    filter: false,
+    sort: false,
+    customBodyRender: (value, tableMeta, updateValue) => {
+      const rowIndex = tableMeta.rowIndex;
+      return (
+        <>
+          <Button
+            variant="text"
+            startIcon={<EditIcon />}
+            color="primary"
+            onClick={() => handleEdit(rowIndex)}
+          >
+            
+          </Button>
+          <Button
+            variant="text"
+            startIcon={<DeleteIcon />}
+            color="error"
+            onClick={() => handleDelete(rowIndex)}
+          >
+            
+          </Button>
+        </>
+      );
+    },
+  },
+ },
 ];
 
 const options = {
-    filterType: 'checkbox',
+    filterType: 'textfield',
     selectableRows: false,
   };
 
 useEffect(() => {
   const fetchData = async () => {
        try {
-            const response = await axios.get('http://127.0.0.1:8000/api/User',{
+            const response = await axios.get('http://127.0.0.1:8000/api/User', {
                 headers: {
-                  Authorization : 'Bearer' + localStorage.getItem('login_token'),
+                  Authorization : 'Bearer ' + localStorage.getItem('login_token'),
                 },
             });
-            let User = response.data.userbe;
-
+            let User = response.data.userbe === undefined ? [] : response.data.userbe ;
+            console.log("response",response)
             console.log(User);
             setData(User);
             setloading(false);             
@@ -283,7 +281,6 @@ useEffect(() => {
   }
 
   fetchData();
-  
 }, [success]);
 
   const handleAdd = () => {
@@ -312,7 +309,6 @@ useEffect(() => {
   };
 
   const handleChange = (event) => {
-
     setFormData((prevState) => ({
       ...prevState,
       [event.target.name]: event.target.value,
@@ -329,25 +325,24 @@ useEffect(() => {
       return;
     } else {
       try {
-
         if(transactionType === 'add'){
           const response = await axios.post('http://127.0.0.1:8000/api/User', formData, {
             headers: {
-              Authorization : 'Bearer' + localStorage.getItem('login_token'),
+              Authorization : 'Bearer ' + localStorage.getItem('login_token'),
             },
         });
         console.log(response);
         }else if(transactionType === 'edit'){
           const response = await axios.put(`http://127.0.0.1:8000/api/User/${id}`, formData, {
             headers: {
-              Authorization : 'Bearer' + localStorage.getItem('login_token'),
+              Authorization : 'Bearer ' + localStorage.getItem('login_token'),
             },
         });
         console.log(response);
         }else if(transactionType === 'delete'){
           const response = await axios.delete(`http://127.0.0.1:8000/api/User/${id}`, {
             headers: {
-              Authorization : 'Bearer' + localStorage.getItem('login_token'),
+              Authorization : 'Bearer ' + localStorage.getItem('login_token'),
             },
         });
         console.log(response);
@@ -356,6 +351,7 @@ useEffect(() => {
        
       handleClose();
       setSuccess(true);
+      
       const message =
           transactionType == 'add'
             ? 'User Details successfully created!'
@@ -398,43 +394,56 @@ useEffect(() => {
     if (formData.firstname === undefined || formData.firstname === '') {
       setError('First Name is required!');
       return false;
-    } else if (formData.lastname === undefined || formData.lastname === '') {
+    } 
+    else if (formData.lastname === undefined || formData.lastname === '') {
       setError('Last Name is required!');
       return false;
-    } else if (formData.username === undefined || formData.username === '') {
+    } 
+    else if (formData.username === undefined || formData.username === '') {
       setError('User name is required!');
       return false;
-    } else if (formData.email === undefined || formData.email === '') {
+    } 
+    else if (formData.email === undefined || formData.email === '') {
       setError('Email is required!');
       return false;
-    } else if (formData.password === undefined || formData.password === '') {
+    } 
+    else if (formData.password === undefined || formData.password === '') {
       setError('Password is required!');
       return false;
-    } else if (formData.house_lot_number === undefined || formData.house_lot_number === '') {
+    } 
+    else if (formData.house_lot_number === undefined || formData.house_lot_number === '') {
       setError('House Lot Number is required!');
       return false;
-    } else if (formData.street_name === undefined || formData.street_name === '') {
+    } 
+    else if (formData.street_name === undefined || formData.street_name === '') {
       setError('Street is required!');
       return false;
-    } else if (formData.barangay_name === undefined || formData.barangay_name === '') {
+    } 
+    else if (formData.barangay_name === undefined || formData.barangay_name === '') {
       setError('Barangay is required!');
       return false;
-    } else if (formData.city_name === undefined || formData.city_name === '') {
+    } 
+    else if (formData.city_name === undefined || formData.city_name === '') {
       setError('City is required!');
       return false;
-    } else if (formData.province_name === undefined || formData.province_name === '') {
+    } 
+    else if (formData.province_name === undefined || formData.province_name === '') {
       setError('Province is required!');
       return false;
-    } else if (formData.region_name === undefined || formData.region_name === '') {
+    } 
+    else if (formData.region_name === undefined || formData.region_name === '') {
       setError('Region is required!');
       return false;
-    } else if (formData.country_name === undefined || formData.country_name === '') {
+    } 
+    else if (formData.country_name === undefined || formData.country_name === '') {
       setError('Country is required!');
       return false;
-    } else if (formData.postal_code === undefined || formData.postal_code === '') {
+    } 
+    else if (formData.postal_code === undefined || formData.postal_code === '') {
       setError('Postal Code is required!');
       return false;
-    } else if (formData.phone_number === undefined || formData.phone_number === '') {
+    } 
+    else if (formData.phone_number === undefined || formData.phone_number === '') {
       setError('Phone Number is required!');
       return false;
     }
@@ -442,21 +451,24 @@ useEffect(() => {
     return true;
   };
 
-
   return ( 
-   <div style={{marginTop: '50px'}}>
-    <div style={{display:'flex', justifyContent:'end', marginBottom: '10px'}}> 
-     <Button variant='outlined' color='secondary' startIcon={<AddCircleIcon/>} 
-       onclick={handleAdd}
-       > 
+   <> 
+    <div style={{marginTop: '50px'}}>
+       <div style={{display:'flex', justifyContent:'end', marginBottom: '10px'}}> 
+          <Button 
+           variant="outlined" 
+           color="secondary" 
+           startIcon={<AddCircleIcon/>} 
+           onclick={handleAdd}
+          > 
         ADD
-     </Button>
-     </div>
+          </Button>
+       </div>
       {loading ? ( 
         <div style={{display:'flex', justifyContent: 'center', marginBottom: '10px' }}> 
-        <CircularProgress/> 
+           <CircularProgress/> 
         </div>
-    ):( 
+    ) : ( 
        <MUIDataTable 
          loading={loading} 
          title={"Customer Information"} 
@@ -468,12 +480,12 @@ useEffect(() => {
          })} 
          columns={columns}  
          options={options}
-      />  
+        />  
       )}
 
 
        <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
            {transactionType === 'add'
             ? 'Add User Details'
             : transactionType === 'edit'
@@ -664,17 +676,15 @@ useEffect(() => {
                 {transactionType === 'add'
                   ? 'Add User Details'
                   : transactionType === 'edit'
-                  ? 'Edit User Details'
-                  : 'Delete User Details'}
+                  ? 'Edit'
+                  : 'Delete'}
               </Button>  
         </DialogActions>
       </BootstrapDialog>
-
-
     </div>
+  </>
  );
 }
-
 
 export default BEUser;
 
