@@ -21,7 +21,6 @@ import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-
 // const style = {
 //   position: 'absolute',
 //   top: '50%',
@@ -33,6 +32,7 @@ import toast from 'react-hot-toast';
 //   boxShadow: 24,
 //   p: 4,
 // };
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -67,7 +67,8 @@ function BootstrapDialogTitle(props) {
   );
 }
 
-function VizBEUser() {
+
+function UserBE() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
@@ -352,19 +353,22 @@ function VizBEUser() {
         } else if (transactionType === 'edit') {
           const response = await axios.put(`http://127.0.0.1:8000/api/User/${id}`, formData, {
             headers: {
+
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
+
             },
           });
           console.log(response);
         } else if (transactionType === 'delete') {
           const response = await axios.delete(`http://127.0.0.1:8000/api/User/${id}`, {
             headers: {
+
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
+
             },
           });
           console.log(response);
         }
-
         handleClose();
         setSuccess(true);
         const message =
@@ -703,10 +707,13 @@ function VizBEUser() {
               ? 'Edit User Information'
               : 'Delete User Information'}
           </Button>
+
         </DialogActions>
       </BootstrapDialog>
     </div>
   );
 }
 
-export default VizBEUser;
+
+export default UserBE;
+

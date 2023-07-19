@@ -25,7 +25,9 @@ import { styled, useTheme } from '@mui/material/styles';
 import Order from '../../components/Order';
 import Product from '../../components/Product';
 import { Toaster } from 'react-hot-toast';
-import VizBEUser from '../../components/VizBEUser';
+
+import UserBE from '../../components/BEUser';
+
 
 const drawerWidth = 240;
 
@@ -225,7 +227,7 @@ export default function Admin() {
       <Main open={open}>
         <Routes>
           <Route path="/Admin" element={<Admin />} />
-          <Route path="/Users" element={<VizBEUser />} />
+          <Route path="/Users" element={<UserBE />} />
           <Route path="/Products" element={<Product />} />
           <Route path="/Orders" element={<Order />} />
         </Routes>
