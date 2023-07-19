@@ -21,6 +21,7 @@ import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
+
 // const style = {
 //   position: 'absolute',
 //   top: '50%',
@@ -66,22 +67,21 @@ function BootstrapDialogTitle(props) {
   );
 }
 
-function Order() {
+function Product() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState('');
   const [submitLoading, setSubmitLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  // const navigate = useNavigate();
+//   const navigate = useNavigate();
   const [transactionType, setTransactionType] = useState('');
   const [id, setId] = useState('');
 
   const [formData, setFormData] = useState({
-    product_id: '',
-    user_id: '',
-    order_quantity: '',
-    total_order_amount: '',
+    product_name: '',
+    product_details: '',
+    product_price: '',
   });
 
   const handleEdit = (rowIndex) => {
@@ -89,10 +89,11 @@ function Order() {
     setOpen(true);
     setSuccess(false);
     setId(rowIndex + 1);
-    setFormData({ product_id: rowData.product_id, 
-                  user_id: rowData.user_id, 
-                  order_quantity: rowData.order_quantity, 
-                  total_order_amount: rowData.total_order_amount });
+    setFormData({ product_name: rowData.product_name, 
+                product_details: rowData.product_details, 
+                product_price: rowData.product_price, 
+                });
+                console.log(rowIndex)
     setTransactionType('edit');
   };
 
@@ -101,36 +102,29 @@ function Order() {
     setOpen(true);
     setSuccess(false);
     setId(rowIndex + 1);
-    setFormData({ product_id: rowData.product_id, 
-                  user_id: rowData.user_id, 
-                  order_quantity: rowData.order_quantity, 
-                  total_order_amount: rowData.total_order_amount });
+    setFormData({ product_name: rowData.product_name, 
+        product_details: rowData.product_details, 
+        product_price: rowData.product_price, 
+        });
     setTransactionType('delete');
   };
   const columns = [
     {
-      name: 'Product ID',
+      name: 'Product Name',
       options: {
         filter: true,
         sort: true,
       },
     },
     {
-      name: 'User ID',
+      name: 'Product Details',
       options: {
         filter: true,
         sort: true,
       },
     },
     {
-      name: 'Order quantity',
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
-      name: 'Order total amount',
+      name: 'Product Price',
       options: {
         filter: true,
         sort: true,
@@ -176,15 +170,15 @@ function Order() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/order', {
+        const response = await axios.get('http://127.0.0.1:8000/api/products', {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('login_token'),
           },
         });
-        let orderDetails = response.data.order === undefined ? [] : response.data.order ;
+        let Products = response.data.product === undefined ? [] : response.data.product ;
         console.log("response",response)
-        console.log(orderDetails);
-        setData(orderDetails);
+        console.log(Products);
+        setData(Products);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -197,10 +191,9 @@ function Order() {
 
   const handleAdd = () => {
     setFormData({
-        product_id: '',
-        user_id: '',
-        order_quantity: '',
-        total_order_amount: '',
+        product_name: '',
+        product_details: '',
+        product_price: '',
     });
     setOpen(true);
     setSuccess(false);
@@ -228,21 +221,21 @@ function Order() {
     } else {
       try {
         if (transactionType === 'add') {
-          const response = await axios.post('http://127.0.0.1:8000/api/order', formData, {
+          const response = await axios.post('http://127.0.0.1:8000/api/products', formData, {
             headers: {
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
             },
           });
           console.log(response);
         } else if (transactionType === 'edit') {
-          const response = await axios.put(`http://127.0.0.1:8000/api/order/${id}`, formData, {
+          const response = await axios.put(`http://127.0.0.1:8000/api/products/${id}`, formData, {
             headers: {
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
             },
           });
           console.log(response);
         } else if (transactionType === 'delete') {
-          const response = await axios.delete(`http://127.0.0.1:8000/api/order/${id}`, {
+          const response = await axios.delete(`http://127.0.0.1:8000/api/products/${id}`, {
             headers: {
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
             },
@@ -254,10 +247,10 @@ function Order() {
         setSuccess(true);
         const message =
         transactionType === 'add'
-          ? 'User Details successfully created!'
+          ? 'Product Details successfully created!'
           : transactionType === 'edit'
-          ? 'User Details successfuly updated!'
-          : 'User Details successfully deleted!';
+          ? 'Product Details successfuly updated!'
+          : 'Product Details successfully deleted!';
       toast(message, {
         duration: 4000,
         position: 'top-center',
@@ -292,20 +285,16 @@ function Order() {
   };
 
   const validateForm = () => {
-    if (formData.product_id === undefined || formData.product_id === '') {
-      setError('Product ID is required!');
+    if (formData.product_name === undefined || formData.product_name === '') {
+      setError('Product Name is required!');
       return false;
     } 
-    else if (formData.user_id === undefined || formData.user_id === '') {
-      setError('User ID is required!');
+    else if (formData.product_details === undefined || formData.product_details === '') {
+      setError('Product Details is required!');
       return false;
     }
-    else if (formData.order_quantity === undefined || formData.order_quantity === '') {
-      setError('Order quantity Name is required!');
-      return false;
-    }
-    else if (formData.total_order_amount === undefined || formData.total_order_amount === '') {
-      setError('Total Amount!');
+    else if (formData.product_price === undefined || formData.product_price === '') {
+      setError('Product Price is required!');
       return false;
     }
 
@@ -331,9 +320,9 @@ function Order() {
       ) : (
         <MUIDataTable
           loading={loading}
-          title={'Order List'}
+          title={'Product List'}
           data={data.map((d) => {
-            return [d.product_id, d.user_id, d.order_quantity, d.total_order_amount];
+            return [d.product_name, d.product_details, d.product_price];
           })}
           columns={columns}
           options={options}
@@ -343,59 +332,47 @@ function Order() {
       <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           {transactionType === 'add'
-            ? 'Add Order'
+            ? 'Add Product'
             : transactionType === 'edit'
-            ? 'Edit Order'
-            : 'Delete Order'}
+            ? 'Edit Product'
+            : 'Delete Product'}
           {error && <Alert severity="error">{error}</Alert>}
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                id="product_id"
+                id="product_name"
                 fullWidth
-                label="Product ID"
-                name="product_id"
+                label="Product Name"
+                name="product_name"
                 disabled={transactionType === 'delete' ? true : false}
                 variant="standard"
-                value={formData.product_id}
+                value={formData.product_name}
                 onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                id="user_id"
+                id="product_details"
                 fullWidth
-                label="User ID"
-                name="user_id"
+                label="Product Details"
+                name="product_details"
                 disabled={transactionType === 'delete' ? true : false}
                 variant="standard"
-                value={formData.user_id}
+                value={formData.product_details}
                 onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                id="order_quantity"
+                id="product_price"
                 fullWidth
-                label="Order quantity"
-                name="order_quantity"
+                label="Product Price"
+                name="product_price"
                 disabled={transactionType === 'delete' ? true : false}
                 variant="standard"
-                value={formData.order_quantity}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="total_order_amount"
-                fullWidth
-                label="Total order amount"
-                name="total_order_amount"
-                variant="standard"
-                disabled={transactionType === 'delete' ? true : false}
-                value={formData.total_order_amount}
+                value={formData.product_price}
                 onChange={handleChange}
               />
             </Grid>
@@ -410,10 +387,10 @@ function Order() {
           >
             {submitLoading ? <CircularProgress size={'10px'} /> : ''}{' '}
             {transactionType === 'add'
-              ? 'Add Order Details'
+              ? 'Add Product Details'
               : transactionType === 'edit'
-              ? 'Edit Order Details'
-              : 'Delete Order Details'}
+              ? 'Edit Product Details'
+              : 'Delete Product Details'}
           </Button>
         </DialogActions>
       </BootstrapDialog>
@@ -421,4 +398,4 @@ function Order() {
   );
 }
 
-export default Order;
+export default Product;

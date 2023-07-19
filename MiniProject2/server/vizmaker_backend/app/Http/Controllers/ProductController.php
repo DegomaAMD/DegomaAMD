@@ -2,85 +2,72 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\vizmakerCafe;
-use App\Http\Requests\StorevizmakerCafeRequest;
-use App\Http\Requests\UpdatevizmakerCafeRequest;
+use App\Http\Resources\ProductResource;
+use App\Models\Product;
+use Illuminate\Http\Request;
 
-class VizmakerCafeController extends Controller
+class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
+        $product = Product::all();
+        $response = ['code' => 200, 'message' => 'Successfully Retrieved!', 'product' => ProductResource::collection($product)];
+
+        return $response;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request)
     {
         //
+        $input = $request->all();
+        $product = Product::create($input);
+        $response = [
+            'code' => 200,
+            'message' => 'Product successfully created!',
+            'order' => new ProductResource($product)
+        ];
+        return $response;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorevizmakerCafeRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StorevizmakerCafeRequest $request)
+    public function show(string $id)
     {
         //
+        $product = Product::findOrFail($id);
+        $response = [
+            'code' => 200, 
+            'message' => 'Product successfully created!', 
+            'order' => new ProductResource($product)
+        ];
+        return $response;
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\vizmakerCafe  $vizmakerCafe
-     * @return \Illuminate\Http\Response
-     */
-    public function show(vizmakerCafe $vizmakerCafe)
+    public function update(Request $request, string $id)
     {
         //
+        $input = $request->all();
+        $product = Product::findOrFail($id);
+        $product->update($input);
+        $response = [
+            'code' => 200, 
+            'message' => 'Product successfully updated!', 
+            'order' => new ProductResource($product)
+        ];
+        return $response;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\vizmakerCafe  $vizmakerCafe
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(vizmakerCafe $vizmakerCafe)
+    public function destroy(string $id)
     {
         //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatevizmakerCafeRequest  $request
-     * @param  \App\Models\vizmakerCafe  $vizmakerCafe
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatevizmakerCafeRequest $request, vizmakerCafe $vizmakerCafe)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\vizmakerCafe  $vizmakerCafe
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(vizmakerCafe $vizmakerCafe)
-    {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+        $response = [
+            'code' => 200, 
+            'message' => 'Service successfully deleted!', 
+            'order' => new ProductResource($product)
+        ];
+        return $response;
     }
 }
