@@ -67,7 +67,7 @@ function BootstrapDialogTitle(props) {
   );
 }
 
-function Product() {
+function VizAdminUser() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
@@ -79,9 +79,9 @@ function Product() {
   const [id, setId] = useState('');
 
   const [formData, setFormData] = useState({
-    product_name: '',
-    product_details: '',
-    product_price: '',
+    username : '',
+    email : '',
+    password : '',
   });
 
   const handleEdit = (rowIndex) => {
@@ -89,12 +89,11 @@ function Product() {
     setOpen(true);
     setSuccess(false);
     setId(rowIndex + 1);
-    setFormData({ product_name: rowData.product_name, 
-                product_details: rowData.product_details, 
-                product_price: rowData.product_price, 
+    setFormData({ username: rowData.username, 
+      email: rowData.email, 
+      password: rowData.password, 
                 });
-                console.log('rowIndex: ', rowIndex)
-                console.log('data: ', data)
+                console.log(rowData)
     setTransactionType('edit');
   };
 
@@ -103,29 +102,29 @@ function Product() {
     setOpen(true);
     setSuccess(false);
     setId(rowIndex + 1);
-    setFormData({ product_name: rowData.product_name, 
-        product_details: rowData.product_details, 
-        product_price: rowData.product_price, 
-        });
+    setFormData({ username: rowData.username, 
+      email: rowData.email, 
+      password: rowData.password, 
+                });
     setTransactionType('delete');
   };
   const columns = [
     {
-      name: 'Product Name',
+      name: 'UserName',
       options: {
         filter: true,
         sort: true,
       },
     },
     {
-      name: 'Product Details',
+      name: 'Email',
       options: {
         filter: true,
         sort: true,
       },
     },
     {
-      name: 'Product Price',
+      name: 'Password',
       options: {
         filter: true,
         sort: true,
@@ -171,15 +170,15 @@ function Product() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/products', {
+        const response = await axios.get('http://127.0.0.1:8000/api/User', {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('login_token'),
           },
         });
-        let Products = response.data.product === undefined ? [] : response.data.product ;
+        let Customer = response.data.userbe === undefined ? [] : response.data.userbe ;
         console.log("response",response)
-        console.log(Products);
-        setData(Products);
+        console.log(Customer);
+        setData(Customer);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -192,9 +191,9 @@ function Product() {
 
   const handleAdd = () => {
     setFormData({
-        product_name: '',
-        product_details: '',
-        product_price: '',
+      username : '',
+      email : '',
+      password : '',
     });
     setOpen(true);
     setSuccess(false);
@@ -222,21 +221,21 @@ function Product() {
     } else {
       try {
         if (transactionType === 'add') {
-          const response = await axios.post('http://127.0.0.1:8000/api/products', formData, {
+          const response = await axios.post('http://127.0.0.1:8000/api/register', formData, {
             headers: {
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
             },
           });
           console.log(response);
         } else if (transactionType === 'edit') {
-          const response = await axios.put(`http://127.0.0.1:8000/api/products/${id}`, formData, {
+          const response = await axios.put(`http://127.0.0.1:8000/api/User/${id}`, formData, {
             headers: {
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
             },
           });
           console.log(response);
         } else if (transactionType === 'delete') {
-          const response = await axios.delete(`http://127.0.0.1:8000/api/products/${id}`, {
+          const response = await axios.delete(`http://127.0.0.1:8000/api/User/${id}`, {
             headers: {
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
             },
@@ -248,10 +247,10 @@ function Product() {
         setSuccess(true);
         const message =
         transactionType === 'add'
-          ? 'Product Details successfully created!'
+          ? 'Admin User successfully created!'
           : transactionType === 'edit'
-          ? 'Product Details successfuly updated!'
-          : 'Product Details successfully deleted!';
+          ? 'Admin User successfuly updated!'
+          : 'Admin User successfully deleted!';
       toast(message, {
         duration: 4000,
         position: 'top-center',
@@ -286,19 +285,19 @@ function Product() {
   };
 
   const validateForm = () => {
-    if (formData.product_name === undefined || formData.product_name === '') {
-      setError('Product Name is required!');
-      return false;
-    } 
-    else if (formData.product_details === undefined || formData.product_details === '') {
-      setError('Product Details is required!');
+    if (formData.username === undefined || formData.username === '') {
+      setError('Username is required!');
       return false;
     }
-    else if (formData.product_price === undefined || formData.product_price === '') {
-      setError('Product Price is required!');
+    else if (formData.email === undefined || formData.email === '') {
+      setError('Email is required!');
       return false;
     }
-
+    else if (formData.password === undefined || formData.password === '') {
+      setError('Password is required!');
+      return false;
+    }
+    
     return true;
   };
 
@@ -321,9 +320,11 @@ function Product() {
       ) : (
         <MUIDataTable
           loading={loading}
-          title={'Product List'}
+          title={'User Information'}
           data={data.map((d) => {
-            return [d.product_name, d.product_details, d.product_price];
+            return [d.username,
+              d.email,
+              d.password,];
           })}
           columns={columns}
           options={options}
@@ -333,47 +334,47 @@ function Product() {
       <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           {transactionType === 'add'
-            ? 'Add Product'
+            ? 'Add Admin'
             : transactionType === 'edit'
-            ? 'Edit Product'
-            : 'Delete Product'}
+            ? 'Edit Admin'
+            : 'Delete Admin'}
           {error && <Alert severity="error">{error}</Alert>}
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                id="product_name"
+                id="username"
                 fullWidth
-                label="Product Name"
-                name="product_name"
+                label="Username"
+                name="username"
                 disabled={transactionType === 'delete' ? true : false}
                 variant="standard"
-                value={formData.product_name}
+                value={formData.username}
                 onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                id="product_details"
+                id="email"
                 fullWidth
-                label="Product Details"
-                name="product_details"
+                label="Email"
+                name="email"
                 disabled={transactionType === 'delete' ? true : false}
                 variant="standard"
-                value={formData.product_details}
+                value={formData.email}
                 onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                id="product_price"
+                id="password"
                 fullWidth
-                label="Product Price"
-                name="product_price"
+                label="Password"
+                name="password"
                 disabled={transactionType === 'delete' ? true : false}
                 variant="standard"
-                value={formData.product_price}
+                value={formData.password}
                 onChange={handleChange}
               />
             </Grid>
@@ -388,10 +389,10 @@ function Product() {
           >
             {submitLoading ? <CircularProgress size={'10px'} /> : ''}{' '}
             {transactionType === 'add'
-              ? 'Add Product Details'
+              ? 'Add Admin Information'
               : transactionType === 'edit'
-              ? 'Edit Product Details'
-              : 'Delete Product Details'}
+              ? 'Edit Admin Information'
+              : 'Delete Admin Information'}
           </Button>
         </DialogActions>
       </BootstrapDialog>
@@ -399,4 +400,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default VizAdminUser;
