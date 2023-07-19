@@ -1,12 +1,12 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Button } from '@material-ui/core';
+import { styled } from '@mui/material/styles';
+import { Typography, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   container: {
     marginTop: theme.spacing(3),
     padding: theme.spacing(3),
