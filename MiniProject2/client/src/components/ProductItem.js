@@ -1,8 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Button, Card, CardContent, CardActions, CardMedia } from '@material-ui/core';
+import { styled } from '@mui/material/styles';
+import { Typography, Button, Card, CardContent, CardActions, CardMedia } from '@mui/material';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   card: {
     display: 'flex',
     flexDirection: 'column',

@@ -12,7 +12,7 @@ import Register from './pages/Login/Register';
 import Admin from './pages/Admin/Admin';
 import toast, { Toaster } from 'react-hot-toast';
 import Checkout from './components/Checkout';
-import VizBEUser from './components/VizBEUser';
+
 
 
 function App() {

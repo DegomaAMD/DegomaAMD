@@ -714,6 +714,4 @@ function UserBE() {
   );
 }
 
-
 export default UserBE;
-

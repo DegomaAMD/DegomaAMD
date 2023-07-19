@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Typography, Button, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography, Button, Grid } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import ShoppingCart from '../../components/ShoppingCart';
 import ProductItem from '../../components/ProductItem';
 import Navbar from '../../components/Navbar';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   container: {
     padding: theme.spacing(3),
   },
