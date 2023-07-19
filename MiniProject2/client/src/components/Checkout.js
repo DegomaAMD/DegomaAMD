@@ -70,7 +70,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className={classes.container}>
+    <div  className={classes.container}>
       <Typography variant="h6" className={classes.title}>
         Checkout
       </Typography>

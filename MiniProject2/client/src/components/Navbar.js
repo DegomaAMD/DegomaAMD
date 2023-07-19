@@ -13,7 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import logo from '../assets/img/vizmaker-logo.png';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 import '../App.css';
 import CartBadge from './CartBadge';
 
@@ -21,15 +21,18 @@ import CartBadge from './CartBadge';
 
 
 const drawerWidth = 240;
-const navItems = ['Home', 'Menu', 'About'];
-const navItemsAdmin = ['Home','Admin', 'Reports'];
+const navSideItems = ['Home', 'Menu', 'About'];
+const navLoggedItems = ['Home', 'Menu', 'Profile'];
+const navSideItemsAdmin = ['Dashboard','Users', 'Products', 'Orders'];
 
 function Navbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isAuthenticated = localStorage.getItem('login_token') ? true : false;
+  const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem('login_token');
+    navigate('/login');
   };
 
   const handleDrawerToggle = () => {
@@ -46,7 +49,7 @@ function Navbar(props) {
           </Box>
       <Divider />
       <List >
-        {isAuthenticated ? navItemsAdmin.map((item) => (
+        {isAuthenticated ? navLoggedItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'start' }}>
               <ListItemText primary={<Link className='navBtn1 navBarItem' to={`/${item}`}>{item}</Link>
@@ -56,7 +59,7 @@ function Navbar(props) {
             </ListItemButton>
             
           </ListItem>
-        )) : navItems.map((item) => (
+        )) : navSideItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'start' }}>
               <ListItemText primary={<Link className='navBtn1 navBarItem' to={`/${item}`}>{item}</Link>
@@ -115,13 +118,13 @@ function Navbar(props) {
               </Link>
           </Box>
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, marginTop: '7px'}}>
-            {isAuthenticated ? navItems.map((item) => (
+            {isAuthenticated ? navLoggedItems.map((item) => (
               <Button key={item} >
                 <Link to={`/${item}`} className='navBtn navBarItem'>
                   {item}
                 </Link>
               </Button>
-            )) : navItemsAdmin.map((item) => (
+            )) : navSideItems.map((item) => (
               <Button key={item} >
                 <Link to={`/${item}`} className='navBtn navBarItem'>
                   {item}
@@ -134,11 +137,15 @@ function Navbar(props) {
                 </Button>
               </Link>
               <Box  component="div" sx={{ display: { xs: 'none', sm: 'block' }}}>
-              <Link to={'/Login'} sx={{ display: { xs: 'none', sm: 'flex'}}}>
+              {isAuthenticated ? 
+                <Button className='btn' sx={{ color: '#000', display: { xs: 'none', sm: 'flex'} }} onClick={handleLogout}>
+                  Logout
+                </Button> : <Link to={'/Login'} sx={{ display: { xs: 'none', sm: 'flex'}}}>
                 <Button className='btn' sx={{ color: '#000' }}>
                   Login
                 </Button>
               </Link>
+              }
               </Box>
           </Box>
         </Toolbar>

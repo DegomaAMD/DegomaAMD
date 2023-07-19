@@ -8,37 +8,18 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Footer from './PageFooter';
-import Axios from 'axios';
+import { useForm, ValidationError } from '@formspree/react';
+import { Form } from 'react-router-dom';
 
 
 
 function ContactUs() {
-
-  const [firstname, setfirstname] = useState("");
-  const [lastname, setlastname] = useState("");
-  const [email, setemail] = useState("");
-  const [message, setmessage] = useState("");
-  const [contactStatus, setcontactStatus] = useState("");
-
   
-  const contact = (e) => {
-    e.preventDefault();
-    Axios.post("http://localhost:3002/messages", {
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      message: message,
-    }).then((response) => {
-      if(response.data.message){
-        setcontactStatus(response.data.message);
-      }else{
-        setcontactStatus("Thank you for contacting us. Your message has been submitted!")
-        setfirstname("");
-        setlastname("");
-        setemail("");
-        setmessage("");
-      }
-    })
+  const [state, handleSubmit] = useForm("mzblzzon");
+  if (state.succeeded) {
+      return 
+      <p>Your message has been submitted.</p>;
+      <p>Thank you for contacting us!</p>;
   }
 
   return (
@@ -47,15 +28,13 @@ function ContactUs() {
         <Container sx={{textAlign:'center', marginTop: '15px', display:'flex', justifyContent:'center'}}>   
         <Card className='contactUsCard' sx={{width:578, display:'block'}}>
       <CardContent>
+            <form>
             <Box>
-            <h2>{contactStatus}</h2>
+                <TextField required label="First Name"  type='text' placeholder="Enter your firstname" className='contactForm' />
+                <TextField required label="Last Name"  type='text' placeholder="Enter your lastname" className='contactForm' />
             </Box>
             <Box>
-                <TextField required label="First Name" value={firstname} type='text' placeholder="Enter your firstname" className='contactForm' onChange={(e) => {setfirstname(e.target.value)}}/>
-                <TextField required label="Last Name" value={lastname} type='text' placeholder="Enter your lastname" className='contactForm' onChange={(e) => {setlastname(e.target.value)}}/>
-            </Box>
-            <Box>
-                <TextField required label="Email" value={email} type='email' placeholder='Enter your email here' className='contactForm' onChange={(e) => {setemail(e.target.value)}}/>
+                <TextField required label="Email"  type='email' placeholder='Enter your email here' className='contactForm' />
             </Box>
             <Box>
                 <TextField 
@@ -64,12 +43,13 @@ function ContactUs() {
                     label="Message" 
                     id="userMessage"  
                     rows={5} 
-                    value={message}
-                    placeholder='Enter your message here' className='contactForm' onChange={(e) => {setmessage(e.target.value)}}/>
+                    placeholder='Enter your message here' className='contactForm' />
             </Box>
+            </form>
+            
       </CardContent>
       <CardActions className='Form'>
-        <Button className='formButton' size="small" onClick={contact}>Submit</Button>
+        <Button className='formButton' size="small" onClick={handleSubmit}>Submit</Button>
       </CardActions>
     </Card>
         </Container>
