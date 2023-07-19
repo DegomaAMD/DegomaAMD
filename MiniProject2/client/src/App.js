@@ -20,6 +20,7 @@ function App() {
   return (
     <>
     <Router>
+      <Navbar/>
       <ScrolltoTop/>
       <Routes>
         <Route exact path="/" element={<Navigate to="/Home" />} />
@@ -30,13 +31,14 @@ function App() {
         <Route exact path="/PageNotFound" element={<PageNotFound/>} />
         <Route exact path="/Register" element={<Register/>} /> 
         <Route exact path="/BEUser" element={<BEUser/>} />
+        <Route exact path="/checkout" element={<Checkout/>} />
       </Routes>
     </Router>
     <Router>
       <Routes>
         <Route exact path="/dashboard/*" element={isAuthenticated ? <Admin/> : <Navigate to="/Login"/>} />
         <Route exact path="/Admin" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/Login"/>} />
-        <Route exact path="/checkout" element={isAuthenticated ? <Checkout/>: <Navigate to="/Login"/>} />
+        {/* <Route exact path="/checkout" element={isAuthenticated ? <Checkout/>: <Navigate to="/Login"/>} /> */}
       </Routes>
     </Router>
     </>

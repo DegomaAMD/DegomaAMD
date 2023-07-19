@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\orderDetails;
-use App\Http\Requests\StoreorderDetailsRequest;
-use App\Http\Requests\UpdateorderDetailsRequest;
 use App\Http\Resources\OrderDetailsResources;
 use Illuminate\Http\Request;
 
@@ -19,7 +17,7 @@ class OrderDetailsController extends Controller
     {
         //
         $order = orderDetails::all();
-        $response = ['code' => 200, 'message' => 'success', 'order'=>OrderDetailsResources::collection($order)];
+        $response = ['code' => 200, 'message' => 'Successfully Retrieved!', 'order'=>OrderDetailsResources::collection($order)];
 
         return $response;
     }
@@ -60,7 +58,7 @@ class OrderDetailsController extends Controller
      * @param  \App\Models\orderDetails  $orderDetails
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(string $id)
     {
         //
         $order = orderDetails::findOrFail($id);
@@ -90,7 +88,7 @@ class OrderDetailsController extends Controller
      * @param  \App\Models\orderDetails  $orderDetails
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
         //
         $input = $request->all();
@@ -110,7 +108,7 @@ class OrderDetailsController extends Controller
      * @param  \App\Models\orderDetails  $orderDetails
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
         //
         $order = orderDetails::findOrFail($id);

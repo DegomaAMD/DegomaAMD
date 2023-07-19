@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\OrderDetailsController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserAuthenticationController;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Resources\ProductResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/register', [UserAuthenticationController::class, 'register']);
 Route::post('/login', [UserAuthenticationController::class, 'login']);
-Route::get('/products', function(){
+Route::get('/product', function(){
     $product = Product::all();
     return response()->json($product);
 });
@@ -32,7 +34,8 @@ Route::get('/products', function(){
 Route::middleware('auth:api')->group(function(){
     Route::post('/logout', [UserAuthenticationController::class, 'logout']);
     Route::resource('/order', OrderDetailsController::class);
-    Route::resource('/User', UserController::class);
+    Route::resource('/User', UserAuthenticationController::class);
     Route::get('/cart/items', [CartController::class, 'getCartItems']);
     Route::post('/cart/add', [CartController::class, 'addToCart']);
+    Route::resource('/products', ProductController::class);
 });

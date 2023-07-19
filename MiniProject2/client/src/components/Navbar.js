@@ -115,7 +115,13 @@ function Navbar(props) {
               </Link>
           </Box>
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, marginTop: '7px'}}>
-            {navItems.map((item) => (
+            {isAuthenticated ? navItems.map((item) => (
+              <Button key={item} >
+                <Link to={`/${item}`} className='navBtn navBarItem'>
+                  {item}
+                </Link>
+              </Button>
+            )) : navItemsAdmin.map((item) => (
               <Button key={item} >
                 <Link to={`/${item}`} className='navBtn navBarItem'>
                   {item}
