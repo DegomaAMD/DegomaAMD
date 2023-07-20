@@ -79,9 +79,9 @@ function VizAdminUser() {
   const [id, setId] = useState('');
 
   const [formData, setFormData] = useState({
-    username : '',
-    email : '',
-    password : '',
+    username: '',
+    email: '',
+    password: '',
   });
 
   const handleEdit = (rowIndex) => {
@@ -90,10 +90,11 @@ function VizAdminUser() {
     setSuccess(false);
     setId(rowIndex + 1);
     setFormData({ username: rowData.username, 
-      email: rowData.email, 
-      password: rowData.password, 
+                email: rowData.email, 
+                password: rowData.password, 
                 });
-                console.log(rowData)
+                console.log('rowIndex: ', rowIndex)
+                console.log('data: ', data)
     setTransactionType('edit');
   };
 
@@ -103,14 +104,14 @@ function VizAdminUser() {
     setSuccess(false);
     setId(rowIndex + 1);
     setFormData({ username: rowData.username, 
-      email: rowData.email, 
-      password: rowData.password, 
-                });
+        email: rowData.email, 
+        password: rowData.password, 
+        });
     setTransactionType('delete');
   };
   const columns = [
     {
-      name: 'UserName',
+      name: 'User Name',
       options: {
         filter: true,
         sort: true,
@@ -170,15 +171,15 @@ function VizAdminUser() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/User', {
+        const response = await axios.get('http://127.0.0.1:8000/api/AdminUser', {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('login_token'),
           },
         });
-        let Customer = response.data.userbe === undefined ? [] : response.data.userbe ;
+        let AdminUser = response.data.adminuserbe === undefined ? [] : response.data.adminuserbe ;
         console.log("response",response)
-        console.log(Customer);
-        setData(Customer);
+        console.log(AdminUser);
+        setData(AdminUser);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -191,9 +192,9 @@ function VizAdminUser() {
 
   const handleAdd = () => {
     setFormData({
-      username : '',
-      email : '',
-      password : '',
+        username: '',
+        email: '',
+        password: '',
     });
     setOpen(true);
     setSuccess(false);
@@ -228,14 +229,14 @@ function VizAdminUser() {
           });
           console.log(response);
         } else if (transactionType === 'edit') {
-          const response = await axios.put(`http://127.0.0.1:8000/api/User/${id}`, formData, {
+          const response = await axios.put(`http://127.0.0.1:8000/api/AdminUser/${id}`, formData, {
             headers: {
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
             },
           });
           console.log(response);
         } else if (transactionType === 'delete') {
-          const response = await axios.delete(`http://127.0.0.1:8000/api/User/${id}`, {
+          const response = await axios.delete(`http://127.0.0.1:8000/api/AdminUser/${id}`, {
             headers: {
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
             },
@@ -247,10 +248,10 @@ function VizAdminUser() {
         setSuccess(true);
         const message =
         transactionType === 'add'
-          ? 'Admin User successfully created!'
+          ? 'Admin User Details successfully created!'
           : transactionType === 'edit'
-          ? 'Admin User successfuly updated!'
-          : 'Admin User successfully deleted!';
+          ? 'Admin User Details successfuly updated!'
+          : 'Admin User Details successfully deleted!';
       toast(message, {
         duration: 4000,
         position: 'top-center',
@@ -286,18 +287,18 @@ function VizAdminUser() {
 
   const validateForm = () => {
     if (formData.username === undefined || formData.username === '') {
-      setError('Username is required!');
+      setError('Admin User Name is required!');
       return false;
-    }
+    } 
     else if (formData.email === undefined || formData.email === '') {
-      setError('Email is required!');
+      setError('Admin Email is required!');
       return false;
     }
     else if (formData.password === undefined || formData.password === '') {
-      setError('Password is required!');
+      setError('Admin Password is required!');
       return false;
     }
-    
+
     return true;
   };
 
@@ -320,11 +321,9 @@ function VizAdminUser() {
       ) : (
         <MUIDataTable
           loading={loading}
-          title={'User Information'}
+          title={'Admin Information'}
           data={data.map((d) => {
-            return [d.username,
-              d.email,
-              d.password,];
+            return [d.username, d.email, d.password];
           })}
           columns={columns}
           options={options}
@@ -334,10 +333,10 @@ function VizAdminUser() {
       <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           {transactionType === 'add'
-            ? 'Add Admin'
+            ? 'Add Admin User Details'
             : transactionType === 'edit'
-            ? 'Edit Admin'
-            : 'Delete Admin'}
+            ? 'Edit Admin User Details'
+            : 'Delete Admin User Details'}
           {error && <Alert severity="error">{error}</Alert>}
         </BootstrapDialogTitle>
         <DialogContent dividers>
@@ -346,7 +345,7 @@ function VizAdminUser() {
               <TextField
                 id="username"
                 fullWidth
-                label="Username"
+                label="User Name"
                 name="username"
                 disabled={transactionType === 'delete' ? true : false}
                 variant="standard"
@@ -389,10 +388,10 @@ function VizAdminUser() {
           >
             {submitLoading ? <CircularProgress size={'10px'} /> : ''}{' '}
             {transactionType === 'add'
-              ? 'Add Admin Information'
+              ? 'Add Admin User Details'
               : transactionType === 'edit'
-              ? 'Edit Admin Information'
-              : 'Delete Admin Information'}
+              ? 'Edit Admin User Details'
+              : 'Delete Admin User Details'}
           </Button>
         </DialogActions>
       </BootstrapDialog>
