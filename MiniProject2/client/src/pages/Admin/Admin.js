@@ -3,9 +3,12 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import PeopleIcon from '@mui/icons-material/People';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+// import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import MenuIcon from '@mui/icons-material/Menu';
-import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
+// import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
 import { Button } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -105,7 +108,7 @@ export default function Admin() {
         open={open}
         sx={{ background: 'linear-gradient(45deg, #2f891e, transparent)' }}
       >
-        <Toolbar>
+        <Toolbar component="div" sx={{ backgroundColor: '#102F3A', padding:'5px'}}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -119,11 +122,13 @@ export default function Admin() {
             Vizmaker Cafe Dashboard
           </Typography>
           <Button
+            className='btn'
             variant="contained"
-            color="success"
+            background="success"
             sx={{
               height: 'fit-content',
               marginLeft: 'auto',
+              color: '#000'
             }}
             onClick={handleLogout}
           >
@@ -138,6 +143,7 @@ export default function Admin() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
+            backgroundColor: '#102F3A'
           },
         }}
         variant="persistent"
@@ -145,18 +151,19 @@ export default function Admin() {
         open={open}
       >
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerClose} style={{ color: 'white', fontWeight: 'bold' }}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem disablePadding sx={{ background: '#e9e1e1' }}>
+          <ListItem disablePadding sx={{ background: '#3e6364' }}>
             <ListItemButton>
-              <ListItemIcon>{<DashboardIcon sx={{ color: 'green' }} />}</ListItemIcon>
+              <ListItemIcon>{<DashboardIcon sx={{ color: '#FFBD59' }} />}</ListItemIcon>
               <ListItemText
                 primary={
                   <Button
+                    className='btn'
                     variant="contained"
                     color="success"
                     fullWidth
@@ -169,12 +176,13 @@ export default function Admin() {
             </ListItemButton>
           </ListItem>
 
-          <ListItem disablePadding sx={{ background: '#e9e1e1' }}>
+          <ListItem disablePadding sx={{ background: '#3e6364' }}>
             <ListItemButton>
-              <ListItemIcon>{<MiscellaneousServicesIcon sx={{ color: 'green' }} />}</ListItemIcon>
+              <ListItemIcon>{<PeopleIcon sx={{ color: '#FFBD59' }} />}</ListItemIcon>
               <ListItemText
                 primary={
                   <Button
+                  className='btn'
                     variant="contained"
                     color="success"
                     fullWidth
@@ -187,12 +195,13 @@ export default function Admin() {
             </ListItemButton>
           </ListItem>
 
-          <ListItem disablePadding sx={{ background: '#e9e1e1' }}>
+          <ListItem disablePadding sx={{ background: '#3e6364' }}>
             <ListItemButton>
-              <ListItemIcon>{<DirectionsCarIcon sx={{ color: 'green' }} />}</ListItemIcon>
+              <ListItemIcon>{<ShoppingCartIcon sx={{ color: '#FFBD59' }} />}</ListItemIcon>
               <ListItemText
                 primary={
                   <Button
+                  className='btn'
                     variant="contained"
                     color="success"
                     fullWidth
@@ -204,12 +213,13 @@ export default function Admin() {
               />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding sx={{ background: '#e9e1e1' }}>
+          <ListItem disablePadding sx={{ background: '#3e6364' }}>
             <ListItemButton>
-              <ListItemIcon>{<DirectionsCarIcon sx={{ color: 'green' }} />}</ListItemIcon>
+              <ListItemIcon>{<AssignmentIcon sx={{ color: '#FFBD59' }} />}</ListItemIcon>
               <ListItemText
                 primary={
                   <Button
+                  className='btn'
                     variant="contained"
                     color="success"
                     fullWidth
