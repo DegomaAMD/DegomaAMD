@@ -6,19 +6,23 @@ import Axios from 'axios';
 import './Login.css'
 import { Link, useNavigate } from 'react-router-dom';
 import BackgroundImage from '../../assets/img/vizmaker-banner.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
 
-  // const [username, setusername] = useState("");
-  // const [password, setpassword] = useState("");
-  // const [loginStatus, setLoginStatus] = useState("");
+
   const Navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
   const [error, setError] = useState('');
   const [submitLoading, setSubmitLoading] = useState(false);
+
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
@@ -47,7 +51,7 @@ function Login() {
   const validateForm = () => {
 
     if (formData.username === undefined || formData.username === ''){
-      setError('Email is required!');
+      setError('Username is required!');
       return false;
     } else if (formData.password === undefined || formData.password === '') {
       setError('Password is required!');
@@ -81,8 +85,27 @@ function Login() {
           <Box>
             <TextField className='textInput' value={formData.username} label='Username' type='text' placeholder='Enter your username' name='username' onChange={handleChange} required/>
             </Box>
+          <Box sx={{ position: 'relative' }}>
+            <TextField className='textInput' value={formData.password} label='Password' type={showPassword ? 'text' : 'password'}placeholder='Enter your password' name='password' onChange={handleChange} required />
+            
+          </Box>
           <Box>
-            <TextField className='textInput' value={formData.password} label='Password' type='password' placeholder='Enter your password' name='password' onChange={handleChange} required/>
+          <div
+          style={{
+            position: 'absolute',
+            top: '39%',
+            right: '90px',
+            transform: 'translateY(-50%)',
+            cursor: 'pointer'
+          }}
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? (
+            <FontAwesomeIcon icon={faEyeSlash} style={{color: "#102f3a",}} />
+          ) : (
+            <FontAwesomeIcon icon={faEye} style={{color: "#102f3a",}} />
+          )}
+        </div>
           </Box>
           <Box>
             <Button className='button' type='submit'onClick={handleLogin} disabled={submitLoading}>
