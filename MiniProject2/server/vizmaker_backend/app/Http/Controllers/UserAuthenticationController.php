@@ -12,20 +12,20 @@ class UserAuthenticationController extends Controller
 {
     public function register(Request $request){
         $validator = Validator::make($request->all(),[
-            'firstname' => 'required|string',
-            'lastname' => 'required|string',
+            'firstname' => 'string',
+            'lastname' => 'string',
             'username' => 'required|string',
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'house_lot_number' => 'required|string',
-            'street_name' => 'required|string',
-            'barangay_name' => 'required|string',
-            'city_name' => 'required|string',
-            'province_name' => 'required|string',
-            'region_name' => 'required|string',
-            'country_name' => 'required|string',
-            'postal_code' => 'required|integer',
-            'phone_number' => 'required|integer',
+            'house_lot_number' => 'string',
+            'street_name' => 'string',
+            'barangay_name' => 'string',
+            'city_name' => 'string',
+            'province_name' => 'string',
+            'region_name' => 'string',
+            'country_name' => 'string',
+            'postal_code' => 'integer',
+            'phone_number' => 'integer',
         ]);
 
         if($validator->fails()){

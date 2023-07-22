@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OrderDetailsController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserAuthenticationController;
 use App\Models\Product;
@@ -33,7 +34,7 @@ Route::get('/product', function(){
 
 Route::middleware('auth:api')->group(function(){
     Route::post('/logout', [UserAuthenticationController::class, 'logout']);
-    Route::resource('/order', OrderDetailsController::class);
+    Route::resource('/order', OrdersController::class);
     Route::resource('/User', UserAuthenticationController::class);
     Route::get('/cart/items', [CartController::class, 'getCartItems']);
     Route::post('/cart/add', [CartController::class, 'addToCart']);

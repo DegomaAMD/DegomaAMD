@@ -78,6 +78,7 @@ function Order() {
   const [id, setId] = useState('');
 
   const [formData, setFormData] = useState({
+    id:'',
     product_id: '',
     user_id: '',
     order_quantity: '',
@@ -88,8 +89,9 @@ function Order() {
     const rowData = data[rowIndex];
     setOpen(true);
     setSuccess(false);
-    setId(rowIndex + 1);
-    setFormData({ product_id: rowData.product_id, 
+    
+    setFormData({ id: rowData.id,
+                  product_id: rowData.product_id, 
                   user_id: rowData.user_id, 
                   order_quantity: rowData.order_quantity, 
                   total_order_amount: rowData.total_order_amount });
@@ -100,14 +102,22 @@ function Order() {
     const rowData = data[rowIndex];
     setOpen(true);
     setSuccess(false);
-    setId(rowIndex + 1);
-    setFormData({ product_id: rowData.product_id, 
+    setId(rowData.id);
+    setFormData({ id: rowData.id,
+                  product_id: rowData.product_id, 
                   user_id: rowData.user_id, 
                   order_quantity: rowData.order_quantity, 
                   total_order_amount: rowData.total_order_amount });
     setTransactionType('delete');
   };
   const columns = [
+    {
+      name: 'ID',
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
     {
       name: 'Product ID',
       options: {
@@ -333,7 +343,7 @@ function Order() {
           loading={loading}
           title={'Order List'}
           data={data.map((d) => {
-            return [d.product_id, d.user_id, d.order_quantity, d.total_order_amount];
+            return [d.id, d.product_id, d.user_id, d.order_quantity, d.total_order_amount];
           })}
           columns={columns}
           options={options}
