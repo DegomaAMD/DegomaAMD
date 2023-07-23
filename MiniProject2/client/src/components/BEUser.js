@@ -80,6 +80,7 @@ function UserBE() {
   const [id, setId] = useState('');
 
   const [formData, setFormData] = useState({
+    id:'',
     firstname : '',
     lastname : '',
     username : '',
@@ -100,8 +101,9 @@ function UserBE() {
     const rowData = data[rowIndex];
     setOpen(true);
     setSuccess(false);
-    setId(rowIndex + 1);
-    setFormData({ firstname: rowData.firstname, 
+    setId(rowData.id);
+    setFormData({ id: rowData.id,
+      firstname: rowData.firstname, 
       lastname: rowData.lastname, 
       username: rowData.username, 
       email: rowData.email, 
@@ -125,8 +127,9 @@ function UserBE() {
     const rowData = data[rowIndex];
     setOpen(true);
     setSuccess(false);
-    setId(rowIndex + 1);
-    setFormData({ firstname: rowData.firstname, 
+    setId(rowData.id);
+    setFormData({ id: rowData.id,
+      firstname: rowData.firstname, 
       lastname: rowData.lastname, 
       username: rowData.username, 
       email: rowData.email, 
@@ -144,6 +147,13 @@ function UserBE() {
     setTransactionType('delete');
   };
   const columns = [
+    {
+      name: 'ID',
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
     {
       name: 'First Name',
       options: {
@@ -492,7 +502,8 @@ function UserBE() {
           loading={loading}
           title={'User Information'}
           data={data.map((d) => {
-            return [d.firstname, 
+            return [d.id,
+              d.firstname, 
               d.lastname, 
               d.username,
               d.email,

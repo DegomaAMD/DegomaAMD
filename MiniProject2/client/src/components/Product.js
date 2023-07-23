@@ -79,6 +79,7 @@ function Product() {
   const [id, setId] = useState('');
 
   const [formData, setFormData] = useState({
+    id:'',
     product_name: '',
     product_details: '',
     product_price: '',
@@ -88,8 +89,9 @@ function Product() {
     const rowData = data[rowIndex];
     setOpen(true);
     setSuccess(false);
-    setId(rowIndex + 1);
-    setFormData({ product_name: rowData.product_name, 
+    setId(rowData.id);
+    setFormData({ id: rowData.id,
+      product_name: rowData.product_name, 
                 product_details: rowData.product_details, 
                 product_price: rowData.product_price, 
                 });
@@ -102,14 +104,22 @@ function Product() {
     const rowData = data[rowIndex];
     setOpen(true);
     setSuccess(false);
-    setId(rowIndex + 1);
-    setFormData({ product_name: rowData.product_name, 
+    setId(rowData.id);
+    setFormData({ id: rowData.id,
+      product_name: rowData.product_name, 
         product_details: rowData.product_details, 
         product_price: rowData.product_price, 
         });
     setTransactionType('delete');
   };
   const columns = [
+    {
+      name: 'ID',
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
     {
       name: 'Product Name',
       options: {
@@ -323,7 +333,7 @@ function Product() {
           loading={loading}
           title={'Product List'}
           data={data.map((d) => {
-            return [d.product_name, d.product_details, d.product_price];
+            return [d.id, d.product_name, d.product_details, d.product_price];
           })}
           columns={columns}
           options={options}
@@ -400,3 +410,5 @@ function Product() {
 }
 
 export default Product;
+
+
