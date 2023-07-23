@@ -32,7 +32,7 @@ const Checkout = () => {
 
   const fetchUserData = () => {
     axios
-      .get('http://127.0.0.1:8000/api/user') // Replace with the appropriate endpoint to fetch user data
+      .get('http://127.0.0.1:8000/api/User') // Replace with the appropriate endpoint to fetch user data
       .then((response) => {
         setUserData(response.data);
       })

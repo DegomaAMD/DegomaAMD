@@ -31,6 +31,7 @@ import toast from 'react-hot-toast';
 //   border: '2px solid #000',
 //   boxShadow: 24,
 //   p: 4,
+// };
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -65,6 +66,7 @@ function BootstrapDialogTitle(props) {
     </DialogTitle>
   );
 }
+
 
 function UserBE() {
   const [data, setData] = useState([]);
@@ -116,7 +118,8 @@ function UserBE() {
       postal_code: rowData.postal_code, 
       phone_number: rowData.phone_number, 
                 });
-                console.log(rowData)
+                console.log('rowIndex: ', rowIndex)
+                console.log('data: ', data)
     setTransactionType('edit');
   };
 
@@ -376,7 +379,6 @@ function UserBE() {
           });
           console.log(response);
         }
-        
         handleClose();
         setSuccess(true);
         const message =
@@ -424,7 +426,6 @@ function UserBE() {
       return false;
     } 
     else if (formData.lastname === undefined || formData.lastname === '') {
-
       setError('Lastname is required!');
       return false;
     }
@@ -472,7 +473,6 @@ function UserBE() {
       setError('Postal Code is required!');
       return false;
     }
-    
     else if (formData.phone_number === undefined || formData.phone_number === '') {
       setError('Phone Number is required!');
       return false;
@@ -705,7 +705,6 @@ function UserBE() {
           </Grid>
         </DialogContent>
         <DialogActions>
-
           <Button
             variant="contained"
             style={{ display: 'block', width: '40%', margin: '10px auto' }}
@@ -719,6 +718,7 @@ function UserBE() {
               ? 'Edit User Information'
               : 'Delete User Information'}
           </Button>
+
         </DialogActions>
       </BootstrapDialog>
     </div>
@@ -726,4 +726,3 @@ function UserBE() {
 }
 
 export default UserBE;
-
