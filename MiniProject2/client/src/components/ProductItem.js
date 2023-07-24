@@ -1,50 +1,91 @@
-import React from 'react';
-import { styled } from '@mui/material/styles';
-import { Typography, Button, Card, CardContent, CardActions, CardMedia } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import '../pages/Shop/Cafe.css';
+import '../products';
+import qq from '../assets/img/products/1.png'
 
-const useStyles = styled((theme) => ({
-  card: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9 aspect ratio
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
-}));
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+
 
 const ProductItem = ({ product, addToCart }) => {
-  const classes = useStyles();
+
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const imagePath = require(`../assets/img/products/${product.product_image}`);
 
   return (
-    <Card className={classes.card}>
-      <CardMedia
-        className={classes.cardMedia}
-        image={product.image}
-        title={product.product_name}
-      />
-      <CardContent className={classes.cardContent}>
-        <Typography gutterBottom variant="h6">
-          {product.product_name}
-        </Typography>
-        <Typography variant="body1" color="textSecondary">
-          {product.product_price}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => addToCart(product)}
-        >
-          Add to Cart
-        </Button>
-      </CardActions>
-    </Card>
+    <>
+      <div className="product">
+        <div className="description">
+          <img src={imagePath} alt="Menus"/>
+          <p><b>{product.product_name}</b></p>
+          <p> ₱{product.product_price}</p>
+          <button className="addToCartBttn" onClick={() => addToCart(product)}>
+            Add To Cart
+          </button>
+          <button className="addToCartBttn" onClick={handleOpen}>Learn more</button>
+        </div>
+      </div>
+    <Modal
+    open={open}
+    onClose={handleClose}
+    aria-labelledby="modal-modal-title"
+    aria-describedby="modal-modal-description"
+  >
+    <Box sx={style}>
+      <div>
+      <img src={imagePath} alt="Menus"/>
+      </div>
+      <Typography id="modal-modal-title" variant="h6" component="h2">
+        {product.product_name}
+      </Typography>
+      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+        {product.product_details}
+      </Typography>
+      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+        {product.product_price}
+      </Typography>
+      <Box>
+      <Button
+      variant="contained"
+      color="success"
+      onClick={() => addToCart(product)}
+    >
+      Add to Cart
+    </Button>
+    <Button
+      variant="contained"
+      color="error"
+      onClick={handleClose}
+    >
+      Close
+    </Button>
+    </Box>
+    </Box>
+    
+  </Modal>
+    </>
+  
   );
+  
 };
 
 export default ProductItem;

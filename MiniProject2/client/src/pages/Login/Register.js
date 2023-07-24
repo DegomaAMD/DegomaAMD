@@ -93,7 +93,7 @@ function Register() {
 
     <Container sx={{display: 'flex', justifyContent:'center', textAlign:'center'}}>
         <div className='registerForm'>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleRegister}>
           <h1 style={{marginTop: '20px'}}>Sign-up</h1>
           <div>
           {error && <Alert severity="error">{error}</Alert>}
