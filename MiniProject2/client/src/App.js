@@ -10,8 +10,6 @@ import PageNotFound from './components/PageNotFound';
 import ScrolltoTop from './components/Backtotop';
 import Register from './pages/Login/Register';
 import Admin from './pages/Admin/Admin';
-import BEUser from './components/BEUser';
-// import toast, { Toaster } from 'react-hot-toast';
 import Checkout from './components/Checkout';
 import ShoppingCart from './pages/Shop/ShoppingCart';
 
@@ -22,6 +20,7 @@ function App() {
 
   return (
     <>
+
       <Router>
         {!isDashboardRoute && <Navbar />}
         <ScrolltoTop />
