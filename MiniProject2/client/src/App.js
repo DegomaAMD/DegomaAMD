@@ -10,9 +10,8 @@ import PageNotFound from './components/PageNotFound';
 import ScrolltoTop from './components/Backtotop';
 import Register from './pages/Login/Register';
 import Admin from './pages/Admin/Admin';
-import BEUser from './components/BEUser';
-// import toast, { Toaster } from 'react-hot-toast';
 import Checkout from './components/Checkout';
+import ShoppingCart from './pages/Shop/ShoppingCart';
 
 function App() {
   const isAuthenticated = localStorage.getItem('login_token');
@@ -21,6 +20,7 @@ function App() {
 
   return (
     <>
+
       <Router>
         {!isDashboardRoute && <Navbar />}
         <ScrolltoTop />
@@ -34,6 +34,7 @@ function App() {
           <Route exact path="/Register" element={<Register />} />
           <Route exact path="/BEUser" element={<BEUser />} />
           <Route exact path="/checkout" element={<Checkout />} />
+          {/* <Route exact path="/menu/cart" element={<ShoppingCart />} /> */}
         </Routes>
       </Router>
       <Router>

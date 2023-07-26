@@ -1,4 +1,3 @@
-//Import necessary dependencies and components-> JP
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -19,7 +18,7 @@ import { styled } from '@mui/material/styles';
 import axios from 'axios';
 import MUIDataTable from 'mui-datatables';
 import React, { useEffect, useState } from 'react';
-import Form from 'react-bootstrap/Form';
+// import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 
@@ -35,7 +34,6 @@ import toast from 'react-hot-toast';
 //   p: 4,
 // };
 
-// Create a styled dialog using Material UI styles ->JP
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -45,7 +43,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-// Create a custom dialog title component ->JP
 function BootstrapDialogTitle(props) {
   const { children, onClose, ...other } = props;
 
@@ -70,9 +67,7 @@ function BootstrapDialogTitle(props) {
   );
 }
 
-//Define the Product component -> JP
-function Product() {
-  //State variables to store data and loading state -> JP
+function VizAdminUser() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
@@ -83,89 +78,60 @@ function Product() {
   const [transactionType, setTransactionType] = useState('');
   const [id, setId] = useState('');
 
-  // State variable to store form data -> JP
   const [formData, setFormData] = useState({
-    id:'',
-    product_name: '',
-    product_details: '',
-    product_price: '',
-    product_image: '',
+    username: '',
+    email: '',
+    password: '',
   });
 
-  // Function to handle edit action for a row -> JP
   const handleEdit = (rowIndex) => {
     const rowData = data[rowIndex];
     setOpen(true);
     setSuccess(false);
-    setId(rowData.id);
-    setFormData({ id: rowData.id,
-      product_name: rowData.product_name, 
-                product_details: rowData.product_details, 
-                product_price: rowData.product_price, 
-                product_image: rowData.product_image, 
+    setId(rowIndex + 1);
+    setFormData({ username: rowData.username, 
+                email: rowData.email, 
+                password: rowData.password, 
                 });
                 console.log('rowIndex: ', rowIndex)
                 console.log('data: ', data)
     setTransactionType('edit');
   };
 
-  // Function to handle delete action for a row -> JP
   const handleDelete = (rowIndex) => {
     const rowData = data[rowIndex];
     setOpen(true);
     setSuccess(false);
-    setId(rowData.id);
-    setFormData({ id: rowData.id,
-      product_name: rowData.product_name, 
-        product_details: rowData.product_details, 
-        product_price: rowData.product_price, 
+    setId(rowIndex + 1);
+    setFormData({ username: rowData.username, 
+        email: rowData.email, 
+        password: rowData.password, 
         });
     setTransactionType('delete');
   };
-
-  // Define columns for the data table -> JP
   const columns = [
     {
-      name: 'ID',
+      name: 'User Name',
       options: {
         filter: true,
         sort: true,
       },
     },
     {
-      name: 'Product Name',
+      name: 'Email',
       options: {
         filter: true,
         sort: true,
       },
     },
     {
-      name: 'Product Details',
+      name: 'Password',
       options: {
         filter: true,
         sort: true,
       },
     },
     {
-      name: 'Product Price',
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
-<<<<<<< HEAD
-
-    // Custom render function for the Actions column -> JP
-=======
-      name: 'Product Image',
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
->>>>>>> c00bdc0c3cc2d7aee95918b897a977a562e6ce47
       name: 'Actions',
       options: {
         filter: false,
@@ -197,25 +163,23 @@ function Product() {
     },
   ];
 
-  // Options for the data table -> JP
   const options = {
     filterType: 'textField',
     selectableRows: 'none',
   };
 
-  // Fetch data from the API when the component mounts -> JP
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/products', {
+        const response = await axios.get('http://127.0.0.1:8000/api/AdminUser', {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('login_token'),
           },
         });
-        let Products = response.data.product === undefined ? [] : response.data.product ;
+        let AdminUser = response.data.adminuserbe === undefined ? [] : response.data.adminuserbe ;
         console.log("response",response)
-        console.log(Products);
-        setData(Products);
+        console.log(AdminUser);
+        setData(AdminUser);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -226,25 +190,20 @@ function Product() {
     fetchData();
   }, [success]);
 
-  // Function to handle the add button click -> JP
   const handleAdd = () => {
     setFormData({
-        product_name: '',
-        product_details: '',
-        product_price: '',
-        product_image: '',
+        username: '',
+        email: '',
+        password: '',
     });
     setOpen(true);
     setSuccess(false);
     setTransactionType('add');
   };
-  
-  // Function to handle dialog close -> JP
   const handleClose = () => {
     setOpen(false);
   };
 
-  // Function to handle form input change -> JP
   const handleChange = (event) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -252,7 +211,6 @@ function Product() {
     }));
   };
 
-  // Function to handle form submission -> JP
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
@@ -264,21 +222,21 @@ function Product() {
     } else {
       try {
         if (transactionType === 'add') {
-          const response = await axios.post('http://127.0.0.1:8000/api/products', formData, {
+          const response = await axios.post('http://127.0.0.1:8000/api/register', formData, {
             headers: {
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
             },
           });
           console.log(response);
         } else if (transactionType === 'edit') {
-          const response = await axios.put(`http://127.0.0.1:8000/api/products/${id}`, formData, {
+          const response = await axios.put(`http://127.0.0.1:8000/api/AdminUser/${id}`, formData, {
             headers: {
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
             },
           });
           console.log(response);
         } else if (transactionType === 'delete') {
-          const response = await axios.delete(`http://127.0.0.1:8000/api/products/${id}`, {
+          const response = await axios.delete(`http://127.0.0.1:8000/api/AdminUser/${id}`, {
             headers: {
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
             },
@@ -290,10 +248,10 @@ function Product() {
         setSuccess(true);
         const message =
         transactionType === 'add'
-          ? 'Product Details successfully created!'
+          ? 'Admin User Details successfully created!'
           : transactionType === 'edit'
-          ? 'Product Details successfuly updated!'
-          : 'Product Details successfully deleted!';
+          ? 'Admin User Details successfuly updated!'
+          : 'Admin User Details successfully deleted!';
       toast(message, {
         duration: 4000,
         position: 'top-center',
@@ -327,32 +285,25 @@ function Product() {
     }
   };
 
-  // Function to validate the form inputs -> JP
   const validateForm = () => {
-    if (formData.product_name === undefined || formData.product_name === '') {
-      setError('Product Name is required!');
+    if (formData.username === undefined || formData.username === '') {
+      setError('Admin User Name is required!');
       return false;
     } 
-    else if (formData.product_details === undefined || formData.product_details === '') {
-      setError('Product Details is required!');
+    else if (formData.email === undefined || formData.email === '') {
+      setError('Admin Email is required!');
       return false;
     }
-    else if (formData.product_price === undefined || formData.product_price === '') {
-      setError('Product Price is required!');
-      return false;
-    }
-    else if (formData.product_image === undefined || formData.product_image === '') {
-      setError('Product Price is required!');
+    else if (formData.password === undefined || formData.password === '') {
+      setError('Admin Password is required!');
       return false;
     }
 
     return true;
   };
 
-  // JSX for rendering the component -> JP
   return (
-    // added margin: '0 auto', maxWidth: '1200px', padding: '20px' to style for Responsiveness -> JP
-    <div style={{ marginTop: '50px', margin: '0 auto', maxWidth: '1200px', padding: '20px'  }}>
+    <div style={{ marginTop: '50px' }}>
       <div style={{ display: 'flex', justifyContent: 'end', marginBottom: '10px' }}>
         <Button
           variant="outlined"
@@ -364,78 +315,65 @@ function Product() {
         </Button>
       </div>
       {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', margin: '0 auto', maxWidth: '1200px', padding: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <CircularProgress />
         </div>
       ) : (
         <MUIDataTable
           loading={loading}
-          title={'Product List'}
+          title={'Admin Information'}
           data={data.map((d) => {
-            return [d.id, d.product_name, d.product_details, d.product_price, d.product_image];
+            return [d.username, d.email, d.password];
           })}
           columns={columns}
           options={options}
         />
       )}
 
-      {/* Product dialog -> JP */}
       <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           {transactionType === 'add'
-            ? 'Add Product'
+            ? 'Add Admin User Details'
             : transactionType === 'edit'
-            ? 'Edit Product'
-            : 'Delete Product'}
+            ? 'Edit Admin User Details'
+            : 'Delete Admin User Details'}
           {error && <Alert severity="error">{error}</Alert>}
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                id="product_name"
+                id="username"
                 fullWidth
-                label="Product Name"
-                name="product_name"
+                label="User Name"
+                name="username"
                 disabled={transactionType === 'delete' ? true : false}
                 variant="standard"
-                value={formData.product_name}
+                value={formData.username}
                 onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                id="product_details"
+                id="email"
                 fullWidth
-                label="Product Details"
-                name="product_details"
+                label="Email"
+                name="email"
                 disabled={transactionType === 'delete' ? true : false}
                 variant="standard"
-                value={formData.product_details}
+                value={formData.email}
                 onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                id="product_price"
+                id="password"
                 fullWidth
-                label="Product Price"
-                name="product_price"
+                label="Password"
+                name="password"
                 disabled={transactionType === 'delete' ? true : false}
                 variant="standard"
-                value={formData.product_price}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="product_image"
-                fullWidth
-                label="Product Image"
-                name="product_image"
-                disabled={transactionType === 'delete' ? true : false}
-                variant="standard"
-                value={formData.product_image}
+                value={formData.password}
                 onChange={handleChange}
               />
             </Grid>
@@ -450,10 +388,10 @@ function Product() {
           >
             {submitLoading ? <CircularProgress size={'10px'} /> : ''}{' '}
             {transactionType === 'add'
-              ? 'Add Product Details'
+              ? 'Add Admin User Details'
               : transactionType === 'edit'
-              ? 'Edit Product Details'
-              : 'Delete Product Details'}
+              ? 'Edit Admin User Details'
+              : 'Delete Admin User Details'}
           </Button>
         </DialogActions>
       </BootstrapDialog>
@@ -461,6 +399,4 @@ function Product() {
   );
 }
 
-export default Product;
-
-
+export default VizAdminUser;

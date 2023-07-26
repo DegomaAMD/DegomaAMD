@@ -38,8 +38,8 @@ const ShoppingCart = ({ cartItems, removeFromCart, updateQuantity }) => {
       if ((item.id)) {
         total += item.product_price * item.quantity;
       }
-    });
-    return total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    })
+    return total.toLocaleString();
   };
 
   return (
@@ -112,7 +112,7 @@ const ShoppingCart = ({ cartItems, removeFromCart, updateQuantity }) => {
 
       )};
     </div>
-  );
-};
+  )
+}
 
 export default ShoppingCart;

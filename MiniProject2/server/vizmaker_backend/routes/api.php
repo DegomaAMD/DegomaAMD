@@ -40,3 +40,4 @@ Route::middleware('auth:api')->group(function(){
     Route::post('/cart/add', [CartController::class, 'addToCart']);
     Route::resource('/products', ProductController::class);
 });
+

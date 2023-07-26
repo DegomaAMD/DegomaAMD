@@ -131,7 +131,7 @@ function Navbar(props) {
                 </Link>
               </Button>
             ))}
-            <Link to={'/Shop'}  sx={{ display: 'flex' }}>
+            <Link to={'/menu/cart'}  sx={{ display: 'flex' }}>
                 <Button sx={{marginRight:'10px'}}>
                 <CartBadge />
                 </Button>
