@@ -17,7 +17,7 @@ function Register() {
     const [formData, setFormData] = useState({
       username: '',
       password: '',
-      password: '',
+      // password: '',
     });
       const [error, setError] = useState('');
   const [submitLoading, setSubmitLoading] = useState(false);
