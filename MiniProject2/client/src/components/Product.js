@@ -1,3 +1,4 @@
+//Import necessary dependencies and components-> JP
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -34,6 +35,7 @@ import toast from 'react-hot-toast';
 //   p: 4,
 // };
 
+// Create a styled dialog using Material UI styles ->JP
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -43,6 +45,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
+// Create a custom dialog title component ->JP
 function BootstrapDialogTitle(props) {
   const { children, onClose, ...other } = props;
 
@@ -67,7 +70,9 @@ function BootstrapDialogTitle(props) {
   );
 }
 
+//Define the Product component -> JP
 function Product() {
+  //State variables to store data and loading state -> JP
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
@@ -78,6 +83,7 @@ function Product() {
   const [transactionType, setTransactionType] = useState('');
   const [id, setId] = useState('');
 
+  // State variable to store form data -> JP
   const [formData, setFormData] = useState({
     id:'',
     product_name: '',
@@ -85,6 +91,7 @@ function Product() {
     product_price: '',
   });
 
+  // Function to handle edit action for a row -> JP
   const handleEdit = (rowIndex) => {
     const rowData = data[rowIndex];
     setOpen(true);
@@ -99,6 +106,7 @@ function Product() {
     setTransactionType('edit');
   };
 
+  // Function to handle delete action for a row -> JP
   const handleDelete = (rowIndex) => {
     const rowData = data[rowIndex];
     setOpen(true);
@@ -111,6 +119,8 @@ function Product() {
         });
     setTransactionType('delete');
   };
+
+  // Define columns for the data table -> JP
   const columns = [
     {
       name: 'ID',
@@ -141,6 +151,8 @@ function Product() {
       },
     },
     {
+
+    // Custom render function for the Actions column -> JP
       name: 'Actions',
       options: {
         filter: false,
@@ -172,11 +184,13 @@ function Product() {
     },
   ];
 
+  // Options for the data table -> JP
   const options = {
     filterType: 'textField',
     selectableRows: 'none',
   };
 
+  // Fetch data from the API when the component mounts -> JP
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -199,6 +213,7 @@ function Product() {
     fetchData();
   }, [success]);
 
+  // Function to handle the add button click -> JP
   const handleAdd = () => {
     setFormData({
         product_name: '',
@@ -209,10 +224,13 @@ function Product() {
     setSuccess(false);
     setTransactionType('add');
   };
+  
+  // Function to handle dialog close -> JP
   const handleClose = () => {
     setOpen(false);
   };
 
+  // Function to handle form input change -> JP
   const handleChange = (event) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -220,6 +238,7 @@ function Product() {
     }));
   };
 
+  // Function to handle form submission -> JP
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
@@ -294,6 +313,7 @@ function Product() {
     }
   };
 
+  // Function to validate the form inputs -> JP
   const validateForm = () => {
     if (formData.product_name === undefined || formData.product_name === '') {
       setError('Product Name is required!');
@@ -311,8 +331,10 @@ function Product() {
     return true;
   };
 
+  // JSX for rendering the component -> JP
   return (
-    <div style={{ marginTop: '50px' }}>
+    // added margin: '0 auto', maxWidth: '1200px', padding: '20px' to style for Responsiveness -> JP
+    <div style={{ marginTop: '50px', margin: '0 auto', maxWidth: '1200px', padding: '20px'  }}>
       <div style={{ display: 'flex', justifyContent: 'end', marginBottom: '10px' }}>
         <Button
           variant="outlined"
@@ -324,7 +346,7 @@ function Product() {
         </Button>
       </div>
       {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '0 auto', maxWidth: '1200px', padding: '20px' }}>
           <CircularProgress />
         </div>
       ) : (
@@ -339,6 +361,7 @@ function Product() {
         />
       )}
 
+      {/* Product dialog -> JP */}
       <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           {transactionType === 'add'
