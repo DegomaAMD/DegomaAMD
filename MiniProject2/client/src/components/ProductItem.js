@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
+
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
@@ -35,7 +36,10 @@ const ProductItem = ({ product, addToCart }) => {
     <>
       <div className="product">
         <div className="description">
-          <img src={imagePath} alt="Menus"/>
+         
+            <img src={imagePath} onClick={handleOpen} alt="Menus"/>
+          
+            
           <p><b>{product.product_name}</b></p>
           <p> ₱{product.product_price}</p>
           <button className="addToCartBttn" onClick={() => addToCart(product)}>
@@ -54,6 +58,7 @@ const ProductItem = ({ product, addToCart }) => {
       <div>
       <img src={imagePath} alt="Menus"/>
       </div>
+      
       <Typography id="modal-modal-title" variant="h6" component="h2">
         {product.product_name}
       </Typography>

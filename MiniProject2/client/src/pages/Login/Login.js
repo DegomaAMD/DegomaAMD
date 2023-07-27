@@ -21,6 +21,7 @@ function Login() {
   });
   const [error, setError] = useState('');
   const [submitLoading, setSubmitLoading] = useState(false);
+  const urlBE = process.env.BACK_END_URL;
 
 
   const handleLogin = async (e) => {
@@ -79,9 +80,7 @@ function Login() {
             
           <h1 style={{marginTop: '30px'}}>Login</h1>
           </div>
-          <div>
-          {error && <Alert severity="error">{error}</Alert>}
-          </div>
+          
           <Box>
             <TextField className='textInput' value={formData.username} label='Username' type='text' placeholder='Enter your username' name='username' onChange={handleChange} required/>
             </Box>
@@ -107,6 +106,12 @@ function Login() {
           )}
         </div>
           </Box>
+          <div>
+            <Link to={'/reset-password'}>Reset Password</Link>
+          </div>
+          <div>
+          {error && <Alert severity="error">{error}</Alert>}
+          </div>
           <Box>
             <Button className='button' type='submit'onClick={handleLogin} disabled={submitLoading}>
           Login

@@ -74,7 +74,6 @@ function VizAdminUser() {
   const [error, setError] = useState('');
   const [submitLoading, setSubmitLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-//   const navigate = useNavigate();
   const [transactionType, setTransactionType] = useState('');
   const [id, setId] = useState('');
 
@@ -88,7 +87,7 @@ function VizAdminUser() {
     const rowData = data[rowIndex];
     setOpen(true);
     setSuccess(false);
-    setId(rowIndex + 1);
+    setId(rowData.id);
     setFormData({ username: rowData.username, 
                 email: rowData.email, 
                 password: rowData.password, 

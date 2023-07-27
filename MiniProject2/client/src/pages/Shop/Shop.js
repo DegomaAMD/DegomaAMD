@@ -4,7 +4,7 @@ import { Typography, Button, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ShoppingCart from '../../components/Cart';
 import ProductItem from '../../components/ProductItem';
-import Navbar from '../../components/Navbar';
+import { CircularProgress } from '@mui/material';
 
 const useStyles = styled((theme) => ({
   container: {
@@ -19,6 +19,7 @@ const Shop = () => {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchProducts();
@@ -35,10 +36,12 @@ const Shop = () => {
       })
       .then((response) => {
         setProducts(response.data);
+        setLoading(false);
         console.log('response', response)
       })
       .catch((error) => {
         console.error('Error fetching products:', error);
+        setLoading(false);
       });
   };
 
@@ -125,6 +128,12 @@ const Shop = () => {
       </div>
    </div>
       <div>
+      {loading ? (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <CircularProgress style={{color: '#102F3A', marginTop: '50px'}} />
+        </div>
+      ) : (
+        <div>
         <Grid container spacing={2}>
           {products.map((product) => (
             <Grid item xs={12} sm={6} md={4} key={product.id}>
@@ -137,6 +146,7 @@ const Shop = () => {
             </Grid>
           ))}
         </Grid>
+        </div>)}
       </div>
       <ShoppingCart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} />
     </div>
