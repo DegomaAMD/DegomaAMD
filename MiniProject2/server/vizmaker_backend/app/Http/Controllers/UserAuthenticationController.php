@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserDetailsResources;
 
-
 class UserAuthenticationController extends Controller
 {
     public function register(Request $request){
         $validator = Validator::make($request->all(),[
+            'firstname' => 'string',
+            'lastname' => 'string',
             'username' => 'required|string',
             'email' => 'required|string|email',
             'password' => 'required|string',
@@ -25,7 +26,6 @@ class UserAuthenticationController extends Controller
             'country_name' => 'string',
             'postal_code' => 'integer',
             'phone_number' => 'integer'
-
         ]);
 
         if($validator->fails()){
@@ -34,10 +34,20 @@ class UserAuthenticationController extends Controller
         $password_hash = Hash::make($request->password);
 
         $user = User::create([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
             'username' => $request->username,
             'email' => $request->email,
             'password' => $password_hash,
-            'role' => $request->role,
+            'house_lot_number' => $request->house_lot_number,
+            'street_name' => $request->street_name,
+            'barangay_name' => $request->barangay_name,
+            'city_name' => $request->city_name,
+            'province_name' => $request->province_name,
+            'region_name' => $request->region_name,
+            'country_name' => $request->country_name,
+            'postal_code' => $request->postal_code,
+            'phone_number' => $request->phone_number,
         ]);
 
         $token = $user->createToken('LaravelTokenPassword')->accessToken;
@@ -85,8 +95,6 @@ class UserAuthenticationController extends Controller
         return $response;
 
     }
-
-    
 
     public function index()
     {
@@ -150,11 +158,6 @@ class UserAuthenticationController extends Controller
             'order' => new UserDetailsResources($userbe)
         ];
         return $response;
-    }
-
-    public function getUserByToken(Request $request)
-    {
-        return $request->user();
     }
 
 }

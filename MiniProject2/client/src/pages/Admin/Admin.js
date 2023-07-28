@@ -29,7 +29,7 @@ import Order from '../../components/Order';
 import Product from '../../components/Product';
 import { Toaster } from 'react-hot-toast';
 import UserBE from '../../components/BEUser';
-
+import Dashboard from '../../components/Dashboard';
 
 
 const drawerWidth = 240;
@@ -236,7 +236,7 @@ export default function Admin() {
       </Drawer>
       <Main open={open}>
         <Routes>
-          <Route path="/Overview" element={<UserBE />} />
+          <Route path="/Overview" element={<Dashboard />} />
           <Route path="/Users" element={<UserBE />} />
           <Route path="/Products" element={<Product />} />
           <Route path="/Orders" element={<Order />} />

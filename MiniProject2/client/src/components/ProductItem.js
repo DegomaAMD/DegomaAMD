@@ -5,9 +5,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import '../pages/Shop/Cafe.css';
 import '../products';
-import qq from '../assets/img/products/1.png'
-
-
+import qq from '../assets/img/products/1.png';
 
 const style = {
   position: 'absolute',
@@ -30,12 +28,13 @@ const ProductItem = ({ product, addToCart }) => {
 
   return (
     <>
-
       <div className="product">
         <div className="description">
-          <img src={imagePath} alt="Menus"/>
-          <p><b>{product.product_name}</b></p>
-          <p> ₱{product.product_price}</p>
+          <img src={imagePath} alt="Menus" />
+          <p>
+            <b>{product.product_name}</b>
+          </p>
+          <p>₱{product.product_price}</p>
           <button className="addToCartBttn" onClick={() => addToCart(product)}>
             Add To Cart
           </button>
@@ -44,44 +43,43 @@ const ProductItem = ({ product, addToCart }) => {
           </button>
         </div>
       </div>
-    <Modal
-    open={open}
-    onClose={handleClose}
-    aria-labelledby="modal-modal-title"
-    aria-describedby="modal-modal-description"
-  >
-    <Box sx={style}>
-      <div>
-      <img src={imagePath} alt="Menus"/>
-      </div>
-      <Typography id="modal-modal-title" variant="h6" component="h2">
-        {product.product_name}
-      </Typography>
-      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-        {product.product_details}
-      </Typography>
-      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-        {product.product_price}
-      </Typography>
-      <Box>
-      <Button
-      variant="contained"
-      color="success"
-      onClick={() => addToCart(product)}
-    >
-      Add to Cart
-    </Button>
-    <Button
-      variant="contained"
-      color="error"
-      onClick={handleClose}
-    >
-      Close
-    </Button>
-    </Box>
-    </Box>
-    
-  </Modal>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          '@media (max-width: 600px)': {
+            maxWidth: '90vw',
+          },
+        }}
+      >
+        <Box sx={style}>
+          <div>
+            <img src={imagePath} alt="Menus" style={{ maxWidth: '100%' }} />
+          </div>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {product.product_name}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {product.product_details}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {product.product_price}
+          </Typography>
+          <Box>
+            <Button variant="contained" color="success" onClick={() => addToCart(product)}>
+              Add to Cart
+            </Button>
+            <Button variant="contained" color="error" onClick={handleClose}>
+              Close
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
     </>
   );
 };

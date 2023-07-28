@@ -18,7 +18,7 @@ function Register() {
     const [formData, setFormData] = useState({
       username: '',
       password: '',
-      password: '',
+      role: 'customer'
     });
       const [error, setError] = useState('');
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -96,13 +96,8 @@ function Register() {
             <TextField className='textInput' value={formData.password}  label='Password'  type={showPassword ? 'text' : 'password'} placeholder='Enter your password' name='password' onChange={handleChange} required />
           </Box>
           <div
-          style={{
-            position: 'absolute',
-            top: '45%',
-            right: '79px',
-            transform: 'translateY(-50%)',
-            cursor: 'pointer'
-          }}
+          className='showPass1'
+          
           onClick={() => setShowPassword(!showPassword)}
         >
           {showPassword ? (

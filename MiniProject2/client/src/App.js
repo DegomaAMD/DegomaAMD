@@ -12,15 +12,7 @@ import ScrolltoTop from './components/Backtotop';
 import Register from './pages/Login/Register';
 import Admin from './pages/Admin/Admin';
 import Checkout from './components/Checkout';
-import ResetPassword from './pages/Login/ResetPassword';
-import Profile from './components/Profile';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import ShoppingCart from './pages/Shop/Shopping Cart';
-import Cart from './components/Cart';
-import PlaceOrder from './components/PlaceOrder';
-import { CartProvider } from './context/CartContext';
 // import ShoppingCart from './pages/Shop/ShoppingCart'; // gi-comment nako kay walay gamit -> JP
-
 
 function App() {
   const isAuthenticated = localStorage.getItem('login_token');
@@ -29,8 +21,8 @@ function App() {
 
   return (
     <>
-<CartProvider>
-<Router>
+
+      <Router>
         {!isDashboardRoute && <Navbar />}
         <ScrolltoTop />
         <Routes>
@@ -41,11 +33,9 @@ function App() {
           <Route exact path="/Login" element={<Login />} />
           <Route exact path="/PageNotFound" element={<PageNotFound />} />
           <Route exact path="/Register" element={<Register />} />
+          <Route exact path="/BEUser" element={<BEUser />} />
           <Route exact path="/checkout" element={<Checkout />} />
-          <Route exact path="/reset-password" element={<ResetPassword />} />
-          <Route exact path="/Profile" element={<Profile />} />
-          <Route exact path="/place-order" element={<PlaceOrder />} />
-          <Route path="/menu/cart" element={<Cart />} />
+          {/* <Route exact path="/menu/cart" element={<ShoppingCart />} /> */}
         </Routes>
       </Router>
       <Router>
@@ -53,16 +43,16 @@ function App() {
           <Route
             exact
             path="/dashboard/*"
+            element={isAuthenticated ? <Admin /> : <Navigate to="/Login" />}
           />
           <Route
             exact
-            path="/dashboard"
-            element={isAuthenticated ? <Navigate to="/dashboard/overview" /> : <Navigate to="/login" />}
+            path="/Admin"
+            element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/Login" />}
           />
+          {/* <Route exact path="/checkout" element={isAuthenticated ? <Checkout/>: <Navigate to="/Login"/>} /> */}
         </Routes>
       </Router>
-</CartProvider>
-      
     </>
   );
 }
