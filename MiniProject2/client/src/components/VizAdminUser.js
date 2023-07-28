@@ -77,10 +77,13 @@ function VizAdminUser() {
   const [transactionType, setTransactionType] = useState('');
   const [id, setId] = useState('');
 
+  
+
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
+    role: 'admin'
   });
 
   const handleEdit = (rowIndex) => {
@@ -101,8 +104,10 @@ function VizAdminUser() {
     const rowData = data[rowIndex];
     setOpen(true);
     setSuccess(false);
-    setId(rowIndex + 1);
-    setFormData({ username: rowData.username, 
+    setId(rowData.id);
+    setFormData({ 
+      id: rowData.id,
+      username: rowData.username, 
         email: rowData.email, 
         password: rowData.password, 
         });
@@ -110,14 +115,14 @@ function VizAdminUser() {
   };
   const columns = [
     {
-      name: 'User Name',
+      name: 'ID',
       options: {
         filter: true,
         sort: true,
       },
     },
     {
-      name: 'Email',
+      name: 'User Name',
       options: {
         filter: true,
         sort: true,
@@ -221,7 +226,7 @@ function VizAdminUser() {
     } else {
       try {
         if (transactionType === 'add') {
-          const response = await axios.post('http://127.0.0.1:8000/api/register', formData, {
+          const response = await axios.post('http://127.0.0.1:8000/api/Admin/register', formData, {
             headers: {
               Authorization: 'Bearer ' + localStorage.getItem('login_token'),
             },
@@ -289,10 +294,6 @@ function VizAdminUser() {
       setError('Admin User Name is required!');
       return false;
     } 
-    else if (formData.email === undefined || formData.email === '') {
-      setError('Admin Email is required!');
-      return false;
-    }
     else if (formData.password === undefined || formData.password === '') {
       setError('Admin Password is required!');
       return false;
@@ -322,7 +323,7 @@ function VizAdminUser() {
           loading={loading}
           title={'Admin Information'}
           data={data.map((d) => {
-            return [d.username, d.email, d.password];
+            return [d.id, d.username, d.email, d.password];
           })}
           columns={columns}
           options={options}
@@ -374,6 +375,17 @@ function VizAdminUser() {
                 variant="standard"
                 value={formData.password}
                 onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="role"
+                fullWidth
+                label="Role"
+                name="role"
+                disabled
+                variant="standard"
+                value={formData.role}
               />
             </Grid>
           </Grid>

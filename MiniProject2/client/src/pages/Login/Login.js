@@ -36,9 +36,14 @@ function Login() {
       try {
         const response = await Axios.post('http://127.0.0.1:8000/api/login', formData);
         const token = response.data.token;
+        const CustomerRole = response.data.CustomerRole;
 
         localStorage.setItem('login_token', token);
-        Navigate('/');
+        
+   
+          Navigate('/');
+      
+
 
       } catch(error) {
         let errorMessage = error.response.data.error;

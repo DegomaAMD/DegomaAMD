@@ -16,6 +16,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Cart from './components/Cart';
 import PlaceOrder from './components/PlaceOrder';
 import Dashboard from './components/Dashboard'
+import AdminRegister from './pages/Login/AdminReg';
+import AdminLogin from './pages/Login/AdminLog';
 
 function App() {
   const isAuthenticated = localStorage.getItem('login_token');
@@ -35,11 +37,15 @@ function App() {
           <Route exact path="/Login" element={<Login />} />
           <Route exact path="/PageNotFound" element={<PageNotFound />} />
           <Route exact path="/Register" element={<Register />} />
+          {/* <Route exact path="/Admin/Register" element={<AdminRegister />} />
+          <Route exact path="/Admin/Login" element={<AdminLogin />} /> */}
+          <Route exact path="/Register" element={<Register />} />
           <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/reset-password" element={<ResetPassword />} />
           <Route exact path="/Profile" element={<Profile />} />
           <Route exact path="/place-order" element={<PlaceOrder />} />
           <Route path="/menu/cart" element={<Cart />} />
+
 
 
 
@@ -55,7 +61,7 @@ function App() {
           <Route
             exact
             path="/dashboard"
-            element={isAuthenticated ? <Navigate to="/dashboard/Overview" /> : <Navigate to="/Login" />}
+            element={isAuthenticated ? <Navigate to="/dashboard/Overview" /> : <Navigate to="/Login"/>}
           />
         </Routes>
       </Router>

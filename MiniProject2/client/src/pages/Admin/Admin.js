@@ -95,7 +95,7 @@ export default function Admin() {
 
   const handleLogout = () => {
     localStorage.removeItem('login_token');
-    navigate('/login');
+    navigate('/Login');
   };
 
   const handleMenuClick = (url) => {
