@@ -6,7 +6,6 @@ import Shop from './pages/Shop/Shop';
 import About from './pages/About/About';
 import Login from './pages/Login/Login';
 import PageNotFound from './components/PageNotFound';
-// import  Cart  from "./pages/Cart/Cart";
 import ScrolltoTop from './components/Backtotop';
 import Register from './pages/Login/Register';
 import Admin from './pages/Admin/Admin';
@@ -14,10 +13,9 @@ import Checkout from './components/Checkout';
 import ResetPassword from './pages/Login/ResetPassword';
 import Profile from './components/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ShoppingCart from './pages/Shop/Shopping Cart';
 import Cart from './components/Cart';
 import PlaceOrder from './components/PlaceOrder';
-import { CartProvider } from './context/CartContext';
+import Dashboard from './components/Dashboard'
 
 function App() {
   const isAuthenticated = localStorage.getItem('login_token');
@@ -26,7 +24,6 @@ function App() {
 
   return (
     <>
-<CartProvider>
 <Router>
         {!isDashboardRoute && <Navbar />}
         <ScrolltoTop />
@@ -43,6 +40,9 @@ function App() {
           <Route exact path="/Profile" element={<Profile />} />
           <Route exact path="/place-order" element={<PlaceOrder />} />
           <Route path="/menu/cart" element={<Cart />} />
+
+
+
         </Routes>
       </Router>
       <Router>
@@ -50,15 +50,15 @@ function App() {
           <Route
             exact
             path="/dashboard/*"
+            element={isAuthenticated ? <Admin /> : <Navigate to="/Login" />}
           />
           <Route
             exact
             path="/dashboard"
-            element={isAuthenticated ? <Navigate to="/dashboard/overview" /> : <Navigate to="/login" />}
+            element={isAuthenticated ? <Navigate to="/dashboard/Overview" /> : <Navigate to="/Login" />}
           />
         </Routes>
       </Router>
-</CartProvider>
       
     </>
   );

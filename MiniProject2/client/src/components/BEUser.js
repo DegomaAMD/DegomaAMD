@@ -20,6 +20,7 @@ import MUIDataTable from 'mui-datatables';
 import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import VizAdminUser from './VizAdminUser';
 
 // const style = {
 //   position: 'absolute',
@@ -482,6 +483,7 @@ function UserBE() {
   };
 
   return (
+    <>
     <div style={{ marginTop: '50px' }}>
       <div style={{ display: 'flex', justifyContent: 'end', marginBottom: '10px' }}>
         <Button
@@ -722,6 +724,8 @@ function UserBE() {
         </DialogActions>
       </BootstrapDialog>
     </div>
+    <VizAdminUser/>
+    </>
   );
 }
 
