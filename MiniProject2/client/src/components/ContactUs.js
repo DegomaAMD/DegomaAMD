@@ -9,7 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Footer from './PageFooter';
 import { useForm, ValidationError } from '@formspree/react';
-import { Form } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 
 
 
@@ -28,7 +28,7 @@ function ContactUs() {
         <Container sx={{textAlign:'center', marginTop: '15px', display:'flex', justifyContent:'center'}}>   
         <Card className='contactUsCard' sx={{width:578, display:'block'}}>
       <CardContent>
-            <form>
+            <Form>
             <Box>
                 <TextField required label="First Name"  type='text' placeholder="Enter your firstname" className='contactForm' />
                 <TextField required label="Last Name"  type='text' placeholder="Enter your lastname" className='contactForm' />
@@ -40,12 +40,13 @@ function ContactUs() {
                 <TextField 
                     required  
                     multiline 
+                    type='text'
                     label="Message" 
                     id="userMessage"  
                     rows={5} 
                     placeholder='Enter your message here' className='contactForm' />
             </Box>
-            </form>
+            </Form>
             
       </CardContent>
       <CardActions className='Form'>

@@ -1,125 +1,94 @@
-import React, { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import { Typography, TextField, Button, Grid } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const useStyles = styled((theme) => ({
-  container: {
-    marginTop: theme.spacing(3),
-    padding: theme.spacing(3),
-    backgroundColor: '#f5f5f5',
-  },
-  title: {
-    marginBottom: theme.spacing(2),
-  },
-  formField: {
-    marginBottom: theme.spacing(2),
-  },
-  submitButton: {
-    marginTop: theme.spacing(2),
-  },
-}));
-
 const Checkout = () => {
-  const classes = useStyles();
-  const [userData, setUserData] = useState({});
-  const [selectedProducts, setSelectedProducts] = useState([]);
-
+  const [userData, setUserData] = useState({ name: '', address: '' });
+  const [cartItems, setCartItems] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const getToken = () => {
+    return localStorage.getItem('login_token');
+  };
   useEffect(() => {
-    fetchUserData();
-    fetchSelectedProducts();
-  }, []);
-
-  const fetchUserData = () => {
+    // Fetch user data from the backend
     axios
-      .get('http://127.0.0.1:8000/api/User') // Replace with the appropriate endpoint to fetch user data
+      .get('http://127.0.0.1:8000/api/user', {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
       .then((response) => {
         setUserData(response.data);
+        console.log(response)
       })
       .catch((error) => {
         console.error('Error fetching user data:', error);
       });
+
+    // Retrieve cart data from LocalStorage and display it
+    const cartData = JSON.parse(localStorage.getItem('cart')) || [];
+    setCartItems(cartData);
+    setTotalAmount(calculateTotalAmount(cartData));
+  }, []);
+
+  
+
+  const formatAmountWithCommas = (amount) => {
+    return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  const fetchSelectedProducts = () => {
-    axios
-      .get('http://127.0.0.1:8000/api/cart/items') // Replace with the appropriate endpoint to fetch selected products from the cart
-      .then((response) => {
-        setSelectedProducts(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching selected products:', error);
-      });
+  const calculateTotalAmount = () => {
+    const totalAmount = cartItems.reduce((total, item) => {
+      const itemAmount = item.product_price * item.quantity;
+      return total + itemAmount;
+    }, 0);
+    return formatAmountWithCommas(totalAmount);
   };
 
   const handlePlaceOrder = () => {
-    const order = {
-      user: userData,
-      products: selectedProducts,
-    };
-
+    // Assuming you have an API endpoint to place the order in the backend
+    const orderData = { userData, cartItems };
     axios
-      .post('http://127.0.0.1:8000/api/order', order) // Replace with the appropriate endpoint to send the order data
+      .post('http://127.0.0.1:8000/api/orders', orderData)
       .then((response) => {
-        console.log('Order placed successfully:', response.data);
-        // Add any additional logic or navigation after placing the order
+        // Handle the response as needed (e.g., show success message, navigate to success page)
+        console.log('Order placed successfully!');
+        // Clear the cart and LocalStorage after successful order placement
+        localStorage.removeItem('cart');
       })
       .catch((error) => {
+        // Handle the error (e.g., show error message)
         console.error('Error placing the order:', error);
       });
   };
 
   return (
-    <div  className={classes.container}>
-      <Typography variant="h6" className={classes.title}>
-        Checkout
-      </Typography>
-
-      <Typography variant="h6">User Information:</Typography>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            label="Name"
-            fullWidth
-            className={classes.formField}
-            value={userData.name || ''}
-            disabled
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            label="Email"
-            fullWidth
-            className={classes.formField}
-            value={userData.email || ''}
-            disabled
-          />
-        </Grid>
-        {/* Add more user information fields as needed */}
-      </Grid>
-
-      <Typography variant="h6" className={classes.title}>
-        Selected Products:
-      </Typography>
-      {selectedProducts.length > 0 ? (
-        <ul>
-          {selectedProducts.map((product) => (
-            <li key={product.id}>{product.product_name}</li>
-          ))}
-        </ul>
-      ) : (
-        <Typography variant="body1">No products selected for checkout</Typography>
+    <div>
+      <h2>Checkout</h2>
+      <div>
+        <h3>User Information</h3>
+        <p>Name: {userData.name}</p>
+        <p>Address: {userData.address}</p>
+      </div>
+      <div>
+        <h3>Cart Items</h3>
+        {cartItems.length === 0 ? (
+          <p>Your Cart is empty</p>
+        ) : (
+          cartItems.map((item) => (
+            <div key={item.id}>
+              <p>
+                {item.name} - Quantity: {item.quantity} - Amount: ₱{formatAmountWithCommas(item.product_price * item.quantity)}
+              </p>
+            </div>
+          ))
+        )}
+        <p>Total Amount: ₱{calculateTotalAmount()}</p>
+      </div>
+      {cartItems.length > 0 && (
+        <div>
+          <button onClick={handlePlaceOrder}>Place Order</button>
+        </div>
       )}
-
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        className={classes.submitButton}
-        onClick={handlePlaceOrder}
-      >
-        Place Order
-      </Button>
     </div>
   );
 };

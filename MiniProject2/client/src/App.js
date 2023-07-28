@@ -11,6 +11,11 @@ import ScrolltoTop from './components/Backtotop';
 import Register from './pages/Login/Register';
 import Admin from './pages/Admin/Admin';
 import Checkout from './components/Checkout';
+import ResetPassword from './pages/Login/ResetPassword';
+import Profile from './components/Profile';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ShoppingCart from './pages/Shop/Shopping Cart';
+import Cart from './components/Cart';
 
 function App() {
   const isAuthenticated = localStorage.getItem('login_token');
@@ -32,6 +37,9 @@ function App() {
           <Route exact path="/PageNotFound" element={<PageNotFound />} />
           <Route exact path="/Register" element={<Register />} />
           <Route exact path="/checkout" element={<Checkout />} />
+          <Route exact path="/reset-password" element={<ResetPassword />} />
+          <Route exact path="/Profile" element={<Profile />} />
+          <Route path="/menu/cart" element={<Cart />} />
         </Routes>
       </Router>
       <Router>
@@ -39,14 +47,12 @@ function App() {
           <Route
             exact
             path="/dashboard/*"
-            element={isAuthenticated ? <Admin /> : <Navigate to="/Login" />}
           />
           <Route
             exact
-            path="/Admin"
-            element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/Login" />}
+            path="/dashboard"
+            element={isAuthenticated ? <Navigate to="/dashboard/overview" /> : <Navigate to="/login" />}
           />
-          {/* <Route exact path="/checkout" element={isAuthenticated ? <Checkout/>: <Navigate to="/Login"/>} /> */}
         </Routes>
       </Router>
     </>

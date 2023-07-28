@@ -28,8 +28,8 @@ import { styled, useTheme } from '@mui/material/styles';
 import Order from '../../components/Order';
 import Product from '../../components/Product';
 import { Toaster } from 'react-hot-toast';
-
 import UserBE from '../../components/BEUser';
+
 
 
 const drawerWidth = 240;
@@ -168,7 +168,7 @@ export default function Admin() {
                     variant="contained"
                     color="success"
                     fullWidth
-                    onClick={() => handleMenuClick('/dashboard')}
+                    onClick={() => handleMenuClick('/dashboard/Overview')}
                   >
                     Dashboard
                   </Button>
@@ -236,7 +236,7 @@ export default function Admin() {
       </Drawer>
       <Main open={open}>
         <Routes>
-          <Route path="/Admin" element={<Admin />} />
+          <Route path="/Overview" element={<UserBE />} />
           <Route path="/Users" element={<UserBE />} />
           <Route path="/Products" element={<Product />} />
           <Route path="/Orders" element={<Order />} />

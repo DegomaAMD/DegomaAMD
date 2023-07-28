@@ -2,9 +2,28 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Typography, Button, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import ShoppingCart from '../../components/ShoppingCart';
+import ShoppingCart from '../../components/Cart';
+import CartBadge from '../../components/CartBadge';
 import ProductItem from '../../components/ProductItem';
-import Navbar from '../../components/Navbar';
+import { CircularProgress } from '@mui/material';
+import { ToastContainer, toast } from 'react-toastify';
+import Footer from '../../components/PageFooter';
+
+import 'react-toastify/dist/ReactToastify.css';
+
+toast('Added to cart', {
+  position: "top-right",
+  autoClose: 3000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "colored",
+  });
+
+
+
 
 const useStyles = styled((theme) => ({
   container: {
@@ -19,11 +38,12 @@ const Shop = () => {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchProducts();
     // loadCartItems();
-    fetchCartItems();
+    // fetchCartItems();
   }, []);
 
   const fetchProducts = () => {
@@ -35,13 +55,16 @@ const Shop = () => {
       })
       .then((response) => {
         setProducts(response.data);
+        setLoading(false);
         console.log('response', response)
       })
       .catch((error) => {
         console.error('Error fetching products:', error);
+        setLoading(false);
       });
   };
 
+  
   // const loadCartItems = () => {
   //   const storedCartItems = JSON.parse(localStorage.getItem('cartItems'));
   //   if (storedCartItems) {
@@ -53,91 +76,140 @@ const Shop = () => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   };
 
-  const addToCart = (product) => {
-    axios
-      .post('http://127.0.0.1:8000/api/api/cart/add', product, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getToken()}`,
-        },
-      }).then((response) => {
-        setCartItems(response.data);
-      })
-      .catch((error) => {
-        console.error('Error adding to cart:', error);
-      });
-    const existingItem = cartItems.find((item) => item.id === product.id);
-    if (existingItem) {
-      updateQuantity(existingItem, existingItem.quantity + 1);
+  // const addToCart = (product) => {
+  //   axios
+  //     .post('http://127.0.0.1:8000/api/cart/add', product, {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${getToken()}`,
+  //       },
+  //     }).then((response) => {
+  //       setCartItems(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error adding to cart:', error);
+  //     });
+      
+  //   const existingItem = cartItems.find((item) => item.id === product.id);
+  //   if (existingItem) {
+  //     updateQuantity(existingItem, existingItem.quantity + 1);
+  //   } else {
+  //     const newItem = {
+  //       ...product,
+  //       quantity: 1,
+  //     };
+  //     setCartItems((prevCartItems) => [...prevCartItems, newItem]);
+  //   }
+  // };
+  const handleAddToCart = (product) => {
+    // Retrieve existing cart data from LocalStorage
+    const cartData = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Check if the product is already in the cart
+    const existingProduct = cartData.find(item => item.id === product.id);
+
+    if (existingProduct) {
+      // Increment quantity if already in cart
+      existingProduct.quantity += 1;
+<ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+/>
     } else {
-      const newItem = {
-        ...product,
-        quantity: 1,
-      };
-      setCartItems((prevCartItems) => [...prevCartItems, newItem]);
+      // Add the product to the cart with quantity 1
+      cartData.push({ ...product, quantity: 1 });
+
     }
+
+    // Save updated cart data to LocalStorage
+    localStorage.setItem('cart', JSON.stringify(cartData));
+
   };
 
-  const fetchCartItems = () => {
-    axios
-      .get('http://127.0.0.1:8000/api/cart/items', {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      })
-      .then((response) => {
-        setCartItems(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching cart items:', error);
-      });
-  };
 
-  const removeFromCart = (product) => {
-    setCartItems((prevCartItems) => prevCartItems.filter((item) => item.id !== product.id));
-  };
+  // const fetchCartItems = () => {
+  //   axios
+  //     .get('http://127.0.0.1:8000/api/cart/items', {
+  //       headers: {
+  //         Authorization: `Bearer ${getToken()}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setCartItems(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching cart items:', error);
+  //     });
+  // };
 
-  const updateQuantity = (product, newQuantity) => {
-    const updatedItems = cartItems.map((item) => {
-      if (item.id === product.id) {
-        return { ...item, quantity: newQuantity };
-      }
-      return item;
-    });
-    setCartItems(updatedItems);
-  };
 
-  useEffect(() => {
-    saveCartItems();
-  }, [cartItems]);
+  // const removeFromCart = (product) => {
+  //   setCartItems((prevCartItems) => prevCartItems.filter((item) => item.id !== product.id));
+  // };
+
+  // const updateQuantity = (product, newQuantity) => {
+  //   const updatedItems = cartItems.map((item) => {
+  //     if (item.id === product.id) {
+  //       return { ...item, quantity: newQuantity };
+  //     }
+  //     return item;
+  //   });
+  //   setCartItems(updatedItems);
+  // };
+
+  // useEffect(() => {
+  //   saveCartItems();
+  // }, [cartItems]);
 
   const getToken = () => {
-    return localStorage.getItem('token');
+    return localStorage.getItem('login_token');
   };
+
+
+
   return (
     <div className={classes.container}>
-      <Navbar/>
-      <Typography variant="h4" gutterBottom>
-        My Online Store
-      </Typography>
+      <div className="shop">
+        <div className="shopTitle">
+        <h1>Shop</h1>
+      </div>
+      <CartBadge cartItems={cartItems} />
+   </div>
       <div>
-        <Typography variant="h6" gutterBottom>
-          Products
-        </Typography>
+      {loading ? (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <CircularProgress style={{color: '#102F3A', marginTop: '50px'}} />
+        </div>
+      ) : (
+        <div>
         <Grid container spacing={2}>
           {products.map((product) => (
             <Grid item xs={12} sm={6} md={4} key={product.id}>
               <div className={classes.productItem}>
                 <ProductItem
                   product={product}
-                  addToCart={addToCart}
+                  addToCart={handleAddToCart}
                 />
+                
               </div>
             </Grid>
           ))}
         </Grid>
+        </div>)}
       </div>
-      <ShoppingCart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} />
+      {/* <CartBadge cartItems={cartItems} />
+      <ShoppingCart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} /> */}
+      <div className='footer'>
+        <Footer/>
+      </div>
     </div>
   );
 };

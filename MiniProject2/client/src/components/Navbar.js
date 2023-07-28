@@ -22,8 +22,7 @@ import CartBadge from './CartBadge';
 
 const drawerWidth = 240;
 const navSideItems = ['Home', 'Menu', 'About'];
-const navLoggedItems = ['Home', 'Menu', 'Profile'];
-const navSideItemsAdmin = ['Dashboard','Users', 'Products', 'Orders'];
+const navLoggedItems = ['Home', 'Menu', 'Profile','About'];
 
 function Navbar(props) {
   const { window } = props;
@@ -131,7 +130,7 @@ function Navbar(props) {
                 </Link>
               </Button>
             ))}
-            <Link to={'/Shop'}  sx={{ display: 'flex' }}>
+            <Link to={'/menu/cart'}  sx={{ display: 'flex' }}>
                 <Button sx={{marginRight:'10px'}}>
                 <CartBadge />
                 </Button>

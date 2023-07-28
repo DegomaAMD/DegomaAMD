@@ -18,7 +18,7 @@ import { styled } from '@mui/material/styles';
 import axios from 'axios';
 import MUIDataTable from 'mui-datatables';
 import React, { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 import toast from 'react-hot-toast';
 
 
@@ -83,6 +83,7 @@ function Product() {
     product_name: '',
     product_details: '',
     product_price: '',
+    product_image: '',
   });
 
   const handleEdit = (rowIndex) => {
@@ -94,6 +95,7 @@ function Product() {
       product_name: rowData.product_name, 
                 product_details: rowData.product_details, 
                 product_price: rowData.product_price, 
+                product_image: rowData.product_image, 
                 });
                 console.log('rowIndex: ', rowIndex)
                 console.log('data: ', data)
@@ -136,6 +138,13 @@ function Product() {
     },
     {
       name: 'Product Price',
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
+    {
+      name: 'Product Image',
       options: {
         filter: true,
         sort: true,
@@ -205,6 +214,7 @@ function Product() {
         product_name: '',
         product_details: '',
         product_price: '',
+        product_image: '',
     });
     setOpen(true);
     setSuccess(false);
@@ -308,6 +318,10 @@ function Product() {
       setError('Product Price is required!');
       return false;
     }
+    else if (formData.product_image === undefined || formData.product_image === '') {
+      setError('Product Price is required!');
+      return false;
+    }
 
     return true;
   };
@@ -333,7 +347,7 @@ function Product() {
           loading={loading}
           title={'Product List'}
           data={data.map((d) => {
-            return [d.id, d.product_name, d.product_details, d.product_price];
+            return [d.id, d.product_name, d.product_details, d.product_price, d.product_image];
           })}
           columns={columns}
           options={options}
@@ -384,6 +398,18 @@ function Product() {
                 disabled={transactionType === 'delete' ? true : false}
                 variant="standard"
                 value={formData.product_price}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="product_image"
+                fullWidth
+                label="Product Image"
+                name="product_image"
+                disabled={transactionType === 'delete' ? true : false}
+                variant="standard"
+                value={formData.product_image}
                 onChange={handleChange}
               />
             </Grid>
