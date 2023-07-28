@@ -23,8 +23,6 @@ toast('Added to cart', {
   });
 
 
-
-
 const useStyles = styled((theme) => ({
   container: {
     padding: theme.spacing(3),
@@ -42,8 +40,6 @@ const Shop = () => {
 
   useEffect(() => {
     fetchProducts();
-    // loadCartItems();
-    // fetchCartItems();
   }, []);
 
   const fetchProducts = () => {
@@ -64,43 +60,6 @@ const Shop = () => {
       });
   };
 
-  
-  // const loadCartItems = () => {
-  //   const storedCartItems = JSON.parse(localStorage.getItem('cartItems'));
-  //   if (storedCartItems) {
-  //     setCartItems(storedCartItems);
-  //   }
-  // };
-
-  const saveCartItems = () => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  };
-
-  // const addToCart = (product) => {
-  //   axios
-  //     .post('http://127.0.0.1:8000/api/cart/add', product, {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: `Bearer ${getToken()}`,
-  //       },
-  //     }).then((response) => {
-  //       setCartItems(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error adding to cart:', error);
-  //     });
-      
-  //   const existingItem = cartItems.find((item) => item.id === product.id);
-  //   if (existingItem) {
-  //     updateQuantity(existingItem, existingItem.quantity + 1);
-  //   } else {
-  //     const newItem = {
-  //       ...product,
-  //       quantity: 1,
-  //     };
-  //     setCartItems((prevCartItems) => [...prevCartItems, newItem]);
-  //   }
-  // };
   const handleAddToCart = (product) => {
     // Retrieve existing cart data from LocalStorage
     const cartData = JSON.parse(localStorage.getItem('cart')) || [];
@@ -111,63 +70,23 @@ const Shop = () => {
     if (existingProduct) {
       // Increment quantity if already in cart
       existingProduct.quantity += 1;
-<ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"
-/>
     } else {
       // Add the product to the cart with quantity 1
       cartData.push({ ...product, quantity: 1 });
 
     }
-
+    toast.success('Added to cart', {
+      position: 'bottom-right',
+      autoClose: 2000, // Close the toast after 2 seconds
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+    });
     // Save updated cart data to LocalStorage
     localStorage.setItem('cart', JSON.stringify(cartData));
 
   };
 
-
-  // const fetchCartItems = () => {
-  //   axios
-  //     .get('http://127.0.0.1:8000/api/cart/items', {
-  //       headers: {
-  //         Authorization: `Bearer ${getToken()}`,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       setCartItems(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching cart items:', error);
-  //     });
-  // };
-
-
-  // const removeFromCart = (product) => {
-  //   setCartItems((prevCartItems) => prevCartItems.filter((item) => item.id !== product.id));
-  // };
-
-  // const updateQuantity = (product, newQuantity) => {
-  //   const updatedItems = cartItems.map((item) => {
-  //     if (item.id === product.id) {
-  //       return { ...item, quantity: newQuantity };
-  //     }
-  //     return item;
-  //   });
-  //   setCartItems(updatedItems);
-  // };
-
-  // useEffect(() => {
-  //   saveCartItems();
-  // }, [cartItems]);
 
   const getToken = () => {
     return localStorage.getItem('login_token');
@@ -177,11 +96,11 @@ const Shop = () => {
 
   return (
     <div className={classes.container}>
+      <ToastContainer />
       <div className="shop">
         <div className="shopTitle">
         <h1>Shop</h1>
       </div>
-      <CartBadge cartItems={cartItems} />
    </div>
       <div>
       {loading ? (
@@ -205,8 +124,7 @@ const Shop = () => {
         </Grid>
         </div>)}
       </div>
-      {/* <CartBadge cartItems={cartItems} />
-      <ShoppingCart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} /> */}
+
       <div className='footer'>
         <Footer/>
       </div>

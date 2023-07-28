@@ -23,6 +23,8 @@ function Register() {
       const [error, setError] = useState('');
   const [submitLoading, setSubmitLoading] = useState(false);
 
+    
+  
  
   const handleRegister = (e) => {
     e.preventDefault();
@@ -96,8 +98,8 @@ function Register() {
           <div
           style={{
             position: 'absolute',
-            top: '52%',
-            right: '90px',
+            top: '45%',
+            right: '79px',
             transform: 'translateY(-50%)',
             cursor: 'pointer'
           }}

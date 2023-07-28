@@ -201,7 +201,10 @@ const Cart = () => {
         </div>
       )}
       {cartItems.length === 0 ? (
-        <p>Your Cart is empty</p>
+        <div className='CartText'>
+          <p>Your Cart is empty</p>
+        </div>
+        
       ) : (
         cartItems.map((item) => (
           <div key={item.id} className='cartCard'>
@@ -233,8 +236,7 @@ const Cart = () => {
         ))
       )}
       <div>
-      {cartItems.length > 0 && <p style={{fontSize: '22px', fontWeight: 'bold', marginTop: '16px', marginBottom: '16px'}}> Total Amount: ₱{calculateTotalAmount()}</p>}
-      </div>
+      {cartItems.length > 0 && <><p style={{fontSize: '22px', fontWeight: 'bold', marginTop: '16px', marginBottom: '16px'}}> Total Amount: ₱{calculateTotalAmount()}</p>
       <div style={{margin: '10px'}}>
       <Link to="/Menu">
             <Button>Continue Shopping</Button>
@@ -242,7 +244,9 @@ const Cart = () => {
       <Link to="/checkout">
             <Button style={{marginLeft: '5px'}}>Checkout</Button>
           </Link>
+      </div></>}
       </div>
+      
       
           </Container>
       <div className='footer'>

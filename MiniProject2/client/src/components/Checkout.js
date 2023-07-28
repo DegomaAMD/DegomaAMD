@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+import  Button  from 'react-bootstrap/Button';
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({ name: '', address: '' });
   const [cartItems, setCartItems] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -45,15 +48,29 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = () => {
+    const userId = userData.id; // Assuming the user ID is available in the `userData` object
+
+  const ordersData = cartItems.map((item) => ({
+    user_id: userId,
+    product_id: item.id,
+    order_quantity: item.quantity,
+    total_order_amount: item.product_price * item.quantity,
+  }));
+    console.log(ordersData)
+  
     // Assuming you have an API endpoint to place the order in the backend
-    const orderData = { userData, cartItems };
     axios
-      .post('http://127.0.0.1:8000/api/orders', orderData)
+      .post('http://127.0.0.1:8000/api/placeOrders', { orders: ordersData }, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
       .then((response) => {
         // Handle the response as needed (e.g., show success message, navigate to success page)
         console.log('Order placed successfully!');
         // Clear the cart and LocalStorage after successful order placement
         localStorage.removeItem('cart');
+        navigate('/place-order');
       })
       .catch((error) => {
         // Handle the error (e.g., show error message)
@@ -66,8 +83,9 @@ const Checkout = () => {
       <h2>Checkout</h2>
       <div>
         <h3>User Information</h3>
-        <p>Name: {userData.name}</p>
-        <p>Address: {userData.address}</p>
+        <p>Name: {userData.firstname + " " + userData.lastname}</p>
+        <p>Address: {userData.house_lot_number + ", " + userData.street_name + ", " + userData.barangay_name + ", " + userData.city_name + ", " + userData.province_name + ", " + userData.region_name + ", " + userData.country_name + ", " + userData.postal_code}</p>
+        <p>Phone Number: {userData.phone_number }</p>
       </div>
       <div>
         <h3>Cart Items</h3>
@@ -75,18 +93,21 @@ const Checkout = () => {
           <p>Your Cart is empty</p>
         ) : (
           cartItems.map((item) => (
-            <div key={item.id}>
+            <div key={item.id} className='cartCard'>
               <p>
-                {item.name} - Quantity: {item.quantity} - Amount: ₱{formatAmountWithCommas(item.product_price * item.quantity)}
-              </p>
+                {item.product_name} 
+                </p>
+                <p>Quantity: {item.quantity}</p>  
+                <p>Amount: ₱{formatAmountWithCommas(item.product_price * item.quantity)}</p>
+              
             </div>
           ))
         )}
-        <p>Total Amount: ₱{calculateTotalAmount()}</p>
+        <p style={{fontSize: '22px', fontWeight: 'bold', marginTop: '16px', marginBottom: '16px'}}>Total Amount: ₱{calculateTotalAmount()}</p>
       </div>
       {cartItems.length > 0 && (
         <div>
-          <button onClick={handlePlaceOrder}>Place Order</button>
+          <Button style={{marginLeft: '5px'}} onClick={handlePlaceOrder}>Place Order</Button>
         </div>
       )}
     </div>

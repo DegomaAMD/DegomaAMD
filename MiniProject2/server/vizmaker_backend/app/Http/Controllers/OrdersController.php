@@ -10,7 +10,28 @@ use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
-   
+    public function placeOrders(Request $request)
+{
+    // Validate the incoming request data as needed
+    $request->validate([
+        'orders' => 'required|array',
+    ]);
+
+    // Extract the data from the request
+    $ordersData = $request->input('orders');
+
+    // Loop through each order and save it to the database
+    foreach ($ordersData as $orderData) {
+        $order = new Orders();
+        $order->user_id = $orderData['user_id'];
+        $order->product_id = $orderData['product_id'];
+        $order->order_quantity = $orderData['order_quantity'];
+        $order->total_order_amount = $orderData['total_order_amount'];
+        $order->save();
+    }
+
+    return response()->json(['message' => 'Orders placed successfully'], 200);
+}
     public function index()
     {
         //

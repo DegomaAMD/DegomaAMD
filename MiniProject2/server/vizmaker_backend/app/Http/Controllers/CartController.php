@@ -12,7 +12,7 @@ class CartController extends Controller
     public function getCartItems()
     {
         $user = Auth::user();
-        $cartItems = $user->cartItems->with('product')->get();
+        $cartItems = $user->cartItems->with('products')->get();
 
         return response()->json($cartItems);
     }

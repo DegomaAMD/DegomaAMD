@@ -38,7 +38,7 @@ const ProductItem = ({ product, addToCart }) => {
             
           <p><b>{product.product_name}</b></p>
           <p> ₱{product.product_price}</p>
-          <button className="addToCartBttn" onClick={() => addToCart(product)}>
+          <button style={{marginRight: '5px'}} className="addToCartBttn" onClick={() => addToCart(product)}>
             Add To Cart
           </button>
           <button className="addToCartBttn" onClick={handleOpen}>Learn more</button>

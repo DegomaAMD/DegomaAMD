@@ -1,27 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import styled from 'styled-components';
+import * as React from 'react';
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
+}));
 
-const CartBadge = ({ cartItems  }) => {
-// const [itemCount, setItemCount] = useState(0);
+export default function CustomizedBadges() {
 
-//   useEffect(() => {
-//     setItemCount(cartItems.length);
-//   }, [cartItems]);
-
-  return(
-    <div>
-      <FontAwesomeIcon icon={faShoppingCart} style={{color: "#fff"}} />
-      {/* {itemCount} */}
-    </div>
-  )
-  
-  
-  
-  
-};
-
-export default CartBadge;
+  return (
+    <IconButton aria-label="cart">
+      <StyledBadge  color="secondary">
+        <ShoppingCartIcon />
+      </StyledBadge>
+    </IconButton>
+  );
+}
