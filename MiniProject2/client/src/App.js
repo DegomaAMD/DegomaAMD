@@ -15,7 +15,7 @@ import Profile from './components/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cart from './components/Cart';
 import PlaceOrder from './components/PlaceOrder';
-import Dashboard from './components/Dashboard'
+
 
 function App() {
   const isAuthenticated = localStorage.getItem('login_token');
@@ -35,7 +35,6 @@ function App() {
           <Route exact path="/Login" element={<Login />} />
           <Route exact path="/PageNotFound" element={<PageNotFound />} />
           <Route exact path="/Register" element={<Register />} />
-          <Route exact path="/BEUser" element={<BEUser />} />
           <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/reset-password" element={<ResetPassword />} />
           <Route exact path="/Profile" element={<Profile />} />
