@@ -16,7 +16,16 @@ class UserAuthenticationController extends Controller
             'username' => 'required|string',
             'email' => 'required|string|email',
             'password' => 'required|string',
- 
+            'house_lot_number' => 'string',
+            'street_name' => 'string',
+            'barangay_name' => 'string',
+            'city_name' => 'string',
+            'province_name' => 'string',
+            'region_name' => 'string',
+            'country_name' => 'string',
+            'postal_code' => 'integer',
+            'phone_number' => 'integer'
+
         ]);
 
         if($validator->fails()){

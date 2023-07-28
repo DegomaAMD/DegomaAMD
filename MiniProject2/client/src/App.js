@@ -6,6 +6,7 @@ import Shop from './pages/Shop/Shop';
 import About from './pages/About/About';
 import Login from './pages/Login/Login';
 import PageNotFound from './components/PageNotFound';
+import BEUser from './components/BEUser';
 // import  Cart  from "./pages/Cart/Cart";
 import ScrolltoTop from './components/Backtotop';
 import Register from './pages/Login/Register';
@@ -18,6 +19,8 @@ import ShoppingCart from './pages/Shop/Shopping Cart';
 import Cart from './components/Cart';
 import PlaceOrder from './components/PlaceOrder';
 import { CartProvider } from './context/CartContext';
+// import ShoppingCart from './pages/Shop/ShoppingCart'; // gi-comment nako kay walay gamit -> JP
+
 
 function App() {
   const isAuthenticated = localStorage.getItem('login_token');
