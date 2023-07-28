@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
-
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import '../pages/Shop/Cafe.css';
-import '../products';
-import qq from '../assets/img/products/1.png'
 
 
 
@@ -25,8 +22,6 @@ const style = {
 
 
 const ProductItem = ({ product, addToCart }) => {
-
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -34,6 +29,7 @@ const ProductItem = ({ product, addToCart }) => {
 
   return (
     <>
+
       <div className="product">
         <div className="description">
          

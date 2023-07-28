@@ -275,7 +275,8 @@ const Profile = () => {
 const rowIndex = data.id;
 
   return (
-    <Container style={{marginTop: '200px'}}>
+    <>
+        <Container style={{marginTop: '200px'}}>
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <CircularProgress />
@@ -290,7 +291,7 @@ const rowIndex = data.id;
                 Firstname: 
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="firstname" plaintext readOnly  defaultValue={data.firstname} />
+                  <Form.Control id="firstname" plaintext readOnly  value={data.firstname} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -312,7 +313,7 @@ const rowIndex = data.id;
                 Lastname: 
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="lastname" plaintext readOnly  defaultValue={data.lastname} />
+                  <Form.Control id="lastname" plaintext readOnly  value={data.lastname} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -335,7 +336,7 @@ const rowIndex = data.id;
                   Username: 
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="username" plaintext readOnly  defaultValue={data.username} />
+                  <Form.Control id="username" plaintext readOnly value={data.username} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -357,7 +358,7 @@ const rowIndex = data.id;
                   Email:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="email" plaintext readOnly  defaultValue={data.email} />
+                  <Form.Control id="email" plaintext readOnly value={data.email} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -379,7 +380,7 @@ const rowIndex = data.id;
                 Password:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="password" plaintext readOnly  defaultValue={data.password} placeholder='Secured Password' />
+                  <Form.Control id="password" plaintext readOnly value={data.password} placeholder='Secured Password' />
                 </Col>
                 </Form.Group>
             </Form>
@@ -402,7 +403,7 @@ const rowIndex = data.id;
                 Phone Number:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="phone_number" plaintext readOnly  defaultValue={data.phone_number} />
+                  <Form.Control id="phone_number" plaintext readOnly value={data.phone_number} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -424,7 +425,7 @@ const rowIndex = data.id;
                 House & Lot Number:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="house_lot_number" plaintext readOnly  defaultValue={data.house_lot_number} />
+                  <Form.Control id="house_lot_number" plaintext readOnly value={data.house_lot_number} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -446,7 +447,7 @@ const rowIndex = data.id;
                 Street:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="street_name" plaintext readOnly  defaultValue={data.street_name} />
+                  <Form.Control id="street_name" plaintext readOnly value={data.street_name} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -468,7 +469,7 @@ const rowIndex = data.id;
                 Barangay:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="barangay_name" plaintext readOnly  defaultValue={data.barangay_name} />
+                  <Form.Control id="barangay_name" plaintext readOnly value={data.barangay_name} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -490,7 +491,7 @@ const rowIndex = data.id;
                 City:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="city_name" plaintext readOnly  defaultValue={data.city_name} />
+                  <Form.Control id="city_name" plaintext readOnly value={data.city_name} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -512,7 +513,7 @@ const rowIndex = data.id;
                 Province:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="province_name" plaintext readOnly  defaultValue={data.province_name} />
+                  <Form.Control id="province_name" plaintext readOnly value={data.province_name} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -534,7 +535,7 @@ const rowIndex = data.id;
                 Region:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="region_name" plaintext readOnly  defaultValue={data.region_name} />
+                  <Form.Control id="region_name" plaintext readOnly value={data.region_name} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -556,7 +557,7 @@ const rowIndex = data.id;
                 Country:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="country_name" plaintext readOnly  defaultValue={data.country_name} />
+                  <Form.Control id="country_name" plaintext readOnly value={data.country_name} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -578,7 +579,7 @@ const rowIndex = data.id;
                 Postal Code:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="postal_code" plaintext readOnly  defaultValue={data.postal_code} />
+                  <Form.Control id="postal_code" plaintext readOnly value={data.postal_code} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -800,10 +801,13 @@ const rowIndex = data.id;
         </DialogActions>
       </BootstrapDialog>
       
-      <div className='footer'>
+     
+    </Container>
+    <div className='footer'>
     <PageFooter />
     </div>
-    </Container>
+    </>
+
   );
 };
 

@@ -28,9 +28,7 @@ function ContactUs() {
         <Container sx={{textAlign:'center', marginTop: '15px', display:'flex', justifyContent:'center'}}>   
         <Card className='contactUsCard' sx={{width:578, display:'block'}}>
       <CardContent>
-            <Form
-            action="https://formspree.io/f/mzblzzon"
-            method="POST">
+            <Form>
             <Box>
                 <TextField required label="First Name"  type='text' placeholder="Enter your firstname" className='contactForm' />
                 <TextField required label="Last Name"  type='text' placeholder="Enter your lastname" className='contactForm' />
