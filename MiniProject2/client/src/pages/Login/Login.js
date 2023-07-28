@@ -92,8 +92,8 @@ function Login() {
           <div
           style={{
             position: 'absolute',
-            top: '39%',
-            right: '90px',
+            top: '34%',
+            right: '79px',
             transform: 'translateY(-50%)',
             cursor: 'pointer'
           }}

@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,7 +17,7 @@ import logo from '../assets/img/vizmaker-logo.png';
 import { Link , useNavigate } from 'react-router-dom';
 import '../App.css';
 import CartBadge from './CartBadge';
-
+import Cart from './Cart'
 
 
 
@@ -29,14 +30,47 @@ function Navbar(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isAuthenticated = localStorage.getItem('login_token') ? true : false;
   const navigate = useNavigate();
+  const [cartItems, setCartItems] = useState([]);
   const handleLogout = () => {
     localStorage.removeItem('login_token');
     navigate('/login');
   };
 
+  const addToCart = (product) => {
+    // Check if the product is already in the cart
+    const existingItem = cartItems.find((item) => item.id === product.id);
+
+    if (existingItem) {
+      // If the product is already in the cart, update its quantity
+      setCartItems(
+        cartItems.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        )
+      );
+    } else {
+      // If the product is not in the cart, add it with a quantity of 1
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
+  };
+
+  // Function to remove an item from the cart
+  const removeFromCart = (productId) => {
+    setCartItems(cartItems.filter((item) => item.id !== productId));
+  };
+
+  // Function to update the quantity of an item in the cart
+  const updateQuantity = (productId, newQuantity) => {
+    setCartItems(
+      cartItems.map((item) =>
+        item.id === productId ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
+
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
 
 
   const drawer = (
@@ -72,22 +106,27 @@ function Navbar(props) {
         <div style={{textAlign:'start', marginLeft:'13px'}}>
         <Link to={'/Shop'} >
                 <Button sx={{ color: '#000',marginRight:'10px', textAlign: 'start'}}>
+                <div style={{color:'#000'}}>
                 <CartBadge />
+                </div>
+                
                 </Button>
               </Link>
               <Box  component="div">
                 {isAuthenticated ? 
+                  
+                  <Link to={'/Login'} sx={{ display: { xs: 'none', sm: 'flex'}}}>
+                  <Button className='btn' sx={{ color: '#000' }} onClick={handleLogout}>
+                    Logout
+                  </Button>
+                </Link>
+                  :
                   <Link to={'/Login'} sx={{ display: { xs: 'none', sm: 'flex'}}}>
                     <Button className='btn' sx={{ color: '#000' }}>
                       Login
                     </Button>
                   </Link> 
-                  :
-                  <Link to={'/Login'} sx={{ display: { xs: 'none', sm: 'flex'}}}>
-                    <Button className='btn' sx={{ color: '#000' }} onClick={handleLogout}>
-                      Logout
-                    </Button>
-                  </Link>}
+                  }
               </Box>
               </div>
       </List>
@@ -132,7 +171,9 @@ function Navbar(props) {
             ))}
             <Link to={'/menu/cart'}  sx={{ display: 'flex' }}>
                 <Button sx={{marginRight:'10px'}}>
-                <CartBadge />
+                <div>
+                <CartBadge/>
+                </div>
                 </Button>
               </Link>
               <Box  component="div" sx={{ display: { xs: 'none', sm: 'block' }}}>

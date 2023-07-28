@@ -16,6 +16,8 @@ import Profile from './components/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ShoppingCart from './pages/Shop/Shopping Cart';
 import Cart from './components/Cart';
+import PlaceOrder from './components/PlaceOrder';
+import { CartProvider } from './context/CartContext';
 
 function App() {
   const isAuthenticated = localStorage.getItem('login_token');
@@ -24,8 +26,8 @@ function App() {
 
   return (
     <>
-
-      <Router>
+<CartProvider>
+<Router>
         {!isDashboardRoute && <Navbar />}
         <ScrolltoTop />
         <Routes>
@@ -39,6 +41,7 @@ function App() {
           <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/reset-password" element={<ResetPassword />} />
           <Route exact path="/Profile" element={<Profile />} />
+          <Route exact path="/place-order" element={<PlaceOrder />} />
           <Route path="/menu/cart" element={<Cart />} />
         </Routes>
       </Router>
@@ -55,6 +58,8 @@ function App() {
           />
         </Routes>
       </Router>
+</CartProvider>
+      
     </>
   );
 }
