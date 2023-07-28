@@ -84,6 +84,7 @@ const Navigate = useNavigate();
           <Box sx={{ position: 'relative' }}>
             <TextField className='textInput' value={formData.password}  type={showPassword1 ? 'text' : 'password'} placeholder='Enter New password' name='password' onChange={handleChange} required/>
             <div
+            
           style={{
             position: 'absolute',
             top: '49%',
@@ -106,13 +107,8 @@ const Navigate = useNavigate();
           </Box>
           <Box>
           <div
-          style={{
-            position: 'absolute',
-            top: '53%',
-            right: '90px',
-            transform: 'translateY(-50%)',
-            cursor: 'pointer'
-          }}
+          className='showPass2'
+          
           onClick={() => setShowPassword2(!showPassword2)}
         >
           {showPassword2 ? (

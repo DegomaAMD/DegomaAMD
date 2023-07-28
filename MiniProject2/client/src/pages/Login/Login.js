@@ -92,12 +92,9 @@ function Login() {
           </Box>
           <Box>
           <div
+          className='showPass'
           style={{
-            position: 'absolute',
-            top: '34%',
-            right: '79px',
-            transform: 'translateY(-50%)',
-            cursor: 'pointer'
+            
           }}
           onClick={() => setShowPassword(!showPassword)}
         >
