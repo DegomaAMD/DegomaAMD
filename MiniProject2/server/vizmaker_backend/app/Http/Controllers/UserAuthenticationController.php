@@ -25,7 +25,7 @@ class UserAuthenticationController extends Controller
             'region_name' => 'string',
             'country_name' => 'string',
             'postal_code' => 'integer',
-            'phone_number' => 'integer',
+            'phone_number' => 'integer'
         ]);
 
         if($validator->fails()){

@@ -19,7 +19,7 @@ import { styled } from '@mui/material/styles';
 import axios from 'axios';
 import MUIDataTable from 'mui-datatables';
 import React, { useEffect, useState } from 'react';
-import Form from 'react-bootstrap/Form';
+// import Form from 'react-bootstrap/Form';
 import toast from 'react-hot-toast';
 
 
@@ -154,10 +154,8 @@ function Product() {
       },
     },
     {
-<<<<<<< HEAD
 
     // Custom render function for the Actions column -> JP
-=======
       name: 'Product Image',
       options: {
         filter: true,
@@ -165,7 +163,6 @@ function Product() {
       },
     },
     {
->>>>>>> c00bdc0c3cc2d7aee95918b897a977a562e6ce47
       name: 'Actions',
       options: {
         filter: false,
@@ -342,14 +339,14 @@ function Product() {
       return false;
     }
     else if (formData.product_image === undefined || formData.product_image === '') {
-      setError('Product Price is required!');
+      setError('Product Image is required!');
       return false;
     }
 
     return true;
   };
 
-  // JSX for rendering the component -> JP
+  // For rendering the component -> JP
   return (
     // added margin: '0 auto', maxWidth: '1200px', padding: '20px' to style for Responsiveness -> JP
     <div style={{ marginTop: '50px', margin: '0 auto', maxWidth: '1200px', padding: '20px'  }}>
