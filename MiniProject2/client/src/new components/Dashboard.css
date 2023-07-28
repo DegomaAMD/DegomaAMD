@@ -1,0 +1,63 @@
+.paddingall{
+    padding: 10px 10px 10px 10px;
+}
+
+.pricesubtitlenet{
+    color: #102f3a;
+    font-size: 14px;
+}
+
+.pricetitlenet{
+    color: #102f3a;
+    font-weight: 600;
+}
+
+.pricetitlegross{
+    font-weight: 600;
+    color: #ECEFF1;
+}
+
+.pricesubtitlegross{
+    font-size: 14px;
+    color: #ECEFF1;
+}
+
+.iconstylecard{
+    margin-top: 20px;
+    margin-left: 20px;
+    color: #ff914d;
+}
+
+.iconstyle{
+    margin-top: 20px;
+    margin-left: 20px;
+    color: #102f3a;
+}
+
+.iconstylebag{
+    margin-top: 20px;
+    margin-left: 20px;
+    color: #ffbd59;
+}
+
+.iconstyleblack{
+    margin-top: 20px;
+    margin-left: 20px;
+    color: #ECEFF1;
+}
+
+.gradient {
+    background: rgb(16, 47, 58);
+    background: linear-gradient(158deg, rgba(16, 47, 58) 0%, rgba(16, 47, 58) 100%);
+}
+
+.gradientlight {
+    background: rgb(16, 47, 58);
+    background: linear-gradient(158deg, rgba(16, 47, 58) 0%, rgba(16, 47, 58) 100%);
+}
+
+.bgcolor{
+    min-height: 100vh;
+    background: #ECEFF1;
+    background: linear-gradient(158deg, rgb(224, 224,224) 0%, rrgb(233, 237, 254) 100%);
+}
