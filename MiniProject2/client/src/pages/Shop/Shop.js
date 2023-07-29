@@ -1,26 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Typography, Button, Grid } from '@mui/material';
+import {  Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import ShoppingCart from '../../components/Cart';
-import CartBadge from '../../components/CartBadge';
 import ProductItem from '../../components/ProductItem';
 import { CircularProgress } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import Footer from '../../components/PageFooter';
 
 import 'react-toastify/dist/ReactToastify.css';
-
-toast('Added to cart', {
-  position: "top-right",
-  autoClose: 3000,
-  hideProgressBar: true,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  theme: "colored",
-  });
 
 
 const useStyles = styled((theme) => ({
@@ -35,7 +22,6 @@ const useStyles = styled((theme) => ({
 const Shop = () => {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

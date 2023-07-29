@@ -20,7 +20,7 @@ import MUIDataTable from 'mui-datatables';
 import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import VizAdminUser from './VizAdminUser';
+
 
 
 
@@ -713,7 +713,6 @@ function UserBE() {
         </DialogActions>
       </BootstrapDialog>
     </div>
-    <VizAdminUser/>
     </>
   );
 }

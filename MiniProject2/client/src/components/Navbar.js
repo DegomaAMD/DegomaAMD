@@ -33,7 +33,7 @@ function Navbar(props) {
   const [cartItems, setCartItems] = useState([]);
   const handleLogout = () => {
     localStorage.removeItem('login_token');
-    navigate('/login');
+    navigate('/Login');
   };
 
 
