@@ -1,10 +1,9 @@
 import * as React from 'react';
 import '../App.css';
 import MenuCards from '../components/Card';
-// import Feedbacks from './ContactUs';
 import Banner from '../components/Banner';
-import ContactUs from '../components/ContactUs';
 import Navbar from '../components/Navbar';
+import Footer from '../components/PageFooter';
 
 function Home() {
   return (
@@ -12,7 +11,9 @@ function Home() {
       <Navbar/>
       <Banner/>
       <MenuCards/>
-      <ContactUs/>
+      <div className='footer'>
+    <Footer />
+    </div>
     </div>
   )
 }

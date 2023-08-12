@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import  Container  from 'react-bootstrap/Container';
-import toast from 'react-hot-toast';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
-import Box from '@mui/material/Box';
 import {
   Alert,
   Button,
@@ -22,16 +20,9 @@ import PageFooter from './PageFooter';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
+import '../pages/Shop/Cafe.css';
 
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -234,9 +225,7 @@ const Profile = () => {
 
       handleClose();
       setSuccess(true);
-      const message = 'Your details have been successfuly updated!'
-      
-      // navigate('/');
+
     } catch (error) {
       let errorMessage = error.response.data.error;
       setError(errorMessage);
@@ -247,10 +236,14 @@ const Profile = () => {
   
 };
 
-const rowIndex = data.id;
 
   return (
     <>
+    <div className="shop">
+        <div className="shopTitle">
+        <h1>Profile</h1>
+      </div>
+      </div>
         <Container style={{marginTop: '200px'}}>
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -258,15 +251,25 @@ const rowIndex = data.id;
         </div>
       ) : (
         <Container>
+          <Button
+        className='btn'
+        style={{marginBottom: '20px'}}
+        variant="text"
+        startIcon={<EditIcon />}
+        color="primary"
+        onClick={() => handleEdit()}
+              >
+                Edit
+      </Button>
       <Grid container spacing={2} style={{margin: 'auto'}}>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextFirstname">
                 <Form.Label column sm="2">
                 Firstname: 
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="firstname" plaintext readOnly  value={data.firstname} />
+                  <Form.Control id="firstname" readOnly  value={data.firstname} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -281,14 +284,14 @@ const rowIndex = data.id;
         
               /> */}
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextLastname">
                 <Form.Label column sm="2">
                 Lastname: 
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="lastname" plaintext readOnly  value={data.lastname} />
+                  <Form.Control id="lastname"  readOnly  value={data.lastname} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -304,14 +307,14 @@ const rowIndex = data.id;
               /> */}
             </Grid>
             
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextUsername">
                 <Form.Label column sm="2">
                   Username: 
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="username" plaintext readOnly value={data.username} />
+                  <Form.Control id="username"  readOnly value={data.username} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -326,14 +329,14 @@ const rowIndex = data.id;
              
               /> */}
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
                 <Form.Label column sm="2">
                   Email:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="email" plaintext readOnly value={data.email} />
+                  <Form.Control id="email"  readOnly value={data.email} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -348,14 +351,14 @@ const rowIndex = data.id;
       
               /> */}
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                 <Form.Label column sm="2">
                 Password:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="password" plaintext readOnly value={data.password} placeholder='Secured Password' />
+                  <Form.Control id="password"  readOnly value={data.password} placeholder='Secured Password' />
                 </Col>
                 </Form.Group>
             </Form>
@@ -371,14 +374,14 @@ const rowIndex = data.id;
               /> */}
               
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextPhoneNumber">
                 <Form.Label column sm="2">
                 Phone Number:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="phone_number" plaintext readOnly value={data.phone_number} />
+                  <Form.Control id="phone_number"  readOnly value={data.phone_number} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -393,14 +396,14 @@ const rowIndex = data.id;
 
               /> */}
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextHouse&LotNumber">
                 <Form.Label column sm="2">
                 House & Lot Number:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="house_lot_number" plaintext readOnly value={data.house_lot_number} />
+                  <Form.Control id="house_lot_number"  readOnly value={data.house_lot_number} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -415,14 +418,14 @@ const rowIndex = data.id;
            
               /> */}
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextStreet">
                 <Form.Label column sm="2">
                 Street:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="street_name" plaintext readOnly value={data.street_name} />
+                  <Form.Control id="street_name"  readOnly value={data.street_name} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -437,14 +440,14 @@ const rowIndex = data.id;
              
               /> */}
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextBarangay">
                 <Form.Label column sm="2">
                 Barangay:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="barangay_name" plaintext readOnly value={data.barangay_name} />
+                  <Form.Control id="barangay_name"  readOnly value={data.barangay_name} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -459,14 +462,14 @@ const rowIndex = data.id;
           
               /> */}
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextCity">
                 <Form.Label column sm="2">
                 City:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="city_name" plaintext readOnly value={data.city_name} />
+                  <Form.Control id="city_name"  readOnly value={data.city_name} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -481,14 +484,14 @@ const rowIndex = data.id;
            
               /> */}
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextProvince">
                 <Form.Label column sm="2">
                 Province:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="province_name" plaintext readOnly value={data.province_name} />
+                  <Form.Control id="province_name"  readOnly value={data.province_name} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -503,14 +506,14 @@ const rowIndex = data.id;
             
               /> */}
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextRegion">
                 <Form.Label column sm="2">
                 Region:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="region_name" plaintext readOnly value={data.region_name} />
+                  <Form.Control id="region_name"  readOnly value={data.region_name} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -525,14 +528,14 @@ const rowIndex = data.id;
              
               /> */}
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextCountry">
                 <Form.Label column sm="2">
                 Country:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="country_name" plaintext readOnly value={data.country_name} />
+                  <Form.Control id="country_name"  readOnly value={data.country_name} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -547,14 +550,14 @@ const rowIndex = data.id;
           
               /> */}
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
             <Form>
               <Form.Group as={Row} className="mb-3" controlId="formPlaintextPostalCode">
                 <Form.Label column sm="2">
                 Postal Code:
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Control id="postal_code" plaintext readOnly value={data.postal_code} />
+                  <Form.Control id="postal_code"  readOnly value={data.postal_code} />
                 </Col>
                 </Form.Group>
             </Form>
@@ -571,16 +574,7 @@ const rowIndex = data.id;
             </Grid>
             
           </Grid>
-          <Button
-        className='btn'
-        style={{marginBottom: '20px'}}
-        variant="text"
-        startIcon={<EditIcon />}
-        color="primary"
-        onClick={() => handleEdit()}
-              >
-                Edit
-      </Button>
+          
 </Container>
       )}
 

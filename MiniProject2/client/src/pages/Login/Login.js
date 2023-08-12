@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-// import { Button, Container, Alert, CircularProgress } from '@mui/material/';
-import { Button, Container, Alert} from '@mui/material/';
+import { Button, Container, Alert } from '@mui/material/';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Axios from 'axios';
@@ -23,7 +22,7 @@ function Login() {
   const [error, setError] = useState('');
   const [submitLoading, setSubmitLoading] = useState(false);
   const urlBE = process.env.BACK_END_URL;
-
+  // `${urlBE}login`
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -39,7 +38,11 @@ function Login() {
         const token = response.data.token;
 
         localStorage.setItem('login_token', token);
-        Navigate('/');
+        
+   
+          Navigate('/');
+      
+
 
       } catch(error) {
         let errorMessage = error.response.data.error;

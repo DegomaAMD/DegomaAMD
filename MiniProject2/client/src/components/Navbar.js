@@ -33,39 +33,9 @@ function Navbar(props) {
   const [cartItems, setCartItems] = useState([]);
   const handleLogout = () => {
     localStorage.removeItem('login_token');
-    navigate('/login');
+    navigate('/Login');
   };
 
-  const addToCart = (product) => {
-    // Check if the product is already in the cart
-    const existingItem = cartItems.find((item) => item.id === product.id);
-
-    if (existingItem) {
-      // If the product is already in the cart, update its quantity
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        )
-      );
-    } else {
-      // If the product is not in the cart, add it with a quantity of 1
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
-    }
-  };
-
-  // Function to remove an item from the cart
-  const removeFromCart = (productId) => {
-    setCartItems(cartItems.filter((item) => item.id !== productId));
-  };
-
-  // Function to update the quantity of an item in the cart
-  const updateQuantity = (productId, newQuantity) => {
-    setCartItems(
-      cartItems.map((item) =>
-        item.id === productId ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);

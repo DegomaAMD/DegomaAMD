@@ -30,6 +30,7 @@ import Product from '../../components/Product';
 import { Toaster } from 'react-hot-toast';
 import UserBE from '../../components/BEUser';
 import Dashboard from '../../components/Dashboard';
+import Login from '../Login/Login';
 
 
 const drawerWidth = 240;
@@ -94,7 +95,7 @@ export default function Admin() {
 
   const handleLogout = () => {
     localStorage.removeItem('login_token');
-    navigate('/login');
+    navigate('/Login');
   };
 
   const handleMenuClick = (url) => {
